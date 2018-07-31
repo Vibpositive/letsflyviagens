@@ -38,15 +38,21 @@ class Home extends CI_Controller
      *
      * @return string blank
      */
-    public function index($page = 'home')
+    public function index($page = 'index')
     {
         if (!file_exists(APPPATH.'views/home/'.$page.'.php')) {
             show_404();
         }
+        
 
         $data['title'] = ucfirst($page);
+        $data['home'] = $this->uri->segment(1) == '';
+        // echo  ? "Silvio" : "Santos"; 
+        // empty($this->uri->segment(1));
         $this->load->view('templates/header');
-        $this->load->view('pages/'.$page, $data);
+        $this->load->view('home/header', $data);
+        $this->load->view('home/'.$page, $data);
+        // $this->load->view('home/index');
         $this->load->view('templates/footer');
     }
 }
