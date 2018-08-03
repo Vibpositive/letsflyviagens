@@ -569,6 +569,8 @@ h3.subheading-w3-agile {
 /*--//stats --*/
 /* middle section */
 
+
+
 .middle-w3l {
     background: url(../images/bg1.jpg)no-repeat;
     background-size: cover;
@@ -650,7 +652,6 @@ h3.subheading-w3-agile {
         margin-top: 0;
     }
 }
-
 
 /* //testimonials */
 
@@ -1956,4 +1957,79 @@ footer h3 {
         width: 100% !important;;
     }
 }
+.wrapper-offers{
+    background: url(../images/bg7.jpg)no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    margin-bottom: -37px;
+    min-height: 700px;
+}
+
+@media screen and (max-width: 700px) {
+	.jcarousel-wrapper,
+	.wrapper-offers {
+		display: none;
+	}
+}
+
+
+
 /*--//responsive--*/
+.quote-form{
+    border-style: solid;
+    background: rgba(233, 233, 233, 0.9);
+    border-width: 10px 10px 10px 10px;
+    border-color: rgba(233, 233, 233, 0.1);
+}
+.contact_left_grid > label {
+    display: -webkit-box;
+    /* margin-bottom: .5rem;     */
+    padding-left: 8px;
+    margin-bottom: -15px;
+    margin-top: 20px;
+    font-weight: 900;
+}
+
+@media (min-width:660px) {
+	/* .label-name {
+		padding-left: 10px !important;
+		float: left !important;
+		width: 50% !important;
+        margin-bottom: -10px !important;
+        
+    }
+	.label-surname {
+		float: right !important;
+		width: 50% !important;
+		text-align: left !important;
+        margin-bottom: -10px !important;
+        display:table-header-group;
+    } */
+}
+.title-quote{
+    color: white !important;
+    text-shadow: 4px 3px 10px rgba(0, 0, 0, 0.8);
+}
+
+.quote-background{
+    background-size: cover !important;
+    background-repeat: no-repeat;
+    background-attachment: fixed !important;
+    background-position: center;
+
+}
+
+.add-passenger{
+    cursor: pointer;
+}
+
+.logo-brand{
+    -webkit-filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.7));
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.7));
+    /* -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')"; */
+    /* filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')"; */
+    
+}
