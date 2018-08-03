@@ -33,47 +33,47 @@
                     <div class="footer-list">
                         <div class="flickr-grid">
                             <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="./assets/images/g3.jpg" class="img-fluid" alt=" ">
+                                <img src="<?php echo base_url(); ?>assets/images/g3.jpg" class="img-fluid" alt=" ">
                             </a>
                         </div>
                         <div class="flickr-grid">
                             <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="./assets/images/g4.jpg" class="img-fluid" alt=" ">
+                                <img src="<?php echo base_url(); ?>assets/images/g4.jpg" class="img-fluid" alt=" ">
                             </a>
                         </div>
                         <div class="flickr-grid">
                             <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="./assets/images/g5.jpg" class="img-fluid" alt=" ">
+                                <img src="<?php echo base_url(); ?>assets/images/g5.jpg" class="img-fluid" alt=" ">
                             </a>
                         </div>
                         <div class="flickr-grid">
                             <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="./assets/images/g4.jpg" class="img-fluid" alt=" ">
+                                <img src="<?php echo base_url(); ?>assets/images/g4.jpg" class="img-fluid" alt=" ">
                             </a>
                         </div>
                         <div class="flickr-grid">
                             <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="./assets/images/g6.jpg" class="img-fluid" alt=" ">
+                                <img src="<?php echo base_url(); ?>assets/images/g6.jpg" class="img-fluid" alt=" ">
                             </a>
                         </div>
                         <div class="flickr-grid">
                             <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="./assets/images/g5.jpg" class="img-fluid" alt=" ">
+                                <img src="<?php echo base_url(); ?>assets/images/g5.jpg" class="img-fluid" alt=" ">
                             </a>
                         </div>
                         <div class="flickr-grid">
                             <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="./assets/images/g7.jpg" class="img-fluid" alt=" ">
+                                <img src="<?php echo base_url(); ?>assets/images/g7.jpg" class="img-fluid" alt=" ">
                             </a>
                         </div>
                         <div class="flickr-grid">
                             <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="./assets/images/g9.jpg" class="img-fluid" alt=" ">
+                                <img src="<?php echo base_url(); ?>assets/images/g9.jpg" class="img-fluid" alt=" ">
                             </a>
                         </div>
                         <div class="flickr-grid">
                             <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="./assets/images/g8.jpg" class="img-fluid" alt=" ">
+                                <img src="<?php echo base_url(); ?>assets/images/g8.jpg" class="img-fluid" alt=" ">
                             </a>
                         </div>
                         <div class="clearfix"></div>
@@ -148,7 +148,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="agileits-w3layouts-info">
-                        <img src="./assets/images/g12.jpg" class="img-responsive" alt="" />
+                        <img src="<?php echo base_url(); ?>assets/images/g12.jpg" class="img-responsive" alt="" />
                         <p>Duis venenatis, turpis eu bibendum porttitor, sapien quam ultricies tellus, ac rhoncus risus odio eget nunc. Pellentesque ac fermentum diam. Integer eu facilisis nunc, a iaculis felis. Pellentesque pellentesque tempor enim, in dapibus turpis porttitor quis. </p>
                     </div>
                 </div>
@@ -161,21 +161,35 @@
     </div>
     <!-- //Modal -->
     <!--js working-->
-    <script src="./assets/js/jquery.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
     <!--//js working-->
     <!--js working-->
-    <script src="./assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/bootstrap-datepicker.min.js"></script>
     <!--//js working-->
     <!-- stats -->
-    <!--						<script src="./assets/js/jquery.waypoints.min.js"></script>-->
-    <script src="./assets/js/jquery.countup.js"></script>
+    <!--						<script src="<?php echo base_url(); ?>assets/js/jquery.waypoints.min.js"></script>-->
+    <script src="<?php echo base_url(); ?>assets/js/jquery.countup.js"></script>
     <script>
         $('.counter-agileits-w3layouts').countUp();
     </script>
     <!-- //stats -->
     <!-- typer js-->
     <!-- For banner text -->
-    <script src='./assets/js/jquery.typer.js'></script>
+    <script src='<?php echo base_url(); ?>assets/js/jquery.typer.js'></script>
+    <!-- //typer js-->
+    <!-- //For banner text -->
+    <script src="<?php echo base_url(); ?>assets/js/main.js"></script>
+    <!--bootstrap working-->
+    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+    <!-- //bootstrap working-->
+    
+    <!-- JCaroussel -->
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jcarousel.basic.js"></script>
+    <!-- //JCaroussel -->
+
+
+
     <script>
         var win = $(window),
             foo = $('#typer'),
@@ -194,20 +208,24 @@
                 $(".collapse").collapse("hide");
                 $("#" + $(e.currentTarget).attr("target")).collapse("show");
             });
-
+            
             $(".add-passenger").click(function(e) {
                 passenger_counter++;
 
                 var formType = $(this).attr('formType');
                 var newPassengerHtml = `
-                  <input type="text" id="` + formType + `_name_` + passenger_counter + `" name="` + formType + `_name` + passenger_counter + `" style="width: 49.9%;" placeholder="Nome" required="">
-                  <input type="text" id="` + formType + `_surname_` + passenger_counter + `" name="` + formType + `_surname_` + passenger_counter + `" style="width: 49.9%; float:right;" placeholder="Sobrenome" required="">
+                  <label for="` + formType + `_name_` + passenger_counter + `">Nome ` + passenger_counter + `</label>
+                  <input type="text" id="` + formType + `_name_` + passenger_counter + `" name="` + formType + `_name_` + passenger_counter + `" placeholder="Nome ` + passenger_counter + `" required="">
+
+                  <label for="` + formType + `_surname_` + passenger_counter + `">Sobrenome ` + passenger_counter + `</label>
+                  <input type="text" id="` + formType + `_surname_` + passenger_counter + `" name="` + formType + `_surname_` + passenger_counter + `" placeholder="Sobrenome ` + passenger_counter + `" required="">
+
+                  <label for="` + formType + `_dob_` + passenger_counter + `">Data de Nascimento ` + passenger_counter + `</label>
                   <input type="text" id="` + formType + `_dob_` + passenger_counter + `" placeholder="Data de Nascimento" class="form-control datePicker">
                 `;
-
-                console.log("#" + formType + "_departureCity");
-
-                $("#" + formType + "_departureCity").before(newPassengerHtml);
+                
+                // $("#" + formType + "_departureCity").before(newPassengerHtml);
+                $("#destinationCity").before(newPassengerHtml);
 
                 $("#" + $(e.currentTarget).attr("target")).collapse("show");
                 $('.datePicker').datepicker({
@@ -230,12 +248,6 @@
             });
         });
     </script>
-    <!-- //typer js-->
-    <!-- //For banner text -->
-    <script src="./assets/js/main.js"></script>
-    <!--bootstrap working-->
-    <script src="./assets/js/bootstrap.min.js"></script>
-    <!-- //bootstrap working-->
 </body>
 
 </html>
