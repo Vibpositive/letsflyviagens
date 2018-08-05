@@ -53,12 +53,14 @@ class Home extends CI_Controller
         $this->load->view('home/header', $data);
         // $this->load->view('home/quotation', $data);
         $this->load->view('quotes/index', $data);
-        $this->load->view('quotes/index', $data);
+        // $this->load->view('quotes/index', $data);
         // $this->load->view('home/services');
         $this->load->view('about/caroussel');
         // $this->load->view('home/testimonials');
         $this->load->view('home/contact_home');
         $this->load->view('home/news_home');
         $this->load->view('templates/footer');
+        $this->load->model('news_model', 'news');
+        $this->news->getnews();
     }
 }
