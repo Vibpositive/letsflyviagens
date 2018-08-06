@@ -14,10 +14,13 @@ class News_model extends CI_Model
 
     public function getnews()
     {
-        $query = $this->db->get('news', 10);
+        $this->db->order_by("id", "desc");
+        $query = $this->db->get('news', 3);
+        
         // print_r($query->result_array());
+
         $result = $query->result();
-        echo random_element($result)->title;
+        // echo random_element($result)->title;
 
         return $query->result();
     }
