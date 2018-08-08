@@ -25,21 +25,15 @@ class News_model extends CI_Model
         return $query->result();
     }
 
-    public function insert_entry()
+    public function getpost($id = "")
     {
-        $this->title    = $_POST['title']; // please read the below note
-        $this->body  = $_POST['body'];
-        $this->date     = time();
-
-        $this->db->insert('entries', $this);
+        $this->db->order_by("id", "desc");
+        $this->db->where("id", $id);
+        $query = $this->db->get('news', 1);
+        
+        // return $query->result();
+        // print_r($query->row());
+        return $query->row();
     }
-
-    public function update_entry()
-    {
-        $this->title    = $_POST['title'];
-        $this->body  = $_POST['body'];
-        $this->date     = time();
-
-        $this->db->update('entries', $this, array('id' => $_POST['id']));
-    }
+    
 }

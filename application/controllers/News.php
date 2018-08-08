@@ -25,7 +25,7 @@
  */
 
 
-class Home extends CI_Controller
+class News extends CI_Controller
 {
     //Rota no caso eh view
     /**
@@ -49,6 +49,27 @@ class Home extends CI_Controller
         $data['home'] = $this->uri->segment(1) == '';
 
         $this->load->model('news_name');
+        
+    }
+
+    public function article()
+    {
+        
+        $this->load->model('news_model', 'news');
+        $this->load->model('populardestinations_model', 'populardestinations');
+
+        // $data['title'] = ucfirst($page);
+        $data['home'] = $this->uri->segment(1) == '';
+        $data['article'] = $this->news->getpost($this->uri->segment(3));
+        $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
+
+        // echo $this->uri->segment(3);
+        // die();
+        
+        $this->load->view('templates/header');
+        $this->load->view('home/header', $data);
+        $this->load->view(strtolower(get_class($this)) . '/article', $data);
+        $this->load->view('templates/footer', $data);
         
     }
 }

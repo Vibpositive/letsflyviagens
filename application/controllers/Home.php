@@ -45,12 +45,15 @@ class Home extends CI_Controller
         }
 
         $this->load->model('news_model', 'news');
+        $this->load->model('populardestinations_model', 'populardestinations');
+
         $this->load->helper('text');
         $this->load->helper('date');
         
         $data['title'] = ucfirst($page);
         $data['home'] = $this->uri->segment(1) == '';
         $news['news'] = $this -> news -> getnews();
+        $populardestinations['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
 
         // echo  ? "Silvio" : "Santos"; 
         // empty($this->uri->segment(1));
@@ -64,7 +67,7 @@ class Home extends CI_Controller
         // $this->load->view('home/testimonials');
         $this->load->view('home/contact_home');
         $this->load->view('home/news_home', $news);
-        $this->load->view('templates/footer');
+        $this->load->view('templates/footer', $populardestinations);
         $this->load->model('news_model', 'news');
         $this->news->getnews();
     }
