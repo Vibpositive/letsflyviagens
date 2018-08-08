@@ -11,7 +11,8 @@
                     <div class="card-body w3ls-card">
                         <h4 class="card-title"><?php echo $news->title; ?></h4>
                         <p class="card-text mb-3 "><?php echo $string; ?></p>
-                        <a href="#" data-toggle="modal" data-target="#myModal">Saiba mais</a>
+                        <!-- <a href="#" data-toggle="modal" data-target="#myModal">Saiba mais</a> -->
+                        <a href="<?php echo base_url() . 'news/article/' . $news->id; ?>" >Saiba mais</a>
                     </div>
                     <div class="card-footer">
                         <?php
@@ -25,28 +26,6 @@
                     </div>
                 </div>
             <?php } ?>
-                <!-- <div class="card">
-                    <img src="./assets/images/g10.jpg" class="img-fluid" alt="Card image cap">
-                    <div class="card-body w3ls-card">
-                        <h4 class="card-title">Noticia 02</h4>
-                        <p class="card-text mb-3 ">Texto da noticia 02</p>
-                        <a href="#" data-toggle="modal" data-target="#myModal">Saiba mais</a>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Atualizado a 3 minutos</small>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="./assets/images/g9.jpg" class="img-fluid" alt="Card image cap">
-                    <div class="card-body w3ls-card">
-                        <h4 class="card-title">Noticia 03</h4>
-                        <p class="card-text mb-3 ">Texto da noticia 03</p>
-                        <a href="#" data-toggle="modal" data-target="#myModal">Saiba mais</a>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Atualizado a 3 minutos</small>
-                    </div>
-                </div> -->
             </div>
         </div>
     </section>

@@ -50,6 +50,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 // $route['default_controller'] = 'welcome';
+// $route['populardestinations'] = 'popular/index';
+$route['populardestinations/(:any)'] = 'populardestinations/destination';
+$route['populardestinations'] = 'populardestinations/index';
 $route['about'] = 'about/index';
 $route['contact'] = 'contact/index';
 $route['quotes'] = 'quotes/index';

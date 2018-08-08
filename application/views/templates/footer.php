@@ -31,51 +31,14 @@
                         <h3>Novos destinos</h3>
                     </div>
                     <div class="footer-list">
+                        <?php foreach($populardestinations as $populardestinations) { ?>
+                        <?php $string = word_limiter($populardestinations->body, 25); ?>
                         <div class="flickr-grid">
                             <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g3.jpg" class="img-fluid" alt=" ">
+                                <img src="./assets/images/popular_destinations/<?php echo $populardestinations->image; ?>" style="width:75px;height:60px;" class="img-fluid" alt=" ">
                             </a>
                         </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g4.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g5.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g4.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g6.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g5.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g7.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g9.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g8.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
+                        <?php } ?>
                         <div class="clearfix"></div>
                     </div>
                 </div>
