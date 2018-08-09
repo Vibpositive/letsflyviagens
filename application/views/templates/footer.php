@@ -28,54 +28,29 @@
                 </div>
                 <div class="col-lg-3 footer-grid">
                     <div class="footer-title">
-                        <h3>Novos destinos</h3>
+                        <h3>Destinos populares</h3>
                     </div>
                     <div class="footer-list">
+                        <?php foreach($populardestinations as $populardestinations) { ?>
+                        <?php $string = word_limiter($populardestinations->body, 25); ?>
                         <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g3.jpg" class="img-fluid" alt=" ">
+                            <a  href="#"
+                                data-toggle="modal"
+                                data-target="#myModal"
+                                data-id="<?php echo base_url() . "populardestinations/" . $populardestinations->id; ?>"
+                                data-title="<?php echo $populardestinations->title; ?>"
+                                data-body="<?php echo $populardestinations->body; ?>"
+                                data-image="<?php echo base_url(). "assets/images/popular_destinations/" . $populardestinations->image; ?>">
+                                <img
+                                    data-toggle="tooltip"
+                                    title="<?php echo $populardestinations->title; ?>!"
+                                    src="<?php echo base_url() . '/assets/images/popular_destinations/'.  $populardestinations->image; ?>"
+                                    style="width:75px;height:60px;"
+                                    class="img-fluid"
+                                    alt=" ">
                             </a>
                         </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g4.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g5.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g4.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g6.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g5.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g7.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g9.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
-                        <div class="flickr-grid">
-                            <a href="#" data-toggle="modal" data-target="#myModal">
-                                <img src="<?php echo base_url(); ?>assets/images/g8.jpg" class="img-fluid" alt=" ">
-                            </a>
-                        </div>
+                        <?php } ?>
                         <div class="clearfix"></div>
                     </div>
                 </div>
@@ -148,13 +123,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="agileits-w3layouts-info">
-                        <img src="<?php echo base_url(); ?>assets/images/g12.jpg" class="img-responsive" alt="" />
-                        <p>Duis venenatis, turpis eu bibendum porttitor, sapien quam ultricies tellus, ac rhoncus risus odio eget nunc. Pellentesque ac fermentum diam. Integer eu facilisis nunc, a iaculis felis. Pellentesque pellentesque tempor enim, in dapibus turpis porttitor quis. </p>
+                        <img src="" class="img-responsive modal-main-image" alt="" />
+                        <h7 class="modal-main-text"></h7>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary btn-more-info">Saiba Mais</button>
                 </div>
             </div>
         </div>
@@ -246,6 +221,20 @@
                 var formOutput = $(this).serializeArray();
                 console.log(formOutput);
             });
+            $('[data-toggle="tooltip"]').tooltip(); 
+
+            $('#myModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget)
+                var title = button.data('title')
+                var body = button.data('body')
+                var image = button.data('image')
+                var moreinfo = button.data('id')
+                var modal = $(this)
+                modal.find('.modal-title').text(title)
+                modal.find('.modal-main-text').text(body)
+                modal.find('.modal-main-image').attr('src', image)
+                modal.find('.btn-more-info').attr('onclick', "location.href = '" + moreinfo + "';")
+            })
         });
     </script>
 </body>
