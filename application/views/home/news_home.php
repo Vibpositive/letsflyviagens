@@ -7,7 +7,7 @@
             <?php $string = word_limiter($news->body, 25); ?>
 
                 <div class="card">
-                    <img src="./assets/images/news/<?php echo $news->image; ?>" class="img-fluid" alt="Card image cap">
+                    <img src="./assets/images/news/<?php echo $news->image; ?>" class="circle-image img-fluid" alt="Card image cap">
                     <div class="card-body w3ls-card">
                         <h4 class="card-title"><?php echo $news->title; ?></h4>
                         <p class="card-text mb-3 "><?php echo $string; ?></p>
