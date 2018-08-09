@@ -117,7 +117,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Peregrinate</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -128,8 +128,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary btn-more-info">Saiba Mais</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <!-- <button type="button" class="btn btn-primary btn-more-info">Saiba Mais</button> -->
                 </div>
             </div>
         </div>
@@ -233,7 +233,7 @@
                 modal.find('.modal-title').text(title)
                 modal.find('.modal-main-text').text(body)
                 modal.find('.modal-main-image').attr('src', image)
-                modal.find('.btn-more-info').attr('onclick', "location.href = '" + moreinfo + "';")
+                // modal.find('.btn-more-info').attr('onclick', "location.href = '" + moreinfo + "';")
             })
         });
     </script>

@@ -13,16 +13,14 @@ class Populardestinations_model extends CI_Model
 
     }
 
-    public function getpopulardestinations()
+    public function getpopulardestinations($amount = 9)
     {
-        $this->db->order_by("id", "desc");
-        $query = $this->db->get('popular_destinations', 9);
-        
-        // print_r($query->result_array());
+        $this->load->helper('text');
+        $this->load->helper('date');
 
-        $result = $query->result();
-        // echo random_element($result)->title;
+        $this->db->order_by("created_at", "desc");
 
+        $query = $this->db->get('popular_destinations', $amount);
         return $query->result();
     }
 }

@@ -443,8 +443,8 @@ p.tit {
 h3.tittle,h2.tittle {
     font-size: 2.8em;
     color: #000000;
-    font-weight: 600;
-    letter-spacing: 2px;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
 }
 /*-- stats --*/
 /*-- services --*/

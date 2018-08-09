@@ -52,8 +52,8 @@ class Home extends CI_Controller
         
         $data['title'] = ucfirst($page);
         $data['home'] = $this->uri->segment(1) == '';
-        $news['news'] = $this -> news -> getnews();
-        $populardestinations['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
+        $data['news'] = $this -> news -> getnews();
+        $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
 
         // echo  ? "Silvio" : "Santos"; 
         // empty($this->uri->segment(1));
@@ -66,8 +66,8 @@ class Home extends CI_Controller
         $this->load->view('about/caroussel');
         // $this->load->view('home/testimonials');
         $this->load->view('home/contact_home');
-        $this->load->view('home/news_home', $news);
-        $this->load->view('templates/footer', $populardestinations);
+        $this->load->view('home/news_home', $data);
+        $this->load->view('templates/footer', $data);
         $this->load->model('news_model', 'news');
         $this->news->getnews();
     }
