@@ -44,18 +44,17 @@ class About extends CI_Controller
             show_404();
         }
         
+        $this->load->model('populardestinations_model', 'populardestinations');
 
         $data['title'] = ucfirst($page);
         $data['home'] = $this->uri->segment(1) == '';
+        $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
 
         $this->load->view('templates/header');
         $this->load->view('home/header', $data);
         $this->load->view('about/company_description');
         $this->load->view('home/contact_home');
         $this->load->view('home/services');
-        // $this->load->view('home/quotation');
-        // $this->load->view('home/testimonials');
-        // $this->load->view('home/news_home');
-        $this->load->view('templates/footer');
+        $this->load->view('templates/footer', $data);
     }
 }
