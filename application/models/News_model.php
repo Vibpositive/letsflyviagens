@@ -12,10 +12,10 @@ class News_model extends CI_Model
 
     }
 
-    public function getnews()
+    public function getnews($ammount = 3)
     {
         $this->db->order_by("id", "desc");
-        $query = $this->db->get('news', 3);
+        $query = $this->db->get('news', $ammount);
         
         // print_r($query->result_array());
 
