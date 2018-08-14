@@ -23,7 +23,7 @@
                                     <a class="nav-link" href="<?php echo base_url(); ?>">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="<?php echo base_url() . "about"; ?>" class="nav-link">Nós</a>
+                                    <a href="<?php echo base_url() . "about"; ?>" class="nav-link">Sobre Nós</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cotações</a>

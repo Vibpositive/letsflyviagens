@@ -140,6 +140,9 @@
     <!--//js working-->
     <!--js working-->
     <script src="<?php echo base_url(); ?>assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/locales/bootstrap-datepicker.pt-BR.min.js"></script>
+    
+    <script src=""></script>
     <!--//js working-->
     <!-- stats -->
     <!--						<script src="<?php echo base_url(); ?>assets/js/jquery.waypoints.min.js"></script>-->
@@ -204,18 +207,20 @@
 
                 $("#" + $(e.currentTarget).attr("target")).collapse("show");
                 $('.datePicker').datepicker({
-                    format: "dd/mm/yyyy",
-                    language: "pt-BR",
+                    format: 'dd/mm/yyyy',
+                    language: 'pt-BR',
                     autoclose: true,
                     todayHighlight: true
                 });
             });
+            
             $('.datePicker').datepicker({
-                format: "dd/mm/yyyy",
-                language: "pt-BR",
+                format: 'dd/mm/yyyy',
+                language: 'pt-BR',
                 autoclose: true,
                 todayHighlight: true
             });
+
             $("form").on("submit", function(event) {
                 // event.preventDefault();
                 var formOutput = $(this).serializeArray();
