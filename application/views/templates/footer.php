@@ -6,7 +6,7 @@
                         <h3>Sobre Nos</h3>
                     </div>
                     <div class="footer-text">
-                        <p>Nós temos a missão de sermos mais que agentes, intermediários ou processadores de passagens e reservas, somos pessoas que estarão constantemente próximas de você, sempre dispostos a oferecer integral assistência e garantia para que sua viagem, evento ou qualquer outro objetivo seja um sucesso</p>
+                        <p>Nós temos a missão de sermos mais que agentes, intermediários ou processadores de passagens e reservas, somos pessoas que estarão constantemente próximas de você, sempre dispostos a oferecer integral assistência e garantia para que sua viagem evento ou qualquer outro objetivo seja um sucesso</p>
                     </div>
                 </div>
                 <div class="col-lg-3 footer-grid">
@@ -104,8 +104,7 @@
                 </ul>
             </div>
             <div class="copyrightbottom">
-                <p>© 2018 Let's Fly Viagens. Todos os direitos reservados | Design por
-                    <a href="http://w3layouts.com/">W3layouts</a>
+                <p>© 2018 Let's Fly Viagens. Todos os direitos reservados
                 </p>
             </div>
             <div class="clearfix"></div>
@@ -164,6 +163,7 @@
     <!-- JCaroussel -->
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.jcarousel.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jcarousel.basic.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.jcarousel-autoscroll.min.js"></script>
     <!-- //JCaroussel -->
 
 
@@ -192,6 +192,7 @@
 
                 var formType = $(this).attr('formType');
                 var newPassengerHtml = `
+                <div id="` + formType + `_` + passenger_counter + `_container">
                   <label for="` + formType + `_name_` + passenger_counter + `">Nome ` + passenger_counter + `</label>
                   <input type="text" id="` + formType + `_name_` + passenger_counter + `" name="` + formType + `_name_` + passenger_counter + `" placeholder="Nome ` + passenger_counter + `" required="">
 
@@ -200,6 +201,7 @@
 
                   <label for="` + formType + `_dob_` + passenger_counter + `">Data de Nascimento ` + passenger_counter + `</label>
                   <input type="text" id="` + formType + `_dob_` + passenger_counter + `" placeholder="Data de Nascimento" class="form-control datePicker">
+                  </div>
                 `;
                 
                 // $("#" + formType + "_departureCity").before(newPassengerHtml);
@@ -213,6 +215,20 @@
                     todayHighlight: true
                 });
             });
+
+            $("input[type=reset]").click(function(e) {
+                var formType = $(this).attr('formType');
+
+                if(passenger_counter > 1){
+                    for (let index = passenger_counter; index > 1; index--) {
+                        // console.log($("#"+ formType + "_" + passenger_counter + "_container"));
+                        $("#"+ formType + "_" + passenger_counter + "_container").remove();
+                        passenger_counter--;
+                    }
+                }
+            });
+
+            
             
             $('.datePicker').datepicker({
                 format: 'dd/mm/yyyy',

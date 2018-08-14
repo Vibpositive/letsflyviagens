@@ -1984,7 +1984,7 @@ footer h3 {
     border-width: 10px 10px 10px 10px;
     border-color: rgba(233, 233, 233, 0.1);
 }
-.contact_left_grid > label {
+.contact_left_grid  label {
     display: -webkit-box;
     /* margin-bottom: .5rem;     */
     padding-left: 8px;
