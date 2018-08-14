@@ -64,7 +64,10 @@
     <?php if ($home) : ?>
     <div class="w3-banner">
         <div id="typer"></div>
-        <p class="mx-auto py-3 justify">Acreditamos que viagens, além de nos trazer bem-estar, podem transformar nossa visão de mundo e nos tornar culturalmente mais ricos. E é por isso Nós da Lets Fly Viagens nos dedicamos a realizar sonhos de viagens de milhares de brasileiros ao proporcionar que nossos associados viajem em suas férias todos os anos.</p>
+        <p class="mx-auto py-3 justify">"Acreditamos que viagens, além de nos trazer bem- estar, podem transformar nossa visão
+de mundo e nos tornar culturalmente mais ricos. E é por isso que, nós da Lets Fly Viagens
+dedicamos a realizar sonhos de viagens de milhares de brasileiros ao proporcionar
+nossos associados viajem em suas férias em todos os anos"</p>
     </div>
     <?php endif; ?>
 </section>

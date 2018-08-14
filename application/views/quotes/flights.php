@@ -55,7 +55,7 @@
                             <option value="Outros">Outros</option>
                         </select>
                         <input type="submit" value="Enviar">
-                        <input type="reset" value="Limpar">
+                        <input type="reset" formType="tf" value="Limpar">
                         <div class="clearfix"> </div>
                     </div>
                 </form>
