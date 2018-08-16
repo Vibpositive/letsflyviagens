@@ -8,11 +8,25 @@
 
             <div class="card">
                 <img src="./assets/images/news/<?php echo $news->image; ?>" class="circle-image img-fluid" alt="Card image cap">
-                <div class="card-body w3ls-card">
-                    <h4 class="card-title"><?php echo $news->title; ?></h4>
-                    <p class="card-text mb-3 "><?php echo $string; ?></p>
-                    <!-- <a href="#" data-toggle="modal" data-target="#myModal">Saiba mais</a> -->
-                    <a href="<?php echo base_url() . 'news/article/' . $news->id; ?>" >Saiba mais</a>
+                <a  href="#"
+                        data-toggle="modal"
+                        data-target="#myModal"
+                        data-id="<?php echo base_url() . "news/" . $news->id; ?>"
+                        data-title="<?php echo $news->title; ?>"
+                        data-body="<?php echo $news->body; ?>"
+                        data-image="<?php echo base_url(). "assets/images/news/" . $news->image; ?>">
+                    <div class="card-body w3ls-card">
+                        <h4 class="card-title"><?php echo $news->title; ?></h4>
+                        <p class="card-text mb-3 "><?php echo $string; ?></p>
+                        <a href="#"data-toggle="modal"
+                            data-target="#myModal"
+                            data-id="<?php echo base_url() . "news/" . $news->id; ?>"
+                            data-title="<?php echo $news->title; ?>"
+                            data-body="<?php echo $news->body; ?>"
+                            data-image="<?php echo base_url(). "assets/images/news/" . $news->image; ?>">Saiba mais</a>
+                        <!-- <a href="<?php echo base_url() . 'news/article/' . $news->id; ?>" >Saiba mais</a> -->
+                    
+                </a>
                 </div>
                 <div class="card-footer">
                     <?php

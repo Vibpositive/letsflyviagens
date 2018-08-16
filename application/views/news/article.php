@@ -4,6 +4,7 @@
             <div class="contact_grid_right mt-5">
                 <div class="quote-form" style="min-height:600px">
                     <div class="container" style="min-height: 580px; padding: 0 !important; margin: 0 !important; position: relative;">
+                    <input id="closenews" type="reset" value="voltar">
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="polaroids">

@@ -50,6 +50,7 @@
                             <label for="cf_cruiseOperator">Companhia</label>
                             <select name="cf_cruiseOperator">
                                 <option value="" disabled selected>Companhia</option>
+                                <option value="todas">Todas</option>
                                 <option value="Costa Cruzeiros">Costa Cruzeiros</option>
                                 <option value="MSC Cruzeiros">MSC Cruzeiros</option>
                                 <option value="Pullmantur">Pullmantur</option>

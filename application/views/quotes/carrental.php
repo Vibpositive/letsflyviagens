@@ -10,13 +10,10 @@
             <div class="contact_grid_right mt-5">
                 <form class="quote-form" action="<?php echo base_url() . "quotes/carrentalquote" ?>" method="post">
                     <div class="contact_left_grid contact-tickets">
-                    <!-- todo implement https://tempusdominus.github.io/bootstrap-4/Usage/ -->
+                    <!-- TODO: implement https://tempusdominus.github.io/bootstrap-4/Usage/ -->
 
-                        <label for="cr_name_1">Nome</label>
-                        <input type="text" id="cr_name_1" name="cr_name_1" placeholder="Nome" required="">
-
-                        <label for="cr_surname_1" class="label-surname">Sobrenome</label>
-                        <input type="text" id="cr_surname_1" name="cr_surname_1" placeholder="Sobrenome" required="">
+                        <label for="cr_name_1">Nome do Condutor</label>
+                        <input type="text" id="cr_name_1" name="cr_name_1" placeholder="Nome do Condutor" required="">
 
                         <label for="cr_dob_1">Data de Nascimento</label>
                         <input type="text" id="cr_dob_1" name="cr_dob_1" placeholder="Data de Nascimento" class="form-control datePicker" required="">
