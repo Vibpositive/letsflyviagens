@@ -9,7 +9,7 @@
                 <h2 class="tittle text-center mb-3 title-quote">Hotéis</h2>
                 <div class="contact_grid_right mt-5">
                 
-                    <form class="quote-form" action="server/contact.php" method="post">
+                    <form class="quote-form" action="<?php echo base_url() . "quotes/hotelquote" ?>" method="post">
                         <div class="contact_left_grid contact-tickets">
                         
                             <label for="hf_name_1">Nome</label>
@@ -47,7 +47,7 @@
 
                             <label for="hf_message">Mensagem</label>
                             <textarea id="hf_message" name="hf_message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Informações adicionais?';}" required="">Informações adicionais?</textarea>
-                            <select style="margin-top: -10px; margin-bottom: 20px;" name="know">
+                            <select style="margin-top: -10px; margin-bottom: 20px;" name="hf_know">
                                 <option value="" disabled selected>Como nos conheceu?</option>
                                 <option value="Google">Google</option>
                                 <option value="Panrotas">Panrotas</option>

@@ -9,7 +9,7 @@
                 <h2 class="tittle text-center mb-3 title-quote">Cruzeiros</h2>
                 <div class="contact_grid_right mt-5">
                 
-                    <form class="quote-form" action="server/contact.php" method="post">
+                    <form class="quote-form" action="<?php echo base_url() . "quotes/cruisequote" ?>" method="post">
                         <div class="contact_left_grid contact-tickets">
                         
                             <label for="cf_name_1">Nome</label>
@@ -64,10 +64,10 @@
                                 <option value="Salvador">Salvador</option>
                             </select>
 
-                            <label for="hf_name_1">Mensagem</label>
+                            <label for="cf_message">Mensagem</label>
                             <textarea id="cf_message" name="cf_message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Informações adicionais?</textarea>
                             
-                            <select style="margin-top: -10px; margin-bottom: 20px;" name="know">
+                            <select style="margin-top: -10px; margin-bottom: 20px;" name="cf_know">
                                 <option value="" disabled selected>Como nos conheceu?</option>
                                 <option value="Google">Google</option>
                                 <option value="Panrotas">Panrotas</option>

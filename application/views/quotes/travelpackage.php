@@ -10,7 +10,7 @@
             <div class="contact_grid_right mt-5">
                 <!-- <h6>Please fill this form to contact with us.</h6> -->
                 <a class="blog-btn add-passenger" role="button" formType="tp">Adicionar Passageiro</a>
-                <form class="quote-form" action="server/contact.php" method="post">
+                <form class="quote-form" action="<?php echo base_url() . "quotes/travelpackagequote" ?>" method="post"
                     <div class="contact_left_grid contact-tickets">
 
                         <label for="tp_name_1">Nome</label>
@@ -40,7 +40,7 @@
                         <label for="tp_message">Mensagem</label>
                         <textarea id="tp_message" name="tp_message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Informações adicionais?</textarea>
 
-                        <select style="margin-top: -10px; margin-bottom: 20px;" name="know">
+                        <select style="margin-top: -10px; margin-bottom: 20px;" name="tp_know">
                             <option value="" disabled selected>Como nos conheceu?</option>
                             <option value="Google">Google</option>
                             <option value="Panrotas">Panrotas</option>

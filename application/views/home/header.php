@@ -30,7 +30,7 @@
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="<?php echo base_url() . "quotes/flights"; ?>">Passagens</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="<?php echo base_url() . "quotes/travelpackages"; ?>">Pacotes</a>
+                                        <a class="dropdown-item" href="<?php echo base_url() . "quotes/travelpackage"; ?>">Pacotes</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="<?php echo base_url() . "quotes/hotels"; ?>">Hotéis</a>
                                         <div class="dropdown-divider"></div>

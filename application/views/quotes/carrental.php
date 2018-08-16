@@ -8,47 +8,47 @@
         <div class="container py-4 mt-2">
             <h2 class="tittle text-center mb-3 title-quote">Aluguel de Carro</h2>
             <div class="contact_grid_right mt-5">
-                <form class="quote-form" action="server/contact.php" method="post">
+                <form class="quote-form" action="<?php echo base_url() . "quotes/carrentalquote" ?>" method="post">
                     <div class="contact_left_grid contact-tickets">
                     <!-- todo implement https://tempusdominus.github.io/bootstrap-4/Usage/ -->
 
-                        <label for="crf_name_1">Nome</label>
-                        <input type="text" id="crf_name_1" name="crf_name_1" placeholder="Nome" required="">
+                        <label for="cr_name_1">Nome</label>
+                        <input type="text" id="cr_name_1" name="cr_name_1" placeholder="Nome" required="">
 
-                        <label for="crf_surname_1" class="label-surname">Sobrenome</label>
-                        <input type="text" id="crf_surname_1" name="crf_surname_1" placeholder="Sobrenome" required="">
+                        <label for="cr_surname_1" class="label-surname">Sobrenome</label>
+                        <input type="text" id="cr_surname_1" name="cr_surname_1" placeholder="Sobrenome" required="">
 
-                        <label for="crf_dob_1">Data de Nascimento</label>
-                        <input type="text" id="crf_dob_1" name="crf_dob_1" placeholder="Data de Nascimento" class="form-control datePicker" required="">
+                        <label for="cr_dob_1">Data de Nascimento</label>
+                        <input type="text" id="cr_dob_1" name="cr_dob_1" placeholder="Data de Nascimento" class="form-control datePicker" required="">
 
-                        <label for="crf_email">E-mail</label>
-                        <input type="email" id="crf_email" name="crf_email" placeholder="Email" required="">
+                        <label for="cr_email">E-mail</label>
+                        <input type="email" id="cr_email" name="cr_email" placeholder="Email" required="">
 
-                        <label for="crf_phone">Telefone</label>
-                        <input type="tel" id="crf_phone" name="crf_phone" placeholder="+55(XX)XXXX-XXXX" required="">
+                        <label for="cr_phone">Telefone</label>
+                        <input type="tel" id="cr_phone" name="cr_phone" placeholder="+55(XX)XXXX-XXXX" required="">
 
-                        <label for="crf_departureCity">Cidade de Retirada</label>
-                        <input type="text" id="crf_departureCity" name="crf_departureCity" placeholder="Cidade de Saida" class="form-control" required="">
+                        <label for="cr_departureCity">Cidade de Retirada</label>
+                        <input type="text" id="cr_departureCity" name="cr_departureCity" placeholder="Cidade de Saida" class="form-control" required="">
 
-                        <label for="crf_departureDate">Data de Retirada</label>
-                        <input type="text" id="crf_departureDate" name="crf_departureDate" placeholder="Data de Retirada" class="form-control datePicker" required="">
+                        <label for="cr_departureDate">Data de Retirada</label>
+                        <input type="text" id="cr_departureDate" name="cr_departureDate" placeholder="Data de Retirada" class="form-control datePicker" required="">
 
-                        <label for="crf_pickUp">Horário de Retirada</label>
-                        <input type="text" id="crf_pickUp" name="crf_pickUp" placeholder="Data de Retirada" class="form-control" required="">
+                        <label for="cr_pickUp">Horário de Retirada</label>
+                        <input type="text" id="cr_pickUp" name="cr_pickUp" placeholder="Data de Retirada" class="form-control" required="">
 
-                        <label for="crf_destinationCity" id="destinationCity">Cidade de Devolução</label>
-                        <input type="text" id="crf_destinationCity" name="crf_destinationCity" placeholder="Cidade de Devolução" class="form-control" required="">
+                        <label for="cr_destinationCity" id="destinationCity">Cidade de Devolução</label>
+                        <input type="text" id="cr_destinationCity" name="cr_destinationCity" placeholder="Cidade de Devolução" class="form-control" required="">
 
-                        <label for="crf_returnDarte">Data de Devolução</label>
-                        <input type="text" id="crf_returnDarte" name="crf_returnDarte" placeholder="Data de Devolução" class="form-control datePicker">
+                        <label for="cr_returnDarte">Data de Devolução</label>
+                        <input type="text" id="cr_returnDarte" name="cr_returnDarte" placeholder="Data de Devolução" class="form-control datePicker">
 
-                        <label for="crf_returnTime">Horário de Devolução</label>
-                        <input type="text" id="crf_returnTime" name="crf_returnTime" placeholder="Horário de Devolução" class="form-control" required="">
+                        <label for="cr_returnTime">Horário de Devolução</label>
+                        <input type="text" id="cr_returnTime" name="cr_returnTime" placeholder="Horário de Devolução" class="form-control" required="">
 
-                        <label for="crf_message">Mensagem</label>
-                        <textarea id="crf_message" name="crf_message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Informações adicionais?</textarea>
+                        <label for="cr_message">Mensagem</label>
+                        <textarea id="cr_message" name="cr_message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Informações adicionais?</textarea>
 
-                        <select style="margin-top: -10px; margin-bottom: 20px;" name="know">
+                        <select style="margin-top: -10px; margin-bottom: 20px;" name="cr_know">
                             <option value="" disabled selected>Como nos conheceu?</option>
                             <option value="Google">Google</option>
                             <option value="Panrotas">Panrotas</option>
