@@ -20,6 +20,87 @@ class Quotes extends CI_Controller
         $this->load->view('home/contact_home');
         $this->load->view('templates/footer', $data);
     }
+
+    private function quote($quote_name){
+        if ($this->input->method() != "post") {
+            redirect('/quotes/flights', 'refresh');
+        }
+        
+        $this->load->helper('url');
+        $this->load->helper('form_helper');
+        
+        $this->load->model('quotes_model', 'quotes');
+        $this->load->model('user_model', 'user');
+        
+        $post = $this->input->post(NULL, TRUE);
+        $email = get_quote_email($post);
+        $quote_type_id = $this -> quotes -> get_quote_type_id($quote_name);
+        
+        if($email && $quote_type_id){
+            $user = $this -> user -> get_user($email);
+            
+            if(!$user){
+                $this -> user -> create_user($email);
+                $user = $this -> user -> get_user($email);
+            }
+            $userid = $user -> id;
+        }//TODO: else if no email and quote type id
+        
+        
+        if(isset($userid)){
+            $data = array();
+            foreach ($post as $key => $value) {
+                $subkey = substr ($key , 3);
+                $register = array("quote_id" => null, "field_name" => $subkey, "field_value" => $value);
+                array_push($data, $register);
+            }
+
+            $this -> quotes -> quote($data, $userid, $quote_type_id);
+            
+        }//TODO: else if no user id
+    }
+
+    public function flightquote(){
+        if ($this->input->method() != "post") {
+            redirect('/quotes/flights', 'refresh');
+        }
+        $this -> quote("flight");
+    }
+
+    public function carrentalquote(){
+        if ($this->input->method() != "post") {
+            redirect('/quotes/carrental', 'refresh');
+        }
+        $this -> quote("carrental");
+    }
+
+    public function cruisequote(){
+        if ($this->input->method() != "post") {
+            redirect('/quotes/cruise', 'refresh');
+        }
+        $this -> quote("cruise");
+    }
+
+    public function hotelquote(){
+        if ($this->input->method() != "post") {
+            redirect('/quotes/hotel', 'refresh');
+        }
+        $this -> quote("hotel");
+    }
+
+    public function travelinsurancequote(){
+        if ($this->input->method() != "post") {
+            redirect('/quotes/travelinsurance', 'refresh');
+        }
+        $this -> quote("travelinsurance");
+    }
+    
+    public function travelpackagequote(){
+        if ($this->input->method() != "post") {
+            redirect('/quotes/travelpackage', 'refresh');
+        }
+        $this -> quote("travelpackage");
+    }
     
     public function flights($page = 'flights')
     {
@@ -41,7 +122,6 @@ class Quotes extends CI_Controller
         $this->load->view('templates/footer', $data);
     }
     
-
     public function hotels($page = 'hotels')
     {
         if (!file_exists(APPPATH.'views/quotes/'.$page.'.php')) {
@@ -59,9 +139,6 @@ class Quotes extends CI_Controller
         $this->load->view('home/header', $data);
         $this->load->view('quotes/'.$page, $data);
         $this->load->view('home/contact_home');
-        // $this->load->view('home/services');
-        // $this->load->view('home/testimonials');
-        // $this->load->view('home/news_home');
         $this->load->view('templates/footer', $data);
     }
 
@@ -125,7 +202,7 @@ class Quotes extends CI_Controller
         $this->load->view('templates/footer', $data);
     }
 
-    public function travelpackages($page = 'travelpackages')
+    public function travelpackage($page = 'travelpackage')
     {
         if (!file_exists(APPPATH.'views/quotes/'.$page.'.php')) {
             show_404();
