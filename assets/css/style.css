@@ -1956,6 +1956,9 @@ footer h3 {
     input {
         width: 100% !important;;
     }
+    input[type="checkbox"] {
+    	width: auto !important;
+    }
 }
 .wrapper-offers{
     background: url(../images/bg7.jpg)no-repeat;

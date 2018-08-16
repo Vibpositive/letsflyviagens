@@ -80,18 +80,21 @@
                         <h4>Nos siga em:</h4>
                     </li>
                     <li>
-                        <a class="facebook" href="#">
-                            <a class="Instagram" href="#">
-                                <a class="Outros" href="#">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                    </li>
-                    <li>
-                        <a class="facebook" href="#">
-                            <i class="fab fa-twitter"></i>
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/letsflyviagens">
+                            <i class="fab fa-facebook-f"></i>
                         </a>
                     </li>
                     <li>
+                        <a class="facebook" target="_blank" href="https://www.instagram.com/letsflyviagens/">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="facebook" target="_blank" href="https://twitter.com/letsflyviagens">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                    <!-- <li>
                         <a class="facebook" href="#">
                             <i class="fab fa-google-plus-g"></i>
                         </a>
@@ -100,7 +103,7 @@
                         <a class="facebook" href="#">
                             <i class="fab fa-pinterest-p"></i>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
             <div class="copyrightbottom">
@@ -189,24 +192,36 @@
             
             $(".add-passenger").click(function(e) {
                 passenger_counter++;
-
+                
                 var formType = $(this).attr('formType');
                 var newPassengerHtml = `
                 <div id="` + formType + `_` + passenger_counter + `_container">
-                  <label for="` + formType + `_name_` + passenger_counter + `">Nome ` + passenger_counter + `</label>
-                  <input type="text" id="` + formType + `_name_` + passenger_counter + `" name="` + formType + `_name_` + passenger_counter + `" placeholder="Nome ` + passenger_counter + `" required="">
-
-                  <label for="` + formType + `_surname_` + passenger_counter + `">Sobrenome ` + passenger_counter + `</label>
-                  <input type="text" id="` + formType + `_surname_` + passenger_counter + `" name="` + formType + `_surname_` + passenger_counter + `" placeholder="Sobrenome ` + passenger_counter + `" required="">
-
-                  <label for="` + formType + `_dob_` + passenger_counter + `">Data de Nascimento ` + passenger_counter + `</label>
-                  <input type="text" id="` + formType + `_dob_` + passenger_counter + `" placeholder="Data de Nascimento" class="form-control datePicker">
-                  </div>
-                `;
+                <label for="` + formType + `_name_` + passenger_counter + `">Nome ` + passenger_counter + `</label>
+                <input type="text" id="` + formType + `_name_` + passenger_counter + `" name="` + formType + `_name_` + passenger_counter + `" placeholder="Nome ` + passenger_counter + `" required="">
                 
+                <label for="` + formType + `_surname_` + passenger_counter + `">Sobrenome ` + passenger_counter + `</label>
+                <input type="text" id="` + formType + `_surname_` + passenger_counter + `" name="` + formType + `_surname_` + passenger_counter + `" placeholder="Sobrenome ` + passenger_counter + `" required="">
+                
+                <label for="` + formType + `_dob_` + passenger_counter + `">Data de Nascimento ` + passenger_counter + `</label>
+                <input type="text" id="` + formType + `_dob_` + passenger_counter + `" placeholder="Data de Nascimento" class="form-control datePicker">
+                </div>
+                `;
+                if(formType == "ti"){
+                    newPassengerHtml = `
+                    <div id="` + formType + `_` + passenger_counter + `_container">
+                    <label for="` + formType + `_name_` + passenger_counter + `">Nome completo ` + passenger_counter + `</label>
+                    <input type="text" id="` + formType + `_name_` + passenger_counter + `" name="` + formType + `_name_` + passenger_counter + `" placeholder="Nome Completo ` + passenger_counter + `" required="">
+                    
+                    <label for="` + formType + `_dob_` + passenger_counter + `">Data de Nascimento ` + passenger_counter + `</label>
+                    <input type="text" id="` + formType + `_dob_` + passenger_counter + `" placeholder="Data de Nascimento" class="form-control datePicker">
+                    </div>
+                    `;
+                }
+                
+                // TODO: implement dynamic cast of object accordingly to form type
                 // $("#" + formType + "_departureCity").before(newPassengerHtml);
                 $("#destinationCity").before(newPassengerHtml);
-
+                
                 $("#" + $(e.currentTarget).attr("target")).collapse("show");
                 $('.datePicker').datepicker({
                     format: 'dd/mm/yyyy',
@@ -255,6 +270,10 @@
                 modal.find('.modal-main-text').text(body)
                 modal.find('.modal-main-image').attr('src', image)
                 // modal.find('.btn-more-info').attr('onclick', "location.href = '" + moreinfo + "';")
+            });
+            $('#closenews').click(function(){
+                // TODO: get base url from codeigniter
+                window.location.href = '../../';
             })
         });
     </script>
