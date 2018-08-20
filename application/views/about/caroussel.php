@@ -3,12 +3,6 @@
     <div class="jcarousel-wrapper">
         <div class="jcarousel">
             <ul>
-                <li>
-                    <img class="img-responsive" src="./assets/images/caroussel/buenos-aires.jpg" alt="">
-				</li>
-				<li>
-                    <img class="img-responsive" src="./assets/images/caroussel/cancun.jpg" alt="">
-				</li>
 				<li>
 					<img class="img-responsive" src="./assets/images/caroussel/costa-cruzeiro.jpg" alt="">
 				</li>

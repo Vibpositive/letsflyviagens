@@ -55,6 +55,9 @@
                             <div class="clearfix"> </div>
                         </div>
                     </form>
+                    <div class="alert alert-success" role="alert" id="success-alert">
+                        Mensagem enviada com sucesso
+                    </div>
                 </div>
             </div>
         </div>
