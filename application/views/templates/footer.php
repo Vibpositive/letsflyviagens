@@ -139,6 +139,7 @@
     <!-- //Modal -->
     <!--js working-->
     <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
     <!--//js working-->
     <!--js working-->
     <script src="<?php echo base_url(); ?>assets/js/bootstrap-datepicker.min.js"></script>
@@ -236,7 +237,6 @@
 
                 if(passenger_counter > 1){
                     for (let index = passenger_counter; index > 1; index--) {
-                        // console.log($("#"+ formType + "_" + passenger_counter + "_container"));
                         $("#"+ formType + "_" + passenger_counter + "_container").remove();
                         passenger_counter--;
                     }
@@ -251,12 +251,7 @@
                 autoclose: true,
                 todayHighlight: true
             });
-
-            $("form").on("submit", function(event) {
-                // event.preventDefault();
-                var formOutput = $(this).serializeArray();
-                console.log(formOutput);
-            });
+            
             $('[data-toggle="tooltip"]').tooltip(); 
 
             $('#myModal').on('show.bs.modal', function (event) {
@@ -274,9 +269,36 @@
             $('#closenews').click(function(){
                 // TODO: get base url from codeigniter
                 window.location.href = '../../';
-            })
+            });
+            $("form").submit(function(e) {
+
+
+                var form = $(this);
+                var url = form.attr('action');
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: form.serialize(), // serializes the form's elements.
+                    success: function(data)
+                        {
+                            $("#success-alert").show();
+                            $("#success-alert").alert();
+                            window.setTimeout(function () {
+                                $("#success-alert").alert('close');
+                            }, 5000);
+                            form.trigger("reset");
+                        }
+                    });
+
+                e.preventDefault(); // avoid to execute the actual submit of the form.
+            });
+
+            $("#success-alert").hide();
+            
         });
     </script>
+    
 </body>
 
 </html>

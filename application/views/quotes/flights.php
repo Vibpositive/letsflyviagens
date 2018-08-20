@@ -54,11 +54,14 @@
                             <option value="Instagram">Instagram</option>
                             <option value="Outros">Outros</option>
                         </select>
-                        <input type="submit" value="Enviar">
+                        <input type="submit" value="Enviar" id="send">
                         <input type="reset" formType="tf" value="Limpar">
                         <div class="clearfix"> </div>
                     </div>
                 </form>
+                <div class="alert alert-success" role="alert" id="success-alert">
+                    Mensagem enviada com sucesso
+                </div>
             </div>
         </div>
     </div>

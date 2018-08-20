@@ -23,7 +23,8 @@ class Quotes extends CI_Controller
 
     private function quote($quote_name){
         if ($this->input->method() != "post") {
-            redirect('/quotes/flights', 'refresh');
+            // TODO: redirect to the right place
+            // redirect('/quotes/flights', 'refresh');
         }
         
         $this->load->helper('url');
@@ -56,15 +57,52 @@ class Quotes extends CI_Controller
             }
 
             $this -> quotes -> quote($data, $userid, $quote_type_id);
+
+            $this->output->set_output(print_r($data));
+
             
-        }//TODO: else if no user id
+            $emaildestinatario = "letsfly@letsflyviagens.com.br";
+            $emailsender = "william@letsflyviagens.com.br";
+            $assunto = "Pedido de cotação - $quote_name";
+            $mensagemHTML = "Voce recebeu uma mensagem de: ";
+            $quebra_linha = "<br>";
+
+
+            setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+            date_default_timezone_set('America/Sao_Paulo');
+            $now = strftime('%A, %d de %B de %Y', strtotime('today'));
+            
+            $mensagemHTML .= "em: $now";
+            $mensagemHTML .= "\n";
+
+            foreach ($data as $campo) {
+                $mensagemHTML .= "Nome do campo: " . $campo['field_name'] . " > " . $campo['field_value'];
+                $mensagemHTML .= "\n";
+            }
+
+
+            $headers = "MIME-Version: 1.1\r\n";
+            $headers .= "Content-type: text/plain; charset=UTF-8\r\n";
+    
+            $headers .= "From: $email\r\n"; // remetente
+            $headers .= "Return-Path: $email\r\n"; // return-path
+    
+            if(!mail($emaildestinatario, $assunto, $mensagemHTML, $headers ,"-r".$emailsender)){ // Se for Postfix
+                $headers .= "Return-Path: " . $emailsender . $quebra_linha; // Se "não for Postfix"
+                mail($emaildestinatario, $assunto, $mensagemHTML, $headers );
+                return $this->output->set_output("sucess"); 
+            }
+        }
+        
+        $this->output->set_output("failure");
+
     }
 
     public function flightquote(){
         if ($this->input->method() != "post") {
             redirect('/quotes/flights', 'refresh');
         }
-        $this -> quote("flight");
+        return $this -> quote("flight");
     }
 
     public function carrentalquote(){
