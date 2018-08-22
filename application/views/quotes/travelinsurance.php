@@ -10,7 +10,11 @@
             <div class="contact_grid_right mt-5">
                 <!-- <h6>Please fill this form to contact with us.</h6> -->
                 <a class="blog-btn add-passenger" role="button" formType="ti">Adicionar segurado</a>
-                <form class="quote-form" action="<?php echo base_url() . "quotes/travelinsurancequote" ?>" method="post">
+                    <?php if ($this->uri->segment(1) == "quotes") : ?>
+                        <form class="quote-form" action="<?php echo $this->uri->segment(2) . "quote"; ?>" method="post">
+                    <?php else : ?>
+                        <form class="quote-form" action="quotes/<?php echo basename(__FILE__, '.php') . "quote"; ?>" method="post">
+                    <?php endif; ?>
                     <div class="contact_left_grid contact-tickets">
 
                         <label for="ti_name_1">Nome completo</label>
@@ -28,7 +32,7 @@
                         <label for="ti_phone">Telefone</label>
                         <input type="tel" id="ti_phone" name="ti_phone" placeholder="+55(XX)XXXX-XXXX" required="">
 
-                        <label for="ti_destinationCity" id="destinationCity">Destino</label>
+                        <label for="ti_destinationCity" id="ti_destinationCity">Destino</label>
                         <input type="text" id="ti_destinationCity" name="ti_destinationCity" placeholder="Cidade de Destino" class="form-control" required="">
 
                         <label for="ti_departureDate">Partida</label>
@@ -54,9 +58,6 @@
                         <div class="clearfix"> </div>
                     </div>
                 </form>
-                <div class="alert alert-success" role="alert" id="success-alert">
-                    Mensagem enviada com sucesso
-                </div>
             </div>
         </div>
     </div>

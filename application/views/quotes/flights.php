@@ -8,13 +8,15 @@
         <div class="container py-4 mt-2">
             <h2 class="tittle text-center mb-3 title-quote">Passagens Aéreas</h2>
             <div class="contact_grid_right mt-5">
-                <!-- <h6>Please fill this form to contact with us.</h6> -->
+            
                 <a class="blog-btn add-passenger" role="button" formType="tf">Adicionar passageiro</a>
-                <form class="quote-form" action="<?php echo substr(base_url(), 11) . "quotes/flightquote" ?>" method="post">
+                
+                <?php if ($this->uri->segment(1) == "quotes") : ?>
+                    <form class="quote-form" action="<?php echo $this->uri->segment(2) . "quote"; ?>" method="post">
+                <?php else : ?>
+                    <form class="quote-form" action="quotes/<?php echo basename(__FILE__, '.php') . "quote"; ?>" method="post">
+                <?php endif; ?>
                     <div class="contact_left_grid contact-tickets">
-
-                    
-
                         <label for="tf_name_1">Nome</label>
                         <input type="text" id="tf_name_1" name="tf_name_1" placeholder="Nome" required="">
 
@@ -33,7 +35,7 @@
                         <label for="tf_departureCity">Cidade</label>
                         <input type="text" id="tf_departureCity" name="tf_departureCity" placeholder="Cidade de Saida" class="form-control" required="">
 
-                        <label for="tf_destinationCity" id="destinationCity">Destino</label>
+                        <label for="tf_destinationCity" id="tf_destinationCity">Destino</label>
                         <input type="text" id="tf_destinationCity" name="tf_destinationCity" placeholder="Cidade de Destino" class="form-control" required="">
 
                         <label for="tf_departureDate">Data de Embarque</label>
@@ -59,9 +61,6 @@
                         <div class="clearfix"> </div>
                     </div>
                 </form>
-                <div class="alert alert-success" role="alert" id="success-alert">
-                    Mensagem enviada com sucesso
-                </div>
             </div>
         </div>
     </div>

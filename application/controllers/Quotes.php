@@ -121,7 +121,7 @@ class Quotes extends CI_Controller
         
     }
 
-    public function flightquote(){
+    public function flightsquote(){
         if ($this->input->method() != "post") {
             redirect('/quotes/flights', 'refresh');
         }
@@ -135,14 +135,14 @@ class Quotes extends CI_Controller
         $this -> quote("carrental");
     }
 
-    public function cruisequote(){
+    public function cruisesquote(){
         if ($this->input->method() != "post") {
             redirect('/quotes/cruise', 'refresh');
         }
         $this -> quote("cruise");
     }
 
-    public function hotelquote(){
+    public function hotelsquote(){
         if ($this->input->method() != "post") {
             redirect('/quotes/hotel', 'refresh');
         }

@@ -193,7 +193,12 @@
     <script>
         var win = $(window),
             foo = $('#typer'),
-            passenger_counter = 1;
+            tf_counter = 1,
+            cr_counter = 1,
+            cf_counter = 1,
+            hf_counter = 1,
+            ti_counter = 1,
+            tp_counter = 1;
 
         var title = "undefined"
         var body = "undefined"
@@ -201,7 +206,7 @@
         foo.typer(['Viajar é preciso', 'Preços acessíveis', 'Sempre ao seu lado', 'A melhor experiência', 'Férias de verão com a Let\'s Fly']);
         // unneeded...
         win.resize(function() {
-            var fontSize = Math.max(Math.min(win.width() / (1 * 10), parseFloat(Number.POSITIVE_INFINITY)), parseFloat(Number.NEGATIVE_INFINITY));
+            var fontSize = Math.max(Math.min(win.width() / (1 * 11), parseFloat(Number.POSITIVE_INFINITY)), parseFloat(Number.NEGATIVE_INFINITY));
             foo.css({
                 fontSize: fontSize * .8 + 'px'
             });
@@ -213,28 +218,60 @@
                 $("#" + $(e.currentTarget).attr("target")).collapse("show");
             });
             
+                
             $(".add-passenger").click(function(e) {
-                if(passenger_counter < 20){
-                    passenger_counter++;
+                var formType = $(this).attr('formType');
+
+                switch (formType) {
+                    case "tf":
+                        tf_counter++;
+                        var currentCounter = tf_counter;
+                        break;
+                    case "cr":
+                        cr_counter++;
+                        var currentCounter = cr_counter;
+                        break;
+                    case "cf":
+                        cf_counter++;
+                        var currentCounter = cf_counter;
+                        break;
+                    case "hf":
+                        hf_counter++;
+                        var currentCounter = hf_counter;
+                        break;
+                    case "ti":
+                        ti_counter++;
+                        var currentCounter = ti_counter;
+                        break;
+                    case "tp":
+                        tp_counter++;
+                        var currentCounter = tp_counter;
+                        break;
+                
+                    default:
+                        break;
+                }
+                
+                if(currentCounter < 20){
 
                     var formType = $(this).attr('formType');
                     var newPassengerHtml = `
-                    <div id="` + formType + `_` + passenger_counter + `_container">
-                    <label for="` + formType + `_name_` + passenger_counter + `">Nome ` + passenger_counter + `</label>
-                    <input type="text" id="` + formType + `_name_` + passenger_counter + `" name="` + formType + `_name_` + passenger_counter + `" placeholder="Nome ` + passenger_counter + `" required="">
+                    <div id="` + formType + `_` + currentCounter + `_container">
+                    <label for="` + formType + `_name_` + currentCounter + `">Nome ` + currentCounter + `</label>
+                    <input type="text" id="` + formType + `_name_` + currentCounter + `" name="` + formType + `_name_` + currentCounter + `" placeholder="Nome ` + currentCounter + `" required="">
 
-                    <label for="` + formType + `_surname_` + passenger_counter + `">Sobrenome ` + passenger_counter + `</label>
-                    <input type="text" id="` + formType + `_surname_` + passenger_counter + `" name="` + formType + `_surname_` + passenger_counter + `" placeholder="Sobrenome ` + passenger_counter + `" required="">
+                    <label for="` + formType + `_surname_` + currentCounter + `">Sobrenome ` + currentCounter + `</label>
+                    <input type="text" id="` + formType + `_surname_` + currentCounter + `" name="` + formType + `_surname_` + currentCounter + `" placeholder="Sobrenome ` + currentCounter + `" required="">
 
-                    <label for="` + formType + `_dob_` + passenger_counter + `">Data de Nascimento ` + passenger_counter + `</label>
-                    <input type="text" id="` + formType + `_dob_` + passenger_counter + `" placeholder="Data de Nascimento" class="form-control datePicker">
+                    <label for="` + formType + `_dob_` + currentCounter + `">Data de Nascimento ` + currentCounter + `</label>
+                    <input type="text" id="` + formType + `_dob_` + currentCounter + `" placeholder="Data de Nascimento" class="form-control datePicker">
                     </div>
                     `;
                     
-                    // $("#" + formType + "_departureCity").before(newPassengerHtml);
-                    $("#destinationCity").before(newPassengerHtml);
+                    $("#" + formType + "_destinationCity").before(newPassengerHtml);
 
                     $("#" + $(e.currentTarget).attr("target")).collapse("show");
+
                     $('.datePicker').datepicker({
                         format: 'dd/mm/yyyy',
                         language: 'pt-BR',
@@ -247,10 +284,43 @@
             $("input[type=reset]").click(function(e) {
                 var formType = $(this).attr('formType');
 
-                if(passenger_counter > 1){
-                    for (let index = passenger_counter; index > 1; index--) {
-                        $("#"+ formType + "_" + passenger_counter + "_container").remove();
-                        passenger_counter--;
+                switch (formType) {
+                    case "tf":
+                        tf_counter++;
+                        var currentCounter = tf_counter;
+                        break;
+                    case "cr":
+                        cr_counter++;
+                        var currentCounter = cr_counter;
+                        break;
+                    case "cf":
+                        cf_counter++;
+                        var currentCounter = cf_counter;
+                        break;
+                    case "hf":
+                        hf_counter++;
+                        var currentCounter = hf_counter;
+                        break;
+                    case "ti":
+                        ti_counter++;
+                        var currentCounter = ti_counter;
+                        break;
+                    case "tp":
+                        tp_counter++;
+                        var currentCounter = tp_counter;
+                        break;
+                
+                    default:
+                        break;
+                }
+
+                console.log(formType);
+                console.log( $("#"+ formType + "_" + currentCounter + "_container"));
+
+                if(currentCounter > 1){
+                    for (let index = currentCounter; index > 1; index--) {
+                        $("#"+ formType + "_" + currentCounter + "_container").remove();
+                        currentCounter--;
                     }
                 }
             });
@@ -293,13 +363,14 @@
                     success: function(data)
                         {
 
-                            console.log(data);
+                            // console.log(data);
 
                             data = data.split('\n').join('');
 
                             if(data == "success"){
                                 title = "Mensagem enviada com sucesso"
                                 body = "Sua mensagem foi enviada, fique de olho no seu email, um agente entrará em contato!"
+                                form.trigger("reset");
                             }else{
                                 title = "Mensagem nao enviada"
                                 body = "Por favor tente mais tarde"
@@ -307,7 +378,6 @@
                             
                             $('#emailFeedbackModal').modal('show');
                             
-                            form.trigger("reset");
                         }
                     });
 
