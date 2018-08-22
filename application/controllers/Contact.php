@@ -64,7 +64,7 @@ class Contact extends CI_Controller
             
             $emaildestinatario = "letsfly@letsflyviagens.com.br";
             $emailsender = "william@letsflyviagens.com.br";
-            $assunto = "Formulario de Contato";
+            $assunto = "Formulario de Contato $post['Assunto']";
 
             $mensagemHTML = '<html><body>';
             $mensagemHTML .= '</body></html>';
