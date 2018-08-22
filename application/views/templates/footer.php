@@ -19,7 +19,7 @@
                             <li>Rua Afonso Sardinha, 95 - Conj. 94 - Lapa - São Paulo - SP</li>
                         </ul>
                         <ul>
-                            <li class="hd">Telefone:+ 55 (11) 3644-8818</li>
+                            <li class="hd">Telefone:+ 55 (11) 3280-3860 </li>
                             <li class="hd" style="float: left">Email:
                                 <a style="float: right; margin-top: -4px" href="mailto:letsfly@letsflyviagens.com.br">&nbsp;&nbsp;letsfly@letsflyviagens.com.br</a>
                             </li>
@@ -118,7 +118,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Peregrinate</h4>
+                    <h4 class="modal-title"></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -131,7 +131,29 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <!-- <button type="button" class="btn btn-primary btn-more-info">Saiba Mais</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emailFeedbackModal">
+      Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="emailFeedbackModal" tabindex="-1" role="dialog" aria-labelledby="emailFeedbackModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="emailFeedbackModalLabel">Mensagem de email</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3 class="modal-main-text"></h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
@@ -176,6 +198,10 @@
         var win = $(window),
             foo = $('#typer'),
             passenger_counter = 1;
+
+        var title = "undefined"
+        var body = "undefined"
+
         foo.typer(['Viajar é preciso', 'Preços acessíveis', 'Sempre ao seu lado', 'A melhor experiência', 'Férias de verão com a Let\'s Fly']);
         // unneeded...
         win.resize(function() {
@@ -231,7 +257,7 @@
                     todayHighlight: true
                 });
             });
-
+            
             $("input[type=reset]").click(function(e) {
                 var formType = $(this).attr('formType');
 
@@ -242,8 +268,6 @@
                     }
                 }
             });
-
-            
             
             $('.datePicker').datepicker({
                 format: 'dd/mm/yyyy',
@@ -264,15 +288,15 @@
                 modal.find('.modal-title').text(title)
                 modal.find('.modal-main-text').text(body)
                 modal.find('.modal-main-image').attr('src', image)
-                // modal.find('.btn-more-info').attr('onclick', "location.href = '" + moreinfo + "';")
             });
             $('#closenews').click(function(){
                 // TODO: get base url from codeigniter
                 window.location.href = '../../';
             });
+
+
             $("form").submit(function(e) {
-
-
+                
                 var form = $(this);
                 var url = form.attr('action');
 
@@ -282,19 +306,52 @@
                     data: form.serialize(), // serializes the form's elements.
                     success: function(data)
                         {
-                            $("#success-alert").show();
-                            $("#success-alert").alert();
-                            window.setTimeout(function () {
-                                $("#success-alert").alert('close');
-                            }, 5000);
+                            data = data.split('\n').join('');
+
+                            if(data == "success"){
+                                title = "Mensagem enviada com sucesso"
+                                body = "Sua mensagem foi enviada, fique de olho no seu email, um agente entrará em contato!"
+                            }else{
+                                title = "Mensagem nao enviada"
+                                body = "Por favor tente mais tarde"
+                            }
+                            
+                            $('#emailFeedbackModal').modal('show');
+                            
                             form.trigger("reset");
                         }
                     });
 
-                e.preventDefault(); // avoid to execute the actual submit of the form.
+                e.preventDefault();
+                // avoid to execute the actual submit of the form.
+            });
+
+            $('#emailFeedbackModal').on('show.bs.modal', function (event) {
+                console.log("Opened");
+                var modal = $(this)
+                modal.find('.modal-title').text(title)
+                modal.find('.modal-main-text').text(body)
             });
 
             $("#success-alert").hide();
+
+            $(".more-info").click(function (){
+                var target = $(this).attr("target");
+                console.log($(".py-4").offset());
+
+                var $el = $("#different_way_to"); 
+                var bottom = $el.position().top + $el.outerHeight(true);
+
+                // $('html, body').animate({
+                //     scrollTop: $("#" + target).offset().top
+                // }, 2000);
+
+                $("html, body").animate({
+                    // scrollTop: $(".py-4").position().top
+                    // scrollTop: $(".py-4").position().top 
+                    scrollTop: bottom
+                }, 1000);
+            });
             
         });
     </script>
