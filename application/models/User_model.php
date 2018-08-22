@@ -9,13 +9,12 @@ class User_model extends CI_Model
 
     public function __construct(){
         $this->load->database();
-
     }
 
     public function get_user($email)
     {
         $this->db->select('id');
-        $this->db->from('user');
+        $this->db->from($this -> table);
         $this->db->where('email', $email);
         $this->db->limit(1);
         $query = $this->db->get();
