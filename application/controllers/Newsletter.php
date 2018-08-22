@@ -46,7 +46,7 @@ class Newsletter extends CI_Controller
             $mensagemHTML = '<html><body>';
             $mensagemHTML .= '</body></html>';
             
-            $mensagemHTML .= '<h1>Formulario de contato</h1>';
+            $mensagemHTML .= '<h1>Inserir no newsletter</h1>';
             $mensagemHTML .= "<h2>Em: $today $now</h2>";
             
             $mensagemHTML .= '<table rules="all" style="border-color: #666; font-family: arial, sans-serif; border-collapse: collapse; width: 100%;" cellpadding="100">';                      
