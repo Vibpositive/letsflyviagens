@@ -214,29 +214,6 @@
             });
             
             $(".add-passenger").click(function(e) {
-<<<<<<< HEAD
-                passenger_counter++;
-                
-                var formType = $(this).attr('formType');
-                var newPassengerHtml = `
-                <div id="` + formType + `_` + passenger_counter + `_container">
-                <label for="` + formType + `_name_` + passenger_counter + `">Nome ` + passenger_counter + `</label>
-                <input type="text" id="` + formType + `_name_` + passenger_counter + `" name="` + formType + `_name_` + passenger_counter + `" placeholder="Nome ` + passenger_counter + `" required="">
-                
-                <label for="` + formType + `_surname_` + passenger_counter + `">Sobrenome ` + passenger_counter + `</label>
-                <input type="text" id="` + formType + `_surname_` + passenger_counter + `" name="` + formType + `_surname_` + passenger_counter + `" placeholder="Sobrenome ` + passenger_counter + `" required="">
-                
-                <label for="` + formType + `_dob_` + passenger_counter + `">Data de Nascimento ` + passenger_counter + `</label>
-                <input type="text" id="` + formType + `_dob_` + passenger_counter + `" placeholder="Data de Nascimento" class="form-control datePicker">
-                </div>
-                `;
-                if(formType == "ti"){
-                    newPassengerHtml = `
-                    <div id="` + formType + `_` + passenger_counter + `_container">
-                    <label for="` + formType + `_name_` + passenger_counter + `">Nome completo ` + passenger_counter + `</label>
-                    <input type="text" id="` + formType + `_name_` + passenger_counter + `" name="` + formType + `_name_` + passenger_counter + `" placeholder="Nome Completo ` + passenger_counter + `" required="">
-                    
-=======
                 if(passenger_counter < 20){
                     passenger_counter++;
 
@@ -249,26 +226,10 @@
                     <label for="` + formType + `_surname_` + passenger_counter + `">Sobrenome ` + passenger_counter + `</label>
                     <input type="text" id="` + formType + `_surname_` + passenger_counter + `" name="` + formType + `_surname_` + passenger_counter + `" placeholder="Sobrenome ` + passenger_counter + `" required="">
 
->>>>>>> feature/quotesFlights
                     <label for="` + formType + `_dob_` + passenger_counter + `">Data de Nascimento ` + passenger_counter + `</label>
                     <input type="text" id="` + formType + `_dob_` + passenger_counter + `" placeholder="Data de Nascimento" class="form-control datePicker">
                     </div>
                     `;
-<<<<<<< HEAD
-                }
-                
-                // TODO: implement dynamic cast of object accordingly to form type
-                // $("#" + formType + "_departureCity").before(newPassengerHtml);
-                $("#destinationCity").before(newPassengerHtml);
-                
-                $("#" + $(e.currentTarget).attr("target")).collapse("show");
-                $('.datePicker').datepicker({
-                    format: 'dd/mm/yyyy',
-                    language: 'pt-BR',
-                    autoclose: true,
-                    todayHighlight: true
-                });
-=======
                     
                     // $("#" + formType + "_departureCity").before(newPassengerHtml);
                     $("#destinationCity").before(newPassengerHtml);
@@ -281,7 +242,6 @@
                         todayHighlight: true
                     });
                 }
->>>>>>> feature/quotesFlights
             });
             
             $("input[type=reset]").click(function(e) {
