@@ -99,16 +99,25 @@ class Quotes extends CI_Controller
             if(!mail($emaildestinatario, $assunto, $mensagemHTML, $headers ,"-r".$emailsender)){ // Se for Postfix
                 $headers .= "Return-Path: " . $emailsender . $quebra_linha; // Se "não for Postfix"
                 if(mail($emaildestinatario, $assunto, $mensagemHTML, $headers )){
-                    $this->output->set_output("success");
+                    // enviou no windows
+                    $this->output->set_output("success1");
+                    return;
                 }else{
-                    $this->output->set_output("failure");
+                    // Nao enviou nenhum dos dois
+                    $this->output->set_output("failure1");
+                    return;
                 }
-                $this->output->set_output("failure");
+                // nao enviou no linux
+                $this->output->set_output("failure2");
+                return;
             }else{
-                $this->output->set_output("success");
+                // enviou no linux
+                $this->output->set_output("success2");
+                return;
             }
         }
-        $this->output->set_output("success");
+        $this->output->set_output("dbonly");
+        // $this->output->set_output("success");
         
     }
 
