@@ -313,10 +313,7 @@
                     default:
                         break;
                 }
-
-                console.log(formType);
-                console.log( $("#"+ formType + "_" + currentCounter + "_container"));
-
+                
                 if(currentCounter > 1){
                     for (let index = currentCounter; index > 1; index--) {
                         $("#"+ formType + "_" + currentCounter + "_container").remove();
@@ -363,7 +360,7 @@
                     success: function(data)
                         {
 
-                            // console.log(data);
+                            console.log(data);
 
                             data = data.split('\n').join('');
 

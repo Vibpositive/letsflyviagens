@@ -9,7 +9,7 @@
 
 				<div class="contact_grid_right mt-5">
 					<h6>Preencha os dados abaixo para nos enviar uma mensagem</h6>
-					<form action="#" method="post">
+					<form action="contact/send" method="post">
 						<div class="contact_left_grid">
 							<input type="text" name="Nome" placeholder="Nome" required="">
 							<input type="email" name="Email" placeholder="Email" required="">
