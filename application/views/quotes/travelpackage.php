@@ -10,7 +10,12 @@
             <div class="contact_grid_right mt-5">
                 <!-- <h6>Please fill this form to contact with us.</h6> -->
                 <a class="blog-btn add-passenger" role="button" formType="tp">Adicionar Passageiro</a>
-                <form class="quote-form" action="<?php echo base_url() . "quotes/travelpackagequote" ?>" method="post">
+
+                    <?php if ($this->uri->segment(1) == "quotes") : ?>
+                        <form class="quote-form" action="<?php echo $this->uri->segment(2) . "quote"; ?>" method="post">
+                    <?php else : ?>
+                        <form class="quote-form" action="quotes/<?php echo basename(__FILE__, '.php') . "quote"; ?>" method="post">
+                    <?php endif; ?>
                     <div class="contact_left_grid contact-tickets">
 
                         <label for="tp_name_1">Nome</label>
@@ -28,7 +33,7 @@
                         <label for="tp_phone">Telefone</label>
                         <input type="tel" id="tp_phone" name="tp_phone" placeholder="+55(XX)XXXX-XXXX" required="">
 
-                        <label for="tp_destinationCity" id="destinationCity">Destino</label>
+                        <label for="tp_destinationCity" id="tp_destinationCity">Destino</label>
                         <input type="text" id="tp_destinationCity" name="tp_destinationCity" placeholder="Cidade de Destino" class="form-control" required="">
 
                         <label for="tp_departureDate">Partida</label>
@@ -70,9 +75,6 @@
                         <div class="clearfix"> </div>
                     </div>
                 </form>
-                <div class="alert alert-success" role="alert" id="success-alert">
-                    Mensagem enviada com sucesso
-                </div>
             </div>
         </div>
     </div>

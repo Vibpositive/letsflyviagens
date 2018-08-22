@@ -9,7 +9,11 @@
                 <h2 class="tittle text-center mb-3 title-quote">Hotéis</h2>
                 <div class="contact_grid_right mt-5">
                     <a class="blog-btn add-passenger" role="button" formType="hf">Adicionar hóspede</a>
-                    <form class="quote-form" action="<?php echo base_url() . "quotes/hotelquote" ?>" method="post">
+                    <?php if ($this->uri->segment(1) == "quotes") : ?>
+                        <form class="quote-form" action="<?php echo $this->uri->segment(2) . "quote"; ?>" method="post">
+                    <?php else : ?>
+                        <form class="quote-form" action="quotes/<?php echo basename(__FILE__, '.php') . "quote"; ?>" method="post">
+                    <?php endif; ?>
                         <div class="contact_left_grid contact-tickets">
                         
                             <label for="hf_name_1">Nome</label>
@@ -33,8 +37,9 @@
                             <label for="hf_checkOutDate">Data de Check-Out</label>
                             <input type="text" id="hf_checkOutDate" name="hf_checkOutDate" placeholder="Data de Check-Out" class="form-control datePicker" required="">
 
-                            <label for="hf_destinationCity" id="destinationCity">Cidade</label>
-                            <input type="text" id="hf_destinationCity" name="hf_destinationCity" placeholder="Cidade" class="form-control" required="">
+                            <label for="hf_destinationCity" id="hf_destinationCity">Cidade</label>
+                            <input type="text" name="hf_destinationCity" placeholder="Cidade" class="form-control" required="">
+                            
 
                             <label for="hf_rooms">N. Quartos</label>
                             <input type="number" id="hf_rooms" name="hf_rooms" placeholder="No. Quartos" min="1" max="20" class="form-control" required="">
@@ -55,9 +60,6 @@
                             <div class="clearfix"> </div>
                         </div>
                     </form>
-                    <div class="alert alert-success" role="alert" id="success-alert">
-                        Mensagem enviada com sucesso
-                    </div>
                 </div>
             </div>
         </div>

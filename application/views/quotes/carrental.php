@@ -8,7 +8,11 @@
         <div class="container py-4 mt-2">
             <h2 class="tittle text-center mb-3 title-quote">Aluguel de Carro</h2>
             <div class="contact_grid_right mt-5">
-                <form class="quote-form" action="<?php echo base_url() . "quotes/carrentalquote" ?>" method="post">
+                <?php if ($this->uri->segment(1) == "quotes") : ?>
+                    <form class="quote-form" action="<?php echo $this->uri->segment(2) . "quote"; ?>" method="post">
+                <?php else : ?>
+                    <form class="quote-form" action="quotes/<?php echo basename(__FILE__, '.php') . "quote"; ?>" method="post">
+                <?php endif; ?>
                     <div class="contact_left_grid contact-tickets">
                     <!-- TODO: implement https://tempusdominus.github.io/bootstrap-4/Usage/ -->
 
@@ -33,7 +37,7 @@
                         <label for="cr_pickUp">Horário de Retirada</label>
                         <input type="text" id="cr_pickUp" name="cr_pickUp" placeholder="Data de Retirada" class="form-control" required="">
 
-                        <label for="cr_destinationCity" id="destinationCity">Cidade de Devolução</label>
+                        <label for="cr_destinationCity" id="cr_destinationCity">Cidade de Devolução</label>
                         <input type="text" id="cr_destinationCity" name="cr_destinationCity" placeholder="Cidade de Devolução" class="form-control" required="">
 
                         <label for="cr_returnDarte">Data de Devolução</label>
@@ -59,9 +63,6 @@
                         <div class="clearfix"> </div>
                     </div>
                 </form>
-                <div class="alert alert-success" role="alert" id="success-alert">
-                    Mensagem enviada com sucesso
-                </div>
             </div>
         </div>
     </div>
