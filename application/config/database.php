@@ -73,24 +73,61 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = true;
 
-$db['default'] = array(
-    'dsn'	=> '',
-    'hostname' => 'localhost',
-    'username' => 'root',
-    'password' => '',
-    'database' => 'letsfly',
-    'dbdriver' => 'mysqli',
-    'dbprefix' => '',
-    'pconnect' => false,
-    'db_debug' => (ENVIRONMENT !== 'production'),
-    'cache_on' => false,
-    'cachedir' => '',
-    'char_set' => 'utf8',
-    'dbcollat' => 'utf8_general_ci',
-    'swap_pre' => '',
-    'encrypt' => false,
-    'compress' => false,
-    'stricton' => false,
-    'failover' => array(),
-    'save_queries' => true
-);
+switch (ENVIRONMENT)
+{
+	case 'development':
+		$db['default'] = array(
+            'dsn'	=> '',
+            'hostname' => 'localhost',
+            'username' => 'root',
+            'password' => '',
+            'database' => 'letsfly',
+            'dbdriver' => 'mysqli',
+            'dbprefix' => '',
+            'pconnect' => false,
+            'db_debug' => (ENVIRONMENT !== 'production'),
+            'cache_on' => false,
+            'cachedir' => '',
+            'char_set' => 'utf8',
+            'dbcollat' => 'utf8_general_ci',
+            'swap_pre' => '',
+            'encrypt' => false,
+            'compress' => false,
+            'stricton' => false,
+            'failover' => array(),
+            'save_queries' => true
+        );
+	break;
+
+	case 'testing':
+	case 'production':
+		$db['default'] = array(
+            'dsn'	=> '',
+            'hostname' => 'letsfly.mysql.dbaas.com.br',
+            'username' => 'letsfly',
+            'password' => 'pZn45RFUMpUr',
+            'database' => 'letsfly',
+            'dbdriver' => 'mysqli',
+            'dbprefix' => '',
+            'pconnect' => false,
+            'db_debug' => (ENVIRONMENT !== 'production'),
+            'cache_on' => false,
+            'cachedir' => '',
+            'char_set' => 'utf8',
+            'dbcollat' => 'utf8_general_ci',
+            'swap_pre' => '',
+            'encrypt' => false,
+            'compress' => false,
+            'stricton' => false,
+            'failover' => array(),
+            'save_queries' => true
+        );
+	break;
+
+	default:
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'The application environment is not set correctly.';
+		exit(1); // EXIT_ERROR
+}
+
+

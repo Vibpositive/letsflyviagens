@@ -23,7 +23,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/letsfly';
+switch (ENVIRONMENT)
+{
+	case 'development':
+		$config['base_url'] = 'http://localhost/letsfly';
+	break;
+
+	case 'testing':
+	case 'production':
+		$config['base_url'] = 'http://www.letsflyviagens.com.br/';
+	break;
+
+	default:
+		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+		echo 'The application environment is not set correctly.';
+		exit(1); // EXIT_ERROR
+}
+
 
 /*
 |--------------------------------------------------------------------------
