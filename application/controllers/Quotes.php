@@ -108,6 +108,7 @@ class Quotes extends CI_Controller
                 $this->output->set_output("success");
             }
         }
+        $this->output->set_output("success");
         
     }
 
