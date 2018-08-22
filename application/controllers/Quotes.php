@@ -58,44 +58,57 @@ class Quotes extends CI_Controller
 
             $this -> quotes -> quote($data, $userid, $quote_type_id);
 
-            $this->output->set_output(print_r($data));
+            // $this->output->set_output(print_r($data));
 
+            setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+            date_default_timezone_set('America/Sao_Paulo');
+            $today = strftime('%d de %B de %Y', strtotime('today'));
+            $now = date("h:i:sa");
             
             $emaildestinatario = "letsfly@letsflyviagens.com.br";
             $emailsender = "william@letsflyviagens.com.br";
             $assunto = "Pedido de cotação - $quote_name";
-            $mensagemHTML = "Voce recebeu uma mensagem de: ";
-            $quebra_linha = "<br>";
 
-
-            setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
-            date_default_timezone_set('America/Sao_Paulo');
-            $now = strftime('%A, %d de %B de %Y', strtotime('today'));
+            $mensagemHTML = '<html><body>';
+            $mensagemHTML .= '</body></html>';
             
-            $mensagemHTML .= "em: $now";
-            $mensagemHTML .= "\n";
+            $mensagemHTML .= '<h1>Pedido de cotação</h1>';
+            $mensagemHTML .= "<h2>Em: $today $now</h2>";
+            
+            $mensagemHTML .= '<table rules="all" style="border-color: #666; font-family: arial, sans-serif; border-collapse: collapse; width: 100%;" cellpadding="100">';                      
 
+            $quebra_linha = "<br>";
+            
             foreach ($data as $campo) {
-                $mensagemHTML .= "Nome do campo: " . $campo['field_name'] . " > " . $campo['field_value'];
-                $mensagemHTML .= "\n";
+                
+                $mensagemHTML .= "<tr style='background: #eee; border: 1px solid #dddddd; text-align: left; padding: 8px;'>";
+                $mensagemHTML .= "<td style='border: 1px solid #dddddd; text-align: left; padding: 8px; width:30%;'><strong>Campo: " . $campo['field_name'] . " :</strong></td>";
+                $mensagemHTML .= "<td style='border: 1px solid #dddddd; text-align: left; padding: 8px; width:70%;'>" . $campo['field_value'] . "</td>";
+                $mensagemHTML .= "</tr>";
+
             }
 
-
+            $mensagemHTML .= "</table>";
+            $mensagemHTML .= "</body></html>";
+            
             $headers = "MIME-Version: 1.1\r\n";
-            $headers .= "Content-type: text/plain; charset=UTF-8\r\n";
-    
-            $headers .= "From: $email\r\n"; // remetente
-            $headers .= "Return-Path: $email\r\n"; // return-path
-    
+            $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+            
+            $headers .= "From: " . strip_tags($email) . "\r\n"; // remetente
+            $headers .= "Return-Path: " . strip_tags($email) . "\r\n"; // return-path
+
+            $this->output->set_output("failure");
+            
             if(!mail($emaildestinatario, $assunto, $mensagemHTML, $headers ,"-r".$emailsender)){ // Se for Postfix
                 $headers .= "Return-Path: " . $emailsender . $quebra_linha; // Se "não for Postfix"
                 mail($emaildestinatario, $assunto, $mensagemHTML, $headers );
-                return $this->output->set_output("sucess"); 
+                // die($this->output->set_output("success"));
+                $this->output->set_output(error_get_last());
+            }else{
+                $this->output->set_output("success");
             }
         }
         
-        $this->output->set_output("failure");
-
     }
 
     public function flightquote(){

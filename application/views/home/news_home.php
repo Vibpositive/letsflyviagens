@@ -24,7 +24,6 @@
                             data-title="<?php echo $news->title; ?>"
                             data-body="<?php echo $news->body; ?>"
                             data-image="<?php echo base_url(). "assets/images/news/" . $news->image; ?>">Saiba mais</a>
-                        <!-- <a href="<?php echo base_url() . 'news/article/' . $news->id; ?>" >Saiba mais</a> -->
                     
                 </a>
                 </div>
