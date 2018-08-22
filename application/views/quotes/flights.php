@@ -10,7 +10,7 @@
             <div class="contact_grid_right mt-5">
                 <!-- <h6>Please fill this form to contact with us.</h6> -->
                 <a class="blog-btn add-passenger" role="button" formType="tf">Adicionar passageiro</a>
-                <form class="quote-form" action="<?php echo substr(base_url(), 7) . "quotes/flightquote" ?>" method="post">
+                <form class="quote-form" action="<?php echo substr(base_url(), 11) . "quotes/flightquote" ?>" method="post">
                     <div class="contact_left_grid contact-tickets">
 
                     
