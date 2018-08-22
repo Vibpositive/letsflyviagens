@@ -18,7 +18,7 @@ class User_model extends CI_Model
         $this->db->where('email', $email);
         $this->db->limit(1);
         $query = $this->db->get();
-
+        
         return $query->row();
     }
 
@@ -29,6 +29,8 @@ class User_model extends CI_Model
         $user -> password   = "";
         $user -> email      = $email;
         $this->db->insert($this -> table, $user);
+        print_r($this->db->_error_message());
+        print_r($this->db->_error_number());
         return $this->db->insert_id();
     }
     
