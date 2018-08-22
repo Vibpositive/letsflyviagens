@@ -58,8 +58,6 @@ class Quotes extends CI_Controller
 
             $this -> quotes -> quote($data, $userid, $quote_type_id);
 
-            // $this->output->set_output(print_r($data));
-
             setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
             date_default_timezone_set('America/Sao_Paulo');
             $today = strftime('%d de %B de %Y', strtotime('today'));
@@ -101,9 +99,12 @@ class Quotes extends CI_Controller
             
             if(!mail($emaildestinatario, $assunto, $mensagemHTML, $headers ,"-r".$emailsender)){ // Se for Postfix
                 $headers .= "Return-Path: " . $emailsender . $quebra_linha; // Se "não for Postfix"
-                mail($emaildestinatario, $assunto, $mensagemHTML, $headers );
-                // die($this->output->set_output("success"));
-                $this->output->set_output(error_get_last());
+                if(mail($emaildestinatario, $assunto, $mensagemHTML, $headers )){
+                    $this->output->set_output("success");
+                }else{
+                    $this->output->set_output("failure");
+                }
+                $this->output->set_output("failure");
             }else{
                 $this->output->set_output("success");
             }
