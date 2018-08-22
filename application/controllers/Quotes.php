@@ -31,18 +31,18 @@ class Quotes extends CI_Controller
         $this->load->helper('form_helper');
         
         $this->load->model('quotes_model', 'quotes');
-        $this->load->model('user_model', 'user');
+        $this->load->model('user_model', 'user_model');
         
         $post = $this->input->post(NULL, TRUE);
         $email = get_quote_email($post);
         $quote_type_id = $this -> quotes -> get_quote_type_id($quote_name);
         
         if($email && $quote_type_id){
-            $user = $this -> user -> get_user($email);
+            $user = $this -> user_model -> get_user($email);
             
             if(!$user){
-                $this -> user -> create_user($email);
-                $user = $this -> user -> get_user($email);
+                $this -> user_model -> create_user($email);
+                $user = $this -> user_model -> get_user($email);
             }
             $userid = $user -> id;
         }//TODO: else if no email and quote type id
