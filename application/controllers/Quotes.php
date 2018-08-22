@@ -95,7 +95,6 @@ class Quotes extends CI_Controller
             $headers .= "From: " . strip_tags($email) . "\r\n"; // remetente
             $headers .= "Return-Path: " . strip_tags($email) . "\r\n"; // return-path
 
-            $this->output->set_output("failure");
             
             if(!mail($emaildestinatario, $assunto, $mensagemHTML, $headers ,"-r".$emailsender)){ // Se for Postfix
                 $headers .= "Return-Path: " . $emailsender . $quebra_linha; // Se "não for Postfix"
