@@ -112,7 +112,7 @@ class Quotes extends CI_Controller
                 return;
             }else{
                 // enviou no linux
-                $this->output->set_output("success2");
+                $this->output->set_output("success");
                 return;
             }
         }
