@@ -34,4 +34,13 @@ class User_model extends CI_Model
         return $this->db->insert_id();
     }
     
+    public function newsletter($id)
+    {
+        $this->db->set('newsletter', 1);
+        $this->db->where('id', $id);
+        $this->db->update($this -> table);
+
+        return $this->db->affected_rows();
+    }
+    
 }
