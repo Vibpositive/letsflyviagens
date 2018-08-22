@@ -6,7 +6,6 @@
 <?php endif; ?>
     <div class="card-body quote-background" style="background: url(<?php echo base_url(); ?>assets/images/quote-tickets.jpg);">
         <div class="container py-4 mt-2">
-            <h1><?php echo ENVIRONMENT; ?></h1>
             <h2 class="tittle text-center mb-3 title-quote">Passagens Aéreas</h2>
             <div class="contact_grid_right mt-5">
                 <!-- <h6>Please fill this form to contact with us.</h6> -->
