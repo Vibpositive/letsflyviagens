@@ -60,8 +60,8 @@
                     </div>
                     <p>Inscreva-se para receber atualizações e ofertas especiais</p>
                     <span style="color: aliceblue; font-size: 10px">Ao informar seu email, você automaticamente concorda com nossa politica de privacidade</span>
-                    <form action="#" method="post" class="newsletter">
-                        <input class="email" type="email" placeholder="Email..." required="">
+                    <form action="newsletter/register" method="post" class="newsletter">
+                        <input class="email" type="email" name="Email" placeholder="Email..." required="">
                         <button class="btn1">
                             <i class="far fa-envelope"></i>
                         </button>

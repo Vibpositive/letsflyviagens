@@ -55,6 +55,7 @@ $route['populardestinations/(:any)'] = 'populardestinations/destination';
 $route['populardestinations'] = 'populardestinations/index';
 $route['about'] = 'about/index';
 $route['contact'] = 'contact/index';
+$route['newsletter/register'] = 'newsletter/register';
 $route['contact/send'] = 'contact/send';
 $route['quotes'] = 'quotes/index';
 $route['default_controller'] = 'home/index';
