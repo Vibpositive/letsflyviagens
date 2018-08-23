@@ -33,7 +33,7 @@ class Contact extends CI_Controller
         }
         
         $this->load->helper('url');
-        $this->load->helper('form_helper');
+        $this->load->helper('forms_helper');
         
         $this->load->model('user_model', 'user_model');
         

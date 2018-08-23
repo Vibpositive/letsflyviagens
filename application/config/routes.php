@@ -51,6 +51,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 */
 // $route['default_controller'] = 'welcome';
 // $route['populardestinations'] = 'popular/index';
+
+$route['login'] = 'user_authentication';
+$route['admin'] = 'admin/index';
 $route['populardestinations/(:any)'] = 'populardestinations/destination';
 $route['populardestinations'] = 'populardestinations/index';
 $route['about'] = 'about/index';
