@@ -202,8 +202,20 @@
 
         var title = "undefined"
         var body = "undefined"
+        // var type = ['Viajar é preciso', 'Preços acessíveis', 'Sempre ao seu lado', 'A melhor experiência', 'Férias de verão com a Let\'s Fly'];
+        var type = [];
+        
+        <?php foreach ($section_1 as $key) : ?>
+            <?php 
+                if($key['enabled'] == "1" ){
+                    echo "type.push('" . addslashes ($key['value']) . "');\n";
+                }
+                 ?>
+        <?php endforeach; ?>
 
-        foo.typer(['Viajar é preciso', 'Preços acessíveis', 'Sempre ao seu lado', 'A melhor experiência', 'Férias de verão com a Let\'s Fly']);
+        // foo.typer(['Viajar é preciso', 'Preços acessíveis', 'Sempre ao seu lado', 'A melhor experiência', 'Férias de verão com a Let\'s Fly']);
+        foo.typer(type);
+        console.log(type);
         // unneeded...
         win.resize(function() {
             var fontSize = Math.max(Math.min(win.width() / (1 * 11), parseFloat(Number.POSITIVE_INFINITY)), parseFloat(Number.NEGATIVE_INFINITY));

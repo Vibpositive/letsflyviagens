@@ -1,3 +1,6 @@
+</div>
+        <!-- End Page wrapper  -->
+    </div>
 <!-- End Wrapper -->
     <!-- All Jquery -->
     <script src="<?php echo base_url(); ?>assets/admin/js/lib/jquery/jquery.min.js"></script>

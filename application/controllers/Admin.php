@@ -27,6 +27,11 @@
 
 class Admin extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('admin/home_model', 'model');
+    }
     //Rota no caso eh view
     /**
      * Renders the view
@@ -51,6 +56,7 @@ class Admin extends CI_Controller
         // $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
 
         $this->load->view('templates/admin/header');
+        $this->load->view('admin/menu');
         $this->load->view('admin/index');
         $this->load->view('templates/admin/footer');
         // $this->load->view('home/header', $data);
@@ -58,5 +64,90 @@ class Admin extends CI_Controller
         // $this->load->view('home/contact_home');
         // $this->load->view('home/services');
         // $this->load->view('templates/footer', $data);
+    }
+
+    public function home($page = "main", $crud = 'null')
+    {
+        
+        // echo "page " . $page . "<br>";
+        // echo "crud " . $crud . "<br>";
+        // echo 'this->input->method(): ' . $this->input->method();
+
+        if($page == "crud" && $this->input->method() != "post"){
+            redirect('/admin', 'refresh');
+        }
+
+        $post = $this->input->post(NULL, TRUE);
+
+        switch ($page) {
+            case 'crud':
+                    switch ($crud) {
+                        case 'create':
+                            $this -> home_crud_c($post);
+                            break;
+                        case 'read':
+                            # code...
+                            break;
+                        case 'update':
+                            # code...
+                            break;
+                        case 'delete':
+                            # code...
+                            break;
+                        
+                        default:
+                            # code...
+                            // TODO: redirect
+                            break;
+                    }
+                break;
+            default:
+            # code...
+                $this -> loadview($page);
+                break;
+        }
+        // // echo $dois;
+        
+        
+        // $this->load->view('home/header', $data);
+        // $this->load->view('about/company_description');
+        // $this->load->view('home/contact_home');
+        // $this->load->view('home/services');
+        // $this->load->view('templates/footer', $data);
+    }
+
+    private function loadview($page){
+        echo "loadview";
+        if (!file_exists(APPPATH.'views/admin/home/' . $page . '.php')) {
+            show_404();
+        }
+        // echo "admin";
+
+        // $data['title'] = ucfirst($page);
+        // $data['home'] = $this->uri->segment(1) == '';
+        // $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
+
+        $data['section_1'] = $this -> model -> get_section_1();
+        $this->load->view('templates/admin/header');
+        $this->load->view('admin/menu');
+        $this->load->view('admin/home/' . $page, $data);
+        $this->load->view('templates/admin/footer');
+    }
+
+    private function home_crud_c($data){
+        // $data = array(
+        //     'name' => $data['name'],
+        //     'value' => $data['value']
+        // );
+        if(!isset($data['name']) || !isset($data['value'])){
+            die("aqui");
+            redirect('/admin', 'refresh');
+        }
+        if($data['name'] && $data['value']){
+            echo "here";
+            // TODO: Model insert
+            echo $this -> model -> insert_into_section_1($data);
+        }
+    
     }
 }
