@@ -85,11 +85,11 @@ class Admin extends CI_Controller
                         case 'create':
                             $this -> home_crud_c($post);
                             break;
-                        case 'read':
+                            case 'read':
                             # code...
                             break;
-                        case 'update':
-                            # code...
+                            case 'update':
+                                $this -> home_crud_u($post);
                             break;
                         case 'delete':
                             # code...
@@ -106,14 +106,6 @@ class Admin extends CI_Controller
                 $this -> loadview($page);
                 break;
         }
-        // // echo $dois;
-        
-        
-        // $this->load->view('home/header', $data);
-        // $this->load->view('about/company_description');
-        // $this->load->view('home/contact_home');
-        // $this->load->view('home/services');
-        // $this->load->view('templates/footer', $data);
     }
 
     private function loadview($page){
@@ -121,12 +113,7 @@ class Admin extends CI_Controller
         if (!file_exists(APPPATH.'views/admin/home/' . $page . '.php')) {
             show_404();
         }
-        // echo "admin";
-
-        // $data['title'] = ucfirst($page);
-        // $data['home'] = $this->uri->segment(1) == '';
-        // $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
-
+        
         $data['section_1'] = $this -> model -> get_section_1();
         $this->load->view('templates/admin/header');
         $this->load->view('admin/menu');
@@ -135,10 +122,74 @@ class Admin extends CI_Controller
     }
 
     private function home_crud_c($data){
-        // $data = array(
-        //     'name' => $data['name'],
-        //     'value' => $data['value']
-        // );
+        if(!isset($data['name']) || !isset($data['value'])){
+            redirect('/admin', 'refresh');
+        }
+        if($data['name'] && $data['value']){
+            echo $this -> model -> insert_into_section_1($data);
+        }
+    }
+
+    private function home_crud_u($data){
+        // die(print_r($data));
+
+        $update = [];
+        $counter = 0;
+
+        foreach ($data as $key => $value) {
+            
+            if(strpos($key, 'enabled') === false){
+                array_push($update, array($key => $value));
+            }
+            
+            foreach ($update as $upkey) {
+                
+                if(strpos($key, 'enabled') !== false){
+                    if(!array_key_exists("enabled", $update[$counter])){
+                        array_push($update[$counter], $update[$counter]["enabled"] = $counter);
+                    }
+                }
+                foreach (array_keys($update[$counter]) as $ak) {
+                    if(is_numeric($ak)){
+                        array_pop($update[$counter]);
+                    }
+                }
+                $counter++;
+            }
+            $counter = 0;
+        }
+
+
+        // foreach ($data as $key => $value) {
+            
+        //     if(strpos($key, 'enabled') !== false){
+                
+        //         foreach ($update as $upitem) {
+
+        //             $index = substr($key, 0, strlen($key) - 8);
+        //             // echo "upitem: " . substr($key, 0, strlen($key) - 8) . " || value: " . $upitem[substr($key, 0, strlen($key) - 8)] . "<br>";
+        //             // echo "upitem: " . substr($key, 0, strlen($key) - 8) . " || value: " . $index . "<br>";
+        //             if(isset($upitem[$index])){
+        //                 $upitem['enabled'] = 1;
+        //                 $update[$counter] = $upitem;
+        //                 // print_r($upitem);
+        //                 // echo "<br>";
+        //                 // print_r($update);
+        //                 // echo "<br>";
+        //                 // echo ;
+        //             }
+        //             // echo substr($key, 0, strlen($key) - 8) ."<br>";
+        //             // echo $key ."<br>";
+        //             // break;
+        //         }
+        //         // $currentindex = array_push($update, array($key => $value, "enabled" => 0));
+        //     }
+        //     $counter++;
+        // }
+        echo "<pre>";
+        print_r($update);
+        echo "</    pre>";
+        die();
         if(!isset($data['name']) || !isset($data['value'])){
             die("aqui");
             redirect('/admin', 'refresh');
@@ -148,6 +199,5 @@ class Admin extends CI_Controller
             // TODO: Model insert
             echo $this -> model -> insert_into_section_1($data);
         }
-    
     }
 }

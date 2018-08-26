@@ -5,22 +5,22 @@
         </div>
 		<div class="card-body">
 			<div class="form-validation">
-               <form class="form-valide" action="#" method="post">
+               <form class="form-valide" action="crud/update" method="post">
                     <?php foreach ($section_1 as $key) : ?>
                         
                         <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="val-username"><?php echo addslashes ($key['name']); ?>
-                                <span class="text-danger">*</span>
+                            <label class="col-lg-4 col-form-label" for="<?php echo $key['name']; ?>"><?php echo addslashes ($key['name']); ?>
+                                <!-- <span class="text-danger">*</span> -->
                             </label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" id="val-username" name="val-username" placeholder="Texto" value="<?php echo addslashes ($key['value']); ?>">
+                                <input type="text" class="form-control" id="<?php echo $key['name']; ?>" name="<?php echo $key['name']; ?>" placeholder="Texto" value="<?php echo addslashes ($key['value']); ?>">
                             </div>
                             <div class="col-lg-1">
                                 <div class="checkbox checkbox-success">
                                     <?php if ($key['enabled'] === "1") : ?>
-                                        <input id="checkbox1" type="checkbox" checked>
+                                        <input id="checkbox1" type="checkbox" name="<?php echo $key['name']; ?>_enabled" checked>
                                     <?php else: ?>
-                                        <input id="checkbox1" type="checkbox">
+                                        <input id="checkbox1" type="checkbox" name="<?php echo $key['name']; ?>_enabled">
                                     <?php endif; ?>
                                     <label for="checkbox1" checked>Habilitado</label>
                                 </div>
