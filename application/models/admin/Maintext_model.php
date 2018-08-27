@@ -1,8 +1,8 @@
 <?php
 
-Class Typer_model extends CI_Model {
+Class  Maintext_model extends CI_Model {
     
-    private $table = "typer";
+    private $table = "main_text";
     
     public function get() {
         $this->db->select('*');

@@ -226,7 +226,8 @@ if (isset($this->session->userdata['logged_in'])) {
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-edit"></i><span class="hide-menu">Home</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href=" <?php echo base_url(); ?>admin/home/typer">Typer</a></li>
-                                <li><a href="email-read.html">Texto rotativo</a></li>
+                                <li><a href=" <?php echo base_url(); ?>admin/home/maintext">Text Principal</a></li>
+                                <!-- <li><a href="email-read.html">Texto rotativo</a></li> -->
                                 <li><a href="email-inbox.html">Texto Principal </a></li>
                             </ul>
                         </li>
