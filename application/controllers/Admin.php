@@ -126,7 +126,7 @@ class Admin extends CI_Controller
             redirect('/admin', 'refresh');
         }
         if($data['name'] && $data['value']){
-            echo $this -> model -> insert_into_section_1($data);
+            echo $this -> model -> insert_into_typer($data);
         }
     }
 
@@ -139,14 +139,19 @@ class Admin extends CI_Controller
         foreach ($data as $key => $value) {
             
             if(strpos($key, 'enabled') === false){
-                array_push($update, array($key => $value));
-            }
-            
+                // array_push($update, array($key => $value));
+                array_push($update, array("name" => $key, "value" => $value));
+            } 
+
             foreach ($update as $upkey) {
                 
                 if(strpos($key, 'enabled') !== false){
                     if(!array_key_exists("enabled", $update[$counter])){
-                        array_push($update[$counter], $update[$counter]["enabled"] = $counter);
+                        $enabled = 0;
+                        if($value === 'on'){
+                            $enabled = 1;
+                        }
+                        array_push($update[$counter], $update[$counter]["enabled"] = $enabled);
                     }
                 }
                 foreach (array_keys($update[$counter]) as $ak) {
@@ -158,46 +163,18 @@ class Admin extends CI_Controller
             }
             $counter = 0;
         }
-
-
-        // foreach ($data as $key => $value) {
-            
-        //     if(strpos($key, 'enabled') !== false){
-                
-        //         foreach ($update as $upitem) {
-
-        //             $index = substr($key, 0, strlen($key) - 8);
-        //             // echo "upitem: " . substr($key, 0, strlen($key) - 8) . " || value: " . $upitem[substr($key, 0, strlen($key) - 8)] . "<br>";
-        //             // echo "upitem: " . substr($key, 0, strlen($key) - 8) . " || value: " . $index . "<br>";
-        //             if(isset($upitem[$index])){
-        //                 $upitem['enabled'] = 1;
-        //                 $update[$counter] = $upitem;
-        //                 // print_r($upitem);
-        //                 // echo "<br>";
-        //                 // print_r($update);
-        //                 // echo "<br>";
-        //                 // echo ;
-        //             }
-        //             // echo substr($key, 0, strlen($key) - 8) ."<br>";
-        //             // echo $key ."<br>";
-        //             // break;
-        //         }
-        //         // $currentindex = array_push($update, array($key => $value, "enabled" => 0));
-        //     }
-        //     $counter++;
-        // }
-        echo "<pre>";
-        print_r($update);
-        echo "</    pre>";
-        die();
-        if(!isset($data['name']) || !isset($data['value'])){
-            die("aqui");
+        
+        // echo "<pre>";
+        // print_r($update);   
+        // echo "</pre>";
+        // die();
+        
+        if(!isset($update)){
             redirect('/admin', 'refresh');
         }
-        if($data['name'] && $data['value']){
-            echo "here";
-            // TODO: Model insert
-            echo $this -> model -> insert_into_section_1($data);
+        if($update){
+            // TODO: Model Update
+            echo $this -> model -> update_typer($update);
         }
     }
 }

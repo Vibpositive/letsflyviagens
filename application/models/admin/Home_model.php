@@ -44,10 +44,32 @@ Class Home_model extends CI_Model {
         // }
     }
 
-    public function insert_into_section_1($data) {
+    public function insert_into_typer($data) {
         
         $this->db->insert($this -> table, $data);
         return $this->db->affected_rows() > 0;
+
+    }
+
+    public function update_typer($data) {
+        
+        $minupdate = count($data);
+        $updatecount = 0;
+
+        
+        foreach ($data as $item) {
+            $where = $item[key($item)];
+            echo "<pre>";
+            print_r($item);
+            echo "</pre>";
+            // die();
+            // $this->db->where("name", $where);
+            // $this->db->update($this -> table, $item);
+            // if($this->db->affected_rows() == 1);
+        }
+        // $this->db->update($this -> table, $data);
+        // echo  $this->db->affected_rows() > 0;
+        // return $this->db->affected_rows() > 0;
 
     }
     
