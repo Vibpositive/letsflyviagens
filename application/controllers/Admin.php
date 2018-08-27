@@ -27,11 +27,6 @@
 
 class Admin extends CI_Controller
 {
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('admin/home_model', 'model');
-    }
     //Rota no caso eh view
     /**
      * Renders the view
@@ -43,107 +38,83 @@ class Admin extends CI_Controller
      *
      * @return string blank
      */
+                                                        
     public function index($page = 'index')
     {
         if (!file_exists(APPPATH.'views/admin/'.$page.'.php')) {
             // show_404();
         }
-        // echo "admin";
-        // $this->load->model('populardestinations_model', 'populardestinations');
-
-        // $data['title'] = ucfirst($page);
-        // $data['home'] = $this->uri->segment(1) == '';
-        // $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
-
         $this->load->view('templates/admin/header');
         $this->load->view('admin/menu');
         $this->load->view('admin/index');
         $this->load->view('templates/admin/footer');
-        // $this->load->view('home/header', $data);
-        // $this->load->view('about/company_description');
-        // $this->load->view('home/contact_home');
-        // $this->load->view('home/services');
-        // $this->load->view('templates/footer', $data);
     }
 
-    public function home($page = "main", $crud = 'null')
+    public function home($page, $operation = "", $id = 0, $run = "")
     {
-        
-        // echo "page " . $page . "<br>";
-        // echo "crud " . $crud . "<br>";
-        // echo 'this->input->method(): ' . $this->input->method();
+        $model_name = $page.'_model';
+        $this->load->model("admin/$model_name", "model");
 
-        if($page == "crud" && $this->input->method() != "post"){
-            redirect('/admin', 'refresh');
-        }
-
-        $post = $this->input->post(NULL, TRUE);
-
-        switch ($page) {
-            case 'crud':
-                    switch ($crud) {
-                        case 'create':
-                            $this -> home_crud_c($post);
-                            break;
-                            case 'read':
-                            # code...
-                            break;
-                            case 'update':
-                                $this -> home_crud_u($post);
-                            break;
-                        case 'delete':
-                            # code...
-                            break;
-                        
-                        default:
-                            # code...
-                            // TODO: redirect
-                            break;
+        if($run === "" && $operation !== "create"){
+            $this -> loadview($page, $operation, $id);  
+        }else{
+            $post = $this->input->post(NULL, TRUE);
+            
+            switch ($operation) {
+                case 'update':
+                    if($this->model->update($id, $post)){
+                        redirect("admin/home/" . $page . "/" . $operation . "/" . $id, 'refresh');
+                    }else{
+                        // TODO: better message
+                        die("could not update");
                     }
-                break;
-            default:
-            # code...
-                $this -> loadview($page);
-                break;
+                    break;
+                    case 'delete':
+                    if($this->model->delete($id)){
+                        redirect("admin/home/" . $page, 'refresh');
+                    }else{
+                        // TODO: better message
+                        die("could not delete");
+                    }
+                    break;
+                    case 'create':
+                    // if($this->model->create($post)){
+                    if($this->model->create($post)){
+                        redirect("admin/home/" . $page, 'refresh');
+                    }else{
+                        die("could not create");
+                        // die("could not update");
+                    }
+                    break;
+                default:
+                    # code...
+                    break;
+            }
         }
     }
+    
+    private function loadview($page, $operation = "", $id = 0){
+        if($operation !== ""){
+            if (!file_exists(APPPATH.'views/admin/home/' . $page . "/" . $operation . '.php')) {
+                show_404();
+            }
 
-    private function loadview($page){
-        echo "loadview";
-        if (!file_exists(APPPATH.'views/admin/home/' . $page . '.php')) {
-            show_404();
-        }
-        
-        $data['section_1'] = $this -> model -> get_section_1();
-        $this->load->view('templates/admin/header');
-        $this->load->view('admin/menu');
-        $this->load->view('admin/home/' . $page, $data);
-        $this->load->view('templates/admin/footer');
-    }
-
-    private function home_crud_c($data){
-        if(!isset($data['name']) || !isset($data['value'])){
-            redirect('/admin', 'refresh');
-        }
-        if($data['name'] && $data['value']){
-            echo $this -> model -> insert_into_typer($data);
-        }
-    }
-
-    private function home_crud_u($data){
-        // die(print_r($data));
-
-        $update = [];
-        foreach ($data as $key => $value) {
-            array_push($update, array("name" => $key, "value" => $value));
-        }
-        
-        if(!isset($update)){
-            redirect('/admin', 'refresh');
-        }
-        if($update){
-            // TODO: Model Update
-            echo $this -> model -> update_typer($update);
+            $data['id'] = $id;
+            $this->load->view('templates/admin/header');
+            $this->load->view('admin/menu');
+            $this->load->view('admin/home/' . $page . "/" . $operation, $data);
+            $this->load->view('templates/admin/footer');
+        }else{
+            if (!file_exists(APPPATH.'views/admin/home/' . $page . '.php')) {
+                show_404();
+            }
+            
+            $this->load->view('templates/admin/header');
+            $this->load->view('admin/menu');
+            $this->load->view('admin/home/' . $page);
+            $this->load->view('templates/admin/footer');
         }
     }
+    
+    
 }

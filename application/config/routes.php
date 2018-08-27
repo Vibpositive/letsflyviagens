@@ -57,11 +57,7 @@ $route['login'] = 'user_authentication';
 
 $route['admin'] = 'admin/index';
 $route['admin/home/(:any)'] = 'admin/home/$1';
-// $route['admin/home/crud/create'] = 'admin/home/$1';
-// $route['admin/home/crud/read'] = 'admin/home/$1';
-// $route['admin/home/crud/update'] = 'admin/home/$1';
-// $route['admin/home/crud/delete'] = 'admin/home/$1';
-// $route['admin/home/(:num)/(:any)'] = 'admin/home/$1';
+
 $route['admin/home/crud/(:any)']  = "admin/home/crud/$1";
 
 // $route['posts/(:any)'] = 'posts/view/$1';
