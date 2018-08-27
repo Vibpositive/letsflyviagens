@@ -134,40 +134,9 @@ class Admin extends CI_Controller
         // die(print_r($data));
 
         $update = [];
-        $counter = 0;
-
         foreach ($data as $key => $value) {
-            
-            if(strpos($key, 'enabled') === false){
-                // array_push($update, array($key => $value));
-                array_push($update, array("name" => $key, "value" => $value));
-            } 
-
-            foreach ($update as $upkey) {
-                
-                if(strpos($key, 'enabled') !== false){
-                    if(!array_key_exists("enabled", $update[$counter])){
-                        $enabled = 0;
-                        if($value === 'on'){
-                            $enabled = 1;
-                        }
-                        array_push($update[$counter], $update[$counter]["enabled"] = $enabled);
-                    }
-                }
-                foreach (array_keys($update[$counter]) as $ak) {
-                    if(is_numeric($ak)){
-                        array_pop($update[$counter]);
-                    }
-                }
-                $counter++;
-            }
-            $counter = 0;
+            array_push($update, array("name" => $key, "value" => $value));
         }
-        
-        // echo "<pre>";
-        // print_r($update);   
-        // echo "</pre>";
-        // die();
         
         if(!isset($update)){
             redirect('/admin', 'refresh');

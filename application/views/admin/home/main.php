@@ -12,18 +12,12 @@
                             <label class="col-lg-4 col-form-label" for="<?php echo $key['name']; ?>"><?php echo addslashes ($key['name']); ?>
                                 <!-- <span class="text-danger">*</span> -->
                             </label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-7">
                                 <input type="text" class="form-control" id="<?php echo $key['name']; ?>" name="<?php echo $key['name']; ?>" placeholder="Texto" value="<?php echo addslashes ($key['value']); ?>">
                             </div>
                             <div class="col-lg-1">
-                                <div class="checkbox checkbox-success">
-                                    <?php if ($key['enabled'] === "1") : ?>
-                                        <input id="checkbox1" type="checkbox" name="<?php echo $key['name']; ?>_enabled" checked>
-                                    <?php else: ?>
-                                        <input id="checkbox1" type="checkbox" name="<?php echo $key['name']; ?>_enabled">
-                                    <?php endif; ?>
-                                    <label for="checkbox1" checked>Habilitado</label>
-                                </div>
+                                <!-- <input type="text" class="form-control" id="<?php echo $key['name']; ?>" name="<?php echo $key['name']; ?>" placeholder="Texto" value="<?php echo addslashes ($key['value']); ?>"> -->
+                                <button type="submit" class="btn btn-info">Deletar</button>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -56,14 +50,6 @@
                             </label>
                             <div class="col-lg-6">
                                 <input type="text" class="form-control" id="value" name="value" placeholder="Texto" value="">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-4 col-form-label" for="value">Habilitado
-                                <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-lg-6">
-                                <input type="text" class="form-control" id="enabled" name="enabled" placeholder="Texto" value="nabled">
                             </div>
                         </div>
                     <button type="submit" class="btn btn-info">Enviar</button>

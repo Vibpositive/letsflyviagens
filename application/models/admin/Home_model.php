@@ -56,16 +56,20 @@ Class Home_model extends CI_Model {
         $minupdate = count($data);
         $updatecount = 0;
 
-        
+        // $this->db->update($this -> table, $data);
+        $this->db->update_batch($this -> table, $data, 'name');
+        die();        
         foreach ($data as $item) {
             $where = $item[key($item)];
             echo "<pre>";
             print_r($item);
             echo "</pre>";
             // die();
-            // $this->db->where("name", $where);
-            // $this->db->update($this -> table, $item);
-            // if($this->db->affected_rows() == 1);
+            $this->db->where("name", $where);
+            $this->db->update($this -> table, $item);
+            if($this->db->affected_rows() == 1){
+                $updatecount++;
+            }
         }
         // $this->db->update($this -> table, $data);
         // echo  $this->db->affected_rows() > 0;

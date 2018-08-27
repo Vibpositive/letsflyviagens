@@ -207,10 +207,8 @@
         
         <?php foreach ($section_1 as $key) : ?>
             <?php 
-                if($key['enabled'] == "1" ){
-                    echo "type.push('" . addslashes ($key['value']) . "');\n";
-                }
-                 ?>
+                echo "type.push('" . addslashes ($key['value']) . "');\n";
+            ?>
         <?php endforeach; ?>
 
         // foo.typer(['Viajar é preciso', 'Preços acessíveis', 'Sempre ao seu lado', 'A melhor experiência', 'Férias de verão com a Let\'s Fly']);
