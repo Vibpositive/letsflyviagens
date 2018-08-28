@@ -47,6 +47,7 @@ class Home extends CI_Controller
         $this->load->model('news_model', 'news');
         $this->load->model('populardestinations_model', 'populardestinations');
         $this->load->model('admin/home_model', 'home');
+        $this->load->model('admin/maintext_model', 'maintext_model');
         $data['section_1'] = $this -> home -> get_section_1();
 
         $this->load->helper('text');

@@ -1,35 +1,19 @@
 <?php
 
-Class  Maintext_model extends CI_Model {
+Class News_model extends CI_Model {
     
-    private $table = "home_maintext";
+    private $table = "news";
 
     public function __construct(){
         $this->load->database();
     }
     
-    public function get($random = false) {
+    public function get() {
         $this->db->select('*');
         $this->db->from($this -> table);
+        $this->db->order_by("id", "desc");
         $query = $this->db->get();
-        
-        if($random === true){
-            $this->db->select('*');
-            $this->db->from($this -> table);
-            $query = $this->db->get();
-            $shuffled_query = $query->result_array();
-            shuffle ($shuffled_query);
-    
-            foreach ($shuffled_query as $row) {
-                if(count($shuffled_query) > 1){
-                    array_pop($shuffled_query);
-                }
-            }
-            return $shuffled_query;
-        }
-
         return $query -> result_array();
-        
     }
 
     public function get_by_id($id = 0) {

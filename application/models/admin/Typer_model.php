@@ -3,6 +3,10 @@
 Class Typer_model extends CI_Model {
     
     private $table = "typer";
+
+    public function __construct(){
+        $this->load->database();
+    }
     
     public function get() {
         $this->db->select('*');

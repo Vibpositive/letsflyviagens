@@ -57,6 +57,7 @@ $route['login'] = 'user_authentication';
 
 $route['admin'] = 'admin/index';
 $route['admin/home/(:any)'] = 'admin/home/$1';
+$route['admin/news/(:any)'] = 'admin/news/$1';
 
 $route['admin/home/crud/(:any)']  = "admin/home/crud/$1";
 

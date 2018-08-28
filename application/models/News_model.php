@@ -6,22 +6,16 @@ class News_model extends CI_Model
     public $title;
     public $body;
     public $date;
-
+    
     public function __construct(){
         $this->load->database();
-
     }
 
     public function getnews($ammount = 3)
     {
         $this->db->order_by("id", "desc");
         $query = $this->db->get('news', $ammount);
-        
-        // print_r($query->result_array());
-
         $result = $query->result();
-        // echo random_element($result)->title;
-
         return $query->result();
     }
 

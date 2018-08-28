@@ -1,5 +1,5 @@
 <?php 
-    $data = $this -> model -> get();
+    $data = $this -> model -> get(false);
 ?>
 <div class="col-lg-12">
 	<div class="card card-outline-primary">

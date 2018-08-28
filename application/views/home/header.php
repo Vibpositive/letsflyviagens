@@ -66,11 +66,20 @@
     <?php if ($home) : ?>
     <div class="w3-banner">
         <div id="typer"></div>
-        <p class="mx-auto py-3 justify">"Acreditamos que viagens, além de nos trazer bem- estar, podem transformar nossa visão
+        <!-- <p class="mx-auto py-3 justify">"Acreditamos que viagens, além de nos trazer bem- estar, podem transformar nossa visão
 de mundo e nos tornar culturalmente mais ricos. E é por isso que, nós da Lets Fly Viagens
 dedicamos a realizar sonhos de viagens de milhares de brasileiros ao proporcionar
-nossos associados viajem em suas férias em todos os anos"</p>
+nossos associados viajem em suas férias em todos os anos"</p> -->
+        <p class="mx-auto py-3 justify">
+        <?php 
+            $data = $this -> maintext_model -> get(true);
+            foreach ($data as $key){
+                echo $key['value'];
+            }
+         ?>
+        </p>
     </div>
     <?php endif; ?>
+    
 </section>
 </header>
