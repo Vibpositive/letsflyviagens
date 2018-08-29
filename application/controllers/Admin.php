@@ -60,35 +60,70 @@ class Admin extends CI_Controller
     public function news($operation = "", $id = 0, $run = "")
     {
         $page = "news";
+
+        // print_r("page: " . $page  . " || operation: " . $operation . " || id: " . $id);
+        // echo "<br>";
+        // echo APPPATH.'views/admin/' . $page . "/" . $operation . '.php';
+        // echo "<br>";
+        // echo APPPATH.'views/admin/' . $page . '.php';
+        // echo "<br>";
+        // die();
+
         
+        $this->load->model("admin/news_model", "model");
         if($run === "" && $operation !== "create"){
+            // die("if");
 
-            // $model_name = $page.'_model';
-            $model_name = 'news_model';
-            $this->load->model("admin/$model_name", "model");
             $this -> loadview("news", "", $operation, $id);
-            // $mainpage, $page, $operation = "", $id = 0
-            // $this -> loadview("home", $operation, $id);
-
 
         }else{
+            // die("else");
             $post = $this->input->post(NULL, TRUE);
             
             switch ($operation) {
                 case 'update':
-                    if($this->model->update($id, $post)){
-                        redirect("admin/news/" . $page . "/" . $operation . "/" . $id, 'refresh');
-                    }else{
-                        // TODO: better message
-                        die("could not update");
+
+                    $config['upload_path']          = './assets/images/news/';
+                    $config['allowed_types']        = 'gif|jpg|png';
+                    $config['encrypt_name']         = true;
+                    
+                    $config['max_size']             = 9999;
+                    $config['max_width']            = 9999;
+                    $config['max_height']           = 9999;
+
+                    $this->load->library('upload', $config);
+
+                    if (! $this->upload->do_upload('image')) {
+                        $error = array('error' => $this->upload->display_errors());
+                        // $this->load->view('admin', $error);
+                        die($error);
+                    } else {
+                        $post           = $this->input->post(null, true);
+                        $title          = $post['title'];
+                        $body           = $post['body'];
+                        $callback       = $post['callback'];
+                        $data           = array('image' => $this->upload->data()['file_name'], "title" => $title, "body" => $body);
+
+                        $this->load->model("admin/news_model", "model");
+
+                        if ($this->model->update($id, $data)) {
+                            // redirect("admin/news/" . $page . "/" . $operation . "/" . $id, 'refresh');
+                            redirect("admin/$callback/", 'refresh');
+                        } else {
+                            // TODO: better message
+                            die("could not update");
+                        }
                     }
+
+
+                    
                     break;
                     case 'delete':
                         if($this->model->delete($id)){
-                            redirect("admin/news/" . $page, 'refresh');
+                            redirect("admin/news/", 'refresh');
                         }else{
-                            // TODO: better message
                             die("could not delete");
+                            // TODO: better message
                         }
                         break;
                         case 'create':
@@ -117,7 +152,6 @@ class Admin extends CI_Controller
         // die();
         
         if($operation !== ""){
-            echo "1";
             if (!file_exists(APPPATH.'views/admin/' . $mainpage . '/' . $page . "/" . $operation . '.php')) {
                 show_404();
             }
@@ -140,7 +174,6 @@ class Admin extends CI_Controller
             $this->load->view('templates/admin/footer');
         }
         else{
-            echo "3";
             
             if (!file_exists(APPPATH.'views/admin/' . $mainpage . '/' . $page . '.php')) {
                 show_404();
@@ -164,12 +197,13 @@ class Admin extends CI_Controller
 
         $this->load->library('upload', $config);
 
-        $model_name = '';
-        
         if ( ! $this->upload->do_upload('image')){
             $error = array('error' => $this->upload->display_errors());
             // $this->load->view('admin', $error);
-            $this -> loadview("admin", "");
+            // $this -> loadview("admin", "");
+            $this->session->set_flashdata('error', $error);
+
+            redirect("admin/news/", 'refresh');
         }else{
             $post = $this->input->post(NULL, TRUE);
             $title = $post['title'];
@@ -180,7 +214,7 @@ class Admin extends CI_Controller
             $this->load->model("admin/news_model", "model");
             $this->model->create($data);
 
-            $this -> loadview($callback, "");
+            // $this -> loadview($callback, "");
             redirect("admin/$callback/", 'refresh');
             // $this->load->view(, $data);  
         } 

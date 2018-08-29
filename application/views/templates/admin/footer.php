@@ -38,6 +38,24 @@
     <!-- scripit init-->
 
     <script src="<?php echo base_url(); ?>assets/admin/js/custom.min.js"></script>
+    <script>
+    $( document ).ready(function() {
+        console.log( "ready!" );
+        $('.form-valide').submit(function(event){
+            if(!confirm("Deseja continuar?")){
+                event.preventDefault();
+            }
+        });
+        console.log($("#button_delete"));
+        
+        $("#button_delete").click(function(event){
+            alert("ae");
+            if (!confirm("Deseja continuar?")) {
+                event.preventDefault();
+            }
+        })
+    });
+</script>
 
 </body>
 

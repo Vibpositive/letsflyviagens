@@ -24,7 +24,7 @@
 			</form>
             <form class="form-valide" action="../delete/<?php echo $id ?>/run" method="post">
                 <div class="col-lg-12">
-                        <button type="submit" class="btn btn-danger" onclick="function(){confirm('Click OK to continue?);}">Deletar</button>
+                        <button type="submit" class="btn btn-danger">Deletar</button>
                 </div>
             </form>
 		</div>

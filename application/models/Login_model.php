@@ -4,6 +4,10 @@ Class Login_Model extends CI_Model {
     
     private $table = "user";
 
+    public function __construct(){
+        $this->load->database();
+    }
+
     // Insert registration data in database
     public function registration_insert($data) {
         
