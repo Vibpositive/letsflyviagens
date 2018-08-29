@@ -202,7 +202,6 @@ class Admin extends CI_Controller
             // $this->load->view('admin', $error);
             // $this -> loadview("admin", "");
             $this->session->set_flashdata('error', $error);
-
             redirect("admin/news/", 'refresh');
         }else{
             $post = $this->input->post(NULL, TRUE);
@@ -210,11 +209,11 @@ class Admin extends CI_Controller
             $body = $post['body'];
             $callback = $post['callback'];
             $data = array('image' => $this->upload->data()['file_name'], "title" => $title, "body" => $body);
-
+            
             $this->load->model("admin/news_model", "model");
             $this->model->create($data);
-
-            // $this -> loadview($callback, "");
+            
+            $this->session->set_flashdata('success', "Criado com sucesso");
             redirect("admin/$callback/", 'refresh');
             // $this->load->view(, $data);  
         } 
