@@ -60,15 +60,6 @@ class Admin extends CI_Controller
     public function news($operation = "", $id = 0, $run = "")
     {
         $page = "news";
-
-        // print_r("page: " . $page  . " || operation: " . $operation . " || id: " . $id);
-        // echo "<br>";
-        // echo APPPATH.'views/admin/' . $page . "/" . $operation . '.php';
-        // echo "<br>";
-        // echo APPPATH.'views/admin/' . $page . '.php';
-        // echo "<br>";
-        // die();
-
         
         $this->load->model("admin/news_model", "model");
         if($run === "" && $operation !== "create"){
@@ -114,8 +105,6 @@ class Admin extends CI_Controller
                             die("could not update");
                         }
                     }
-
-
                     
                     break;
                     case 'delete':
@@ -141,15 +130,68 @@ class Admin extends CI_Controller
         }
     }
     
-    private function loadview($mainpage, $page, $operation = "", $id = 0){
+    public function quotes($operation = "", $id = 0, $run = "")
+    {
+        // die($operation . " || " . $id . " || " . $run);
 
-        // print_r("mainpage: " . $mainpage . " || page: " . $page  . " || operation: " . $operation . " || id: " . $id);
-        // echo "<br>";
-        // echo APPPATH.'views/admin/' . $mainpage . '/' . $page . "/" . $operation . '.php';
-        // echo "<br>";
-        // echo APPPATH.'views/admin/' . $mainpage . '/' . $page . '.php';
-        // echo "<br>";
-        // die();
+        switch ($operation) {
+            case 'pagination':
+                # code...
+                $this -> load_quotes();
+                break;
+            case 'view':
+                # code...
+                // $this -> load_quotes();
+                die("view");
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+        
+
+    }
+
+    private function load_quotes(){
+        $this->load->library('pagination');
+        $this->load->helper('url');
+
+        // load db and model
+        $this->load->database();
+        $this->load->model('Quotes_model', 'model');
+ 
+        // init params
+        $params = array();
+        $limit_per_page = 7;
+        $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $total_records = $this->model->get_total();
+ 
+        if ($total_records > 0) {
+            // get current page records
+            $params["results"] = $this->model->get_current_page_records($limit_per_page, $start_index);
+             
+            $config['base_url'] = base_url() . 'admin/quotes/pagination/';
+            // http://localhost/letsfly/admin/quotes
+
+            $config['total_rows'] = $total_records;
+            $config['per_page'] = $limit_per_page;
+            $config["uri_segment"] = 4;
+             
+            $this->pagination->initialize($config);
+             
+            // build paging links
+            $params["links"] = $this->pagination->create_links();
+        }
+        
+        $this->load->view('templates/admin/header');
+        $this->load->view('admin/menu');
+        $this->load->view('admin/quotes/quotes', $params);
+        $this->load->view('templates/admin/footer');
+
+    }
+
+    private function loadview($mainpage, $page, $operation = "", $id = 0){
         
         if($operation !== ""){
             if (!file_exists(APPPATH.'views/admin/' . $mainpage . '/' . $page . "/" . $operation . '.php')) {

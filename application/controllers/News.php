@@ -62,7 +62,7 @@ class News extends CI_Controller
         $this->load->view('templates/header');
         $this->load->view('home/header', $data);
         $this->load->view('about/caroussel');
-        $this->load->view(strtolower(get_class($this)) . '/index', $data);
+        // $this->load->view(strtolower(get_class($this)) . '/index', $data);
         $this->load->view('templates/footer', $data);
         
     }

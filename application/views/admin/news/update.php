@@ -43,7 +43,7 @@
                 </div>
             </div>
             </form>
-            <form class="form-valide" action="<?php echo base_url() . " admin/news/delete/" . $id ?>/run" method="post">
+            <form class="form-valide" action="<?php echo base_url() . "admin/news/delete/" . $id ?>/run" method="post">
                 <div class="col-lg-12 text-center">
                     <button type="submit" class="btn btn-danger col-lg-12 col-md-12 col-xs-12 col-sm-12" id="delete_button">Deletar</button>
                 </div>

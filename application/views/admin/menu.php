@@ -225,9 +225,9 @@ if (isset($this->session->userdata['logged_in'])) {
                         <li class="nav-label">Seções</li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-edit"></i><span class="hide-menu">Home</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href=" <?php echo base_url(); ?>admin/home/typer">Typer</a></li>
-                                <li><a href=" <?php echo base_url(); ?>admin/home/maintext">Texto Principal</a></li>
-                                <li><a href=" <?php echo base_url(); ?>admin/news">Notícias</a></li>
+                                <li><a href="<?php echo base_url(); ?>admin/home/typer">Typer</a></li>
+                                <li><a href="<?php echo base_url(); ?>admin/home/maintext">Texto Principal</a></li>
+                                <li><a href="<?php echo base_url(); ?>admin/news">Notícias</a></li>
                                 <!-- <li><a href="email-read.html">Texto rotativo</a></li> -->
                                 <li><a href="email-inbox.html">Texto Principal </a></li>
                             </ul>
@@ -241,7 +241,7 @@ if (isset($this->session->userdata['logged_in'])) {
                         </li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-edit"></i><span class="hide-menu">Cotações <span class="label label-rouded label-success pull-right">6</span></span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="chart-flot.html">Flot</a></li>
+                                <li><a href="<?php echo base_url(); ?>admin/quotes">Cotacoes</a></li>
                                 <li><a href="chart-morris.html">Morris</a></li>
                                 <li><a href="chart-chartjs.html">ChartJs</a></li>
                                 <li><a href="chart-chartist.html">Chartist </a></li>
