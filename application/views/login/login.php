@@ -143,7 +143,7 @@ body, html {
 <?php
 if (isset($this->session->userdata['logged_in'])) {
     
-    header("location: " . base_url() . "user_authentication/user_login_process");
+    header("location: " . base_url() . "login/user_login_process");
 }
 ?>
     <div class="container">
@@ -152,7 +152,7 @@ if (isset($this->session->userdata['logged_in'])) {
             <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
             <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
             <p id="profile-name" class="profile-name-card"></p>
-            <?php echo form_open('user_authentication/user_login_process','class="form-signin"'); ?>
+            <?php echo form_open('login/user_login_process','class="form-signin"'); ?>
 
             <?php
                 echo "<div class='error_msg'>";

@@ -132,24 +132,135 @@ class Admin extends CI_Controller
     
     public function quotes($operation = "", $id = 0, $run = "")
     {
-        // die($operation . " || " . $id . " || " . $run);
-
         switch ($operation) {
-            case 'pagination':
-                # code...
-                $this -> load_quotes();
-                break;
             case 'view':
-                # code...
-                // $this -> load_quotes();
-                die("view");
-                break;
-            
+                $this -> load_quote($id);
+            break;
+                
             default:
-                # code...
-                break;
+                $this -> load_quotes();
+            break;
         }
+    }
+
+    public function quote_response()
+    {
+        $post = $this->input->post(null, true);
         
+        if (
+            isset($post['localizador'])            && array_key_exists('localizador',           $post) 
+            && isset($post['airline'])             && array_key_exists('airline',               $post) 
+            && isset($post['flight'])              && array_key_exists('flight',                $post) 
+            && isset($post['departure_datetime'])  && array_key_exists('departure_datetime',    $post) 
+            && isset($post['arrival_datetime'])    && array_key_exists('arrival_datetime',      $post) 
+            && isset($post['class'])               && array_key_exists('class',                 $post) 
+            && isset($post['origin'])              && array_key_exists('origin',                $post) 
+            && isset($post['destination'])         && array_key_exists('destination',           $post) 
+            && isset($post['luggage'])             && array_key_exists('luggage',               $post) 
+            && isset($post['stops'])               && array_key_exists('stops',                 $post) 
+            && isset($post['currency'])            && array_key_exists('currency',              $post) 
+            && isset($post['exchange'])            && array_key_exists('exchange',              $post) 
+            && isset($post['original_cost'])       && array_key_exists('original_cost',         $post) 
+            && isset($post['tax'])                 && array_key_exists('tax',                   $post) 
+            && isset($post['rav'])                 && array_key_exists('rav',                   $post) 
+            && isset($post['total'])               && array_key_exists('total',                 $post)
+        ) {
+            $this->load->database();
+            $this->load->model('Quotes_model', 'model');
+            $this->load->model('admin/Currency_model', 'currency_model');
+
+            $currency_id = $this -> currency_model -> get_currency_id($post['currency']);
+            // TODO: validate $currency_id
+            
+            
+            // $cost = array(
+            //     'currency_id'       => $currency_id,
+            //     'exchange'          => $post['exchange'],
+            //     'original_cost'     => $post['original_cost'],
+            //     'tax'               => $post['tax'],
+            //     'rav'               => $post['rav'],
+            //     'total'             => $post['total']
+            // );
+
+            $exchange           = $post['exchange'];
+            $original_cost      = $post['original_cost'];
+            $cost               = $post['cost'];
+            $tax                = $post['tax'];
+            $rav                = $post['rav'];
+            $localizador        = $post['localizador'];
+            $airline            = $post['airline'];
+            $flight             = $post['flight'];
+            $departure_datetime = $post['departure_datetime'];
+            $arrival_datetime   = $post['arrival_datetime'];
+            $class              = $post['class'];
+            $origin             = $post['origin'];
+            $destination        = $post['destination'];
+            $luggage            = $post['luggage'];
+            $stops              = $post['stops'];
+
+
+            
+            $cost = array(
+
+                
+                'currency_id'       => $currency_id,
+                'exchange'          => $post['exchange'],
+                'original_cost'     => $post['original_cost'],
+                'cost'              => $original_cost * $exchange,
+                'tax'               => $post['tax'],
+                'rav'               => $post['rav'],
+                'total'             => ($post['original_cost'] * $post['exchange']) + ($cost + $tax + $rav)
+            );
+            
+            $cost_id = $this -> model -> insert_response_cost(1, $cost);
+
+            if($cost_id > 0){
+                $response = array(
+                    'localizador'           => $post['localizador'],
+                    'airline'               => $post['airline'],
+                    'flight'                => $post['flight'],
+                    'departure_datetime'    => $post['departure_datetime'],
+                    'arrival_datetime'      => $post['arrival_datetime'],
+                    'class'                 => $post['class'],
+                    'origin'                => $post['origin'],
+                    'destination'           => $post['destination'],
+                    'quote_answer_cost_id'  => $cost_id,
+                    'quote_id'              => 1,
+                    'luggage'               => $post['luggage'],
+                    'stops'                 => $post['stops']
+                );
+
+                $response_id = $this -> model -> insert_response(1, $response);
+                if($response_id > 0){
+                    die("success");
+                }
+            }
+
+            
+
+            echo "<pre>";
+            print_r($post);
+            echo "</pre>";
+        }else {
+            die("error");
+        }
+    }
+
+    private function load_quote($id){
+        // TODO: if id == 0
+
+        // load db and model
+        $this->load->database();
+        $this->load->model('Quotes_model', 'model');
+        
+        $data['quote'] = $this-> model -> get_quote_by_id($id);
+        
+        // die("here");
+
+        $this->load->view('templates/admin/header');
+        $this->load->view('admin/menu');
+        $this->load->view('admin/quotes/view', $data);
+        $this->load->view('templates/admin/footer');
 
     }
 
@@ -171,24 +282,22 @@ class Admin extends CI_Controller
             // get current page records
             $params["results"] = $this->model->get_current_page_records($limit_per_page, $start_index);
              
-            $config['base_url'] = base_url() . 'admin/quotes/pagination/';
-            // http://localhost/letsfly/admin/quotes
-
+            $config['base_url'] = base_url() . 'admin/quotes/';
+            
             $config['total_rows'] = $total_records;
             $config['per_page'] = $limit_per_page;
-            $config["uri_segment"] = 4;
+            $config["uri_segment"] = 3;
              
             $this->pagination->initialize($config);
              
-            // build paging links
             $params["links"] = $this->pagination->create_links();
+
+            
         }
-        
         $this->load->view('templates/admin/header');
         $this->load->view('admin/menu');
         $this->load->view('admin/quotes/quotes', $params);
         $this->load->view('templates/admin/footer');
-
     }
 
     private function loadview($mainpage, $page, $operation = "", $id = 0){

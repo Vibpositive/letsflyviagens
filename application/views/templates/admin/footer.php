@@ -40,7 +40,15 @@
     <script src="<?php echo base_url(); ?>assets/admin/js/custom.min.js"></script>
     <script>
     $( document ).ready(function() {
-        console.log( "ready!" );
+
+        $(".page-item").click(function(e) {
+            var href = $(this).find(".page-link").find("a").attr("href");
+            if(href != undefined){
+                // console.log(href);
+                window.location.assign(href);
+            }
+        });
+
         $('.form-valide').submit(function(event){
             if(!confirm("Deseja continuar?")){
                 event.preventDefault();

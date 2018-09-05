@@ -1,6 +1,6 @@
 <?php
 
-Class User_Authentication extends CI_Controller {
+Class Login extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
@@ -36,15 +36,15 @@ Class User_Authentication extends CI_Controller {
         
         // Check validation for user input in SignUp form
         $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('email_value', 'Email', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('login/registration_form');
         } else {
             $data = array(
-                'username' => $this->input->post('username'),
-                'email' => $this->input->post('email_value'),
+                // 'username' => $this->input->post('username'),
+                'username' => $this->input->post('email'),
                 'password' => $this->input->post('password')
             );
             $result = $this->login_model->registration_insert($data);
@@ -90,7 +90,7 @@ Class User_Authentication extends CI_Controller {
                         'username' => $result[0]->username,
                         'email' => $result[0]->email,
                    );
-              // Add user data in session
+                    // Add user data in session
                     $this->session->set_userdata('logged_in', $session_data);
                     // $this->load->view('login/admin');
                     redirect('/admin', 'refresh');

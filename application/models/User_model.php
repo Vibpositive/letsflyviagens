@@ -22,10 +22,14 @@ class User_model extends CI_Model
         return $query->row();
     }
 
-    public function get_user_by_username($username)
+    public function get_user_by_username($username, $table = "")
     {
         $this->db->select('*');
-        $this->db->from($this -> table);
+        if($table !== ""){
+            $this->db->from($table);
+        }else{
+            $this->db->from($this -> table);
+        }
         $this->db->where('username', $username);
         $this->db->limit(1);
         $query = $this->db->get();

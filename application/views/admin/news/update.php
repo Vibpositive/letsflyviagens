@@ -13,13 +13,13 @@
                 <hr>
                 <div class="form-group row">
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
-                        <label class="col-lg-12 col-form-label" for="<?php echo " field_" . $data['id']; ?>">Titulo</label>
+                        <label class="col-lg-12 col-form-label" for="<?php echo "field_" . $data['id']; ?>">Titulo</label>
                     </div>
                     <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12" style="margin-bottom:20px">
-                        <input type="text" class="form-control col-lg-12" id="<?php echo " field_" . $data['id']; ?>" name="title" placeholder="Texto" value="<?php echo $data['title']; ?>">
+                        <input type="text" class="form-control col-lg-12" id="<?php echo "field_" . $data['id']; ?>" name="title" placeholder="Texto" value="<?php echo $data['title']; ?>">
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
-                        <label class="col-lg-12 col-form-label" for="<?php echo " field_" . $data['id']; ?>">Texto</label>
+                        <label class="col-lg-12 col-form-label" for="<?php echo "field_" . $data['id']; ?>">Texto</label>
                     </div>
                     <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12" style="margin-bottom:20px">
                         <textarea class="form-control col-lg-12" rows="5" style="height: 15em;" name="body" id="comment"><?php echo $data['body']; ?></textarea>
