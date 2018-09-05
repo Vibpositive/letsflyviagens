@@ -159,11 +159,11 @@ class Admin extends CI_Controller
             && isset($post['luggage'])             && array_key_exists('luggage',               $post) 
             && isset($post['stops'])               && array_key_exists('stops',                 $post) 
             && isset($post['currency'])            && array_key_exists('currency',              $post) 
-            && isset($post['exchange'])            && array_key_exists('exchange',              $post) 
-            && isset($post['original_cost'])       && array_key_exists('original_cost',         $post) 
-            && isset($post['tax'])                 && array_key_exists('tax',                   $post) 
-            && isset($post['rav'])                 && array_key_exists('rav',                   $post) 
-            && isset($post['total'])               && array_key_exists('total',                 $post)
+            // && isset($post['exchange'])            && array_key_exists('exchange',              $post) 
+            // && isset($post['original_cost'])       && array_key_exists('original_cost',         $post) 
+            // && isset($post['tax'])                 && array_key_exists('tax',                   $post) 
+            // && isset($post['rav'])                 && array_key_exists('rav',                   $post) 
+            // && isset($post['quote_id'])            && array_key_exists('quote_id',              $post) 
         ) {
             $this->load->database();
             $this->load->model('Quotes_model', 'model');
@@ -172,19 +172,8 @@ class Admin extends CI_Controller
             $currency_id = $this -> currency_model -> get_currency_id($post['currency']);
             // TODO: validate $currency_id
             
-            
-            // $cost = array(
-            //     'currency_id'       => $currency_id,
-            //     'exchange'          => $post['exchange'],
-            //     'original_cost'     => $post['original_cost'],
-            //     'tax'               => $post['tax'],
-            //     'rav'               => $post['rav'],
-            //     'total'             => $post['total']
-            // );
-
             $exchange           = $post['exchange'];
             $original_cost      = $post['original_cost'];
-            $cost               = $post['cost'];
             $tax                = $post['tax'];
             $rav                = $post['rav'];
             $localizador        = $post['localizador'];
@@ -197,50 +186,42 @@ class Admin extends CI_Controller
             $destination        = $post['destination'];
             $luggage            = $post['luggage'];
             $stops              = $post['stops'];
-
-
+            $quote_id           = $post['quote_id'];
             
             $cost = array(
-
-                
                 'currency_id'       => $currency_id,
                 'exchange'          => $post['exchange'],
                 'original_cost'     => $post['original_cost'],
                 'cost'              => $original_cost * $exchange,
                 'tax'               => $post['tax'],
                 'rav'               => $post['rav'],
-                'total'             => ($post['original_cost'] * $post['exchange']) + ($cost + $tax + $rav)
+                'total'             => ($post['original_cost'] * $post['exchange']) + ($tax + $rav)
             );
             
-            $cost_id = $this -> model -> insert_response_cost(1, $cost);
+            $cost_id = $this -> model -> insert_response_cost($cost);
 
             if($cost_id > 0){
                 $response = array(
-                    'localizador'           => $post['localizador'],
-                    'airline'               => $post['airline'],
-                    'flight'                => $post['flight'],
-                    'departure_datetime'    => $post['departure_datetime'],
-                    'arrival_datetime'      => $post['arrival_datetime'],
-                    'class'                 => $post['class'],
-                    'origin'                => $post['origin'],
-                    'destination'           => $post['destination'],
+                    'localizador'           => $localizador,
+                    'airline'               => $airline,
+                    'flight'                => $flight,
+                    'departure_datetime'    => $departure_datetime,
+                    'arrival_datetime'      => $arrival_datetime,
+                    'class'                 => $class,
+                    'origin'                => $origin,
+                    'destination'           => $destination,
                     'quote_answer_cost_id'  => $cost_id,
-                    'quote_id'              => 1,
-                    'luggage'               => $post['luggage'],
-                    'stops'                 => $post['stops']
+                    'quote_id'              => $quote_id,
+                    'luggage'               => $luggage,
+                    'stops'                 => $stops
                 );
 
-                $response_id = $this -> model -> insert_response(1, $response);
+                $response_id = $this -> model -> insert_response($quote_id, $response);
+
                 if($response_id > 0){
                     die("success");
                 }
             }
-
-            
-
-            echo "<pre>";
-            print_r($post);
-            echo "</pre>";
         }else {
             die("error");
         }
@@ -260,6 +241,7 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/header');
         $this->load->view('admin/menu');
         $this->load->view('admin/quotes/view', $data);
+        $this->load->view('admin/quotes/response', $data);
         $this->load->view('templates/admin/footer');
 
     }

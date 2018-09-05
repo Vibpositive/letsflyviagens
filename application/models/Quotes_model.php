@@ -96,7 +96,7 @@ class Quotes_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    public function insert_response_cost($quote_id = 0, $cost_array){
+    public function insert_response_cost($cost_array){
         $this->db->insert($this -> table_cost, $cost_array);
         return $this->db->insert_id();
     }
