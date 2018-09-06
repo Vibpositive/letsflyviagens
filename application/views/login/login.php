@@ -141,8 +141,7 @@ body, html {
     color: rgb(12, 97, 33);
 }</style>
 <?php
-if (isset($this->session->userdata['logged_in'])) {
-    
+if (isset($this->session->userdata['logged_in'])) {    
     header("location: " . base_url() . "login/user_login_process");
 }
 ?>

@@ -100,6 +100,45 @@ class Quotes_model extends CI_Model
         $this->db->insert($this -> table_cost, $cost_array);
         return $this->db->insert_id();
     }
+
+    public function update_response_cost($cost_array, $id){
+        $currency_id = $cost_array['currency_id'];
+        $exchange = $cost_array['exchange'];
+        $original_cost = $cost_array['original_cost'];
+        $cost = $cost_array['cost'];
+        $tax = $cost_array['tax'];
+        $rav = $cost_array['rav'];
+        $total = $cost_array['total'];
+        
+        // $this->db->set('currency_id', $currency_id);
+        $this->db->set('exchange', $exchange);
+        $this->db->set('original_cost', $original_cost);
+        $this->db->set('cost', $cost);
+        $this->db->set('tax', $tax);
+        $this->db->set('rav', $rav);
+        $this->db->set('total', $total);
+        $this->db->where('id', $id);
+        $this->db->update($this -> table_cost);
+        $result = $this->db->affected_rows();
+
+        if($result == 1){
+            return $currency_id;
+        }
+
+        return 0;
+    }
+
+    public function get_quote_response_cost($quote_id){
+        $this->db->select('qa.id , qa.localizador, qa.airline, qa.flight, qa.departure_datetime, qa.quote_id, qa.arrival_datetime, qa.class, qa.origin, qa.destination, qa.luggage, qa.stops, qac.exchange, qac.original_cost, qac.cost, qac.tax, qac.rav, qac.total, qac.id as quote_answer_cost_id, currency.name as currency');
+        $this->db->from('quote_answer as qa');
+        $this->db->join('letsfly.quote_answer_cost qac', 'qa.quote_answer_cost_id = qac.id');
+        $this->db->join('letsfly.currency', 'qac.currency_id = currency.id');
+        $this->db->where("qa.quote_id", $quote_id);
+        $this->db->group_by("qa.id");
+        $query = $this->db->get($this -> table);
+
+        return $query->result_array();
+    }
     
     public function get_total()
     {

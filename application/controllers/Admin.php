@@ -197,8 +197,29 @@ class Admin extends CI_Controller
                 'rav'               => $post['rav'],
                 'total'             => ($post['original_cost'] * $post['exchange']) + ($tax + $rav)
             );
+
+            $result = $this -> model -> get_quote_response_cost($quote_id);
+
+            // TODO compare if values have been updated;
             
-            $cost_id = $this -> model -> insert_response_cost($cost);
+            if(
+                isset($result[0]['quote_id']) && array_key_exists('quote_id', $result[0]) &&
+                isset($result[0]['quote_answer_cost_id']) && array_key_exists('quote_answer_cost_id', $result[0])
+            ){
+                $cost_id = $this -> model -> update_response_cost($cost, $result[0]['quote_answer_cost_id']);
+
+                die($cost_id);
+            }else{
+                $cost_id = $this -> model -> insert_response_cost($cost);
+                if($cost_id){
+                    redirect(base_url() . "admin/quotes/view/35");
+                }
+            }
+
+            // die();
+
+            
+            // $cost_id = $this -> model -> insert_response_cost($cost);
 
             if($cost_id > 0){
                 $response = array(
@@ -225,6 +246,15 @@ class Admin extends CI_Controller
         }else {
             die("error");
         }
+    }
+
+    public function getquotecost($quote_id){
+        $this->load->model('Quotes_model', 'model');
+
+        $result = $this -> model -> get_quote_response_cost($quote_id);
+        echo "<pre>";
+        print_r($result);
+        echo "</pre>";
     }
 
     private function load_quote($id){

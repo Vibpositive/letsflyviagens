@@ -35,7 +35,7 @@ Class Login extends CI_Controller {
     public function new_user_registration() {
         
         // Check validation for user input in SignUp form
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+        // $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 
@@ -70,7 +70,8 @@ Class Login extends CI_Controller {
                 // $this->load->view('login/admin');
                 redirect('/admin', 'refresh');
             }else{
-                $this->load->view('login/login_form');
+                // $this->load->view('login/login_form');
+                redirect(base_url() . '/login', 'refresh');
             }
         } else {
             $data = array(
@@ -82,13 +83,12 @@ Class Login extends CI_Controller {
             // die($result);   
             if ($result == 'true') {
                 
-                // $username = $this->input->post('username');  
+                // $username = $this->input->post('username');
                 $email = $this->input->post('email');
                 $result = $this->login_model->read_user_information($email);
                 if ($result != false) {
                     $session_data = array(
-                        'username' => $result[0]->username,
-                        'email' => $result[0]->email,
+                        'username' => $result[0]->username
                    );
                     // Add user data in session
                     $this->session->set_userdata('logged_in', $session_data);
@@ -99,7 +99,8 @@ Class Login extends CI_Controller {
                 $data = array(
                     'error_message' => 'Invalid Username or Password'
                 );
-                $this->load->view('login/login_form', $data);
+                $this->session->set_flashdata('error', $data);
+                redirect(base_url() . '/admin', 'refresh');
             }
         }
     }

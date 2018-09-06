@@ -1,5 +1,6 @@
 <?php
     // $data = $this -> model -> get_by_id($id)[0];
+    // TODO: load data and fill in into the inputs if theyre existent in the db
 ?>
 <div class="col-lg-12">
     <div class="card card-outline-primary">
@@ -122,16 +123,17 @@
                         <input type="hidden" name="quote_id" value="<?php echo $quote[0]['id'] ?>" />
                     </div>
                     <div class="col-lg-12 text-center">
+                    <!-- TODO: enable button only if values have changed -->
                         <button type="submit" class="btn btn-info col-lg-12 col-md-12 col-xs-12 col-sm-12">Atualizar</button>
                     </div>
                 </div>
             </div>
             </form>
-            <form class="form-valide" action="<?php echo base_url() . "admin/news/delete/" . $id ?>/run" method="post">
+            <!-- <form class="form-valide" action="<?php echo base_url() . "admin/news/delete/" . $quote[0]['id'] ?>/run" method="post">
                 <div class="col-lg-12 text-center">
                     <button type="submit" class="btn btn-danger col-lg-12 col-md-12 col-xs-12 col-sm-12" id="delete_button">Deletar</button>
                 </div>
-            </form>
+            </form> -->
         </div>
     </div>
 </div>
