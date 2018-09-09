@@ -142,7 +142,7 @@ body, html {
 }</style>
 <?php
 if (isset($this->session->userdata['logged_in'])) {    
-    header("location: " . base_url() . "login/user_login_process");
+    header("location: " . base_url() . "login/user_login_process"); 
 }
 ?>
     <div class="container">

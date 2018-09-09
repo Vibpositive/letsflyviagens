@@ -172,6 +172,7 @@ class Admin extends CI_Controller
             $currency_id = $this -> currency_model -> get_currency_id($post['currency']);
             // TODO: validate $currency_id
             
+            $localizador        = $post['localizador'];
             $exchange           = $post['exchange'];
             $original_cost      = $post['original_cost'];
             $tax                = $post['tax'];
@@ -188,7 +189,7 @@ class Admin extends CI_Controller
             $stops              = $post['stops'];
             $quote_id           = $post['quote_id'];
             
-            $cost = array(
+            $cost_array = array(
                 'currency_id'       => $currency_id,
                 'exchange'          => $post['exchange'],
                 'original_cost'     => $post['original_cost'],
@@ -197,7 +198,7 @@ class Admin extends CI_Controller
                 'rav'               => $post['rav'],
                 'total'             => ($post['original_cost'] * $post['exchange']) + ($tax + $rav)
             );
-
+            
             $result = $this -> model -> get_quote_response_cost($quote_id);
 
             // TODO compare if values have been updated;
@@ -206,46 +207,69 @@ class Admin extends CI_Controller
                 isset($result[0]['quote_id']) && array_key_exists('quote_id', $result[0]) &&
                 isset($result[0]['quote_answer_cost_id']) && array_key_exists('quote_answer_cost_id', $result[0])
             ){
-                $cost_id = $this -> model -> update_response_cost($cost, $result[0]['quote_answer_cost_id']);
-
-                die($cost_id);
+                $cost_id        = $this -> model -> update_response_cost($cost_array, $result[0]['quote_answer_cost_id']);
             }else{
-                $cost_id = $this -> model -> insert_response_cost($cost);
-                if($cost_id){
-                    redirect(base_url() . "admin/quotes/view/35");
-                }
+                $cost_id        = $this -> model -> insert_response_cost($cost_array);
             }
 
-            // die();
-
-            
-            // $cost_id = $this -> model -> insert_response_cost($cost);
+            $return = [];
 
             if($cost_id > 0){
-                $response = array(
-                    'localizador'           => $localizador,
-                    'airline'               => $airline,
-                    'flight'                => $flight,
-                    'departure_datetime'    => $departure_datetime,
-                    'arrival_datetime'      => $arrival_datetime,
-                    'class'                 => $class,
-                    'origin'                => $origin,
-                    'destination'           => $destination,
-                    'quote_answer_cost_id'  => $cost_id,
-                    'quote_id'              => $quote_id,
-                    'luggage'               => $luggage,
-                    'stops'                 => $stops
-                );
-
-                $response_id = $this -> model -> insert_response($quote_id, $response);
-
-                if($response_id > 0){
-                    die("success");
-                }
+                // $return = array('cost_success' => "updated successfully");
+                $push = array('cost_success' => "updated successfully");
+                array_push($return, $push);
+            }else{
+                // $return = array('cost_message' => "no updates have been made");
+                $push = array('cost_message' => "no updates have been made");
+                // array_push($push, $return);
+                array_push($return, $push);
             }
+            
+            $response_result = $this -> model -> get_quote_response($quote_id);
+            
+            $response_array = array(
+                'localizador'           => $localizador,
+                'airline'               => $airline,
+                'flight'                => $flight,
+                'departure_datetime'    => $departure_datetime,
+                'arrival_datetime'      => $arrival_datetime,
+                'class'                 => $class,
+                'origin'                => $origin,
+                'destination'           => $destination,
+                'quote_answer_cost_id'  => $cost_id,
+                'quote_id'              => $quote_id,
+                'luggage'               => $luggage,
+                'stops'                 => $stops
+            );
+            
+            if (
+                    isset($response_result[0]['id']) && array_key_exists('id', $response_result[0]))
+            {
+                $response_id    = $this -> model -> update_response($response_array, $response_result[0]['id']);
+            } else {
+                $response_id    = $this -> model -> insert_response($quote_id, $response_array);
+            }
+            
+            if($response_id > 0){
+                // $return = array('response_success' => "updated successfully");
+                $push = array('response_success' => "updated successfully");
+                array_push($return, $push);
+                
+            }else{
+                // $return = array('response_message' => "no updates have been made");
+                $push = array('response_message' => "no updates have been made");
+                array_push($return, $push);
+            }
+                
         }else {
-            die("error");
+            // foreach ($post as $key => $value) {
+            //     echo "$key || $value<br>";
+            // }
+            $return = array('error' => "wrong number of parameters");
         }
+        echo "<pre>";
+        print_r($return);
+        echo "</pre>";
     }
 
     public function getquotecost($quote_id){
@@ -260,14 +284,24 @@ class Admin extends CI_Controller
     private function load_quote($id){
         // TODO: if id == 0
 
-        // load db and model
         $this->load->database();
         $this->load->model('Quotes_model', 'model');
         
-        $data['quote'] = $this-> model -> get_quote_by_id($id);
+        $data['quote']          = $this-> model -> get_quote_by_id($id);
         
-        // die("here");
+        $quote_id = $data['quote'][0]['id'];
 
+        // $data['quote_response']      = $this-> model -> get_quote_response($quote_id);
+        $data['quote_response_cost'] = $this-> model -> get_quote_response_cost($quote_id);
+
+        // echo "<pre>";
+        // print_r($data['quote_response']);
+        // echo "</pre>";
+
+        // echo "<pre>";
+        // print_r($data['quote_response_cost']);
+        // echo "</pre>";
+        
         $this->load->view('templates/admin/header');
         $this->load->view('admin/menu');
         $this->load->view('admin/quotes/view', $data);
