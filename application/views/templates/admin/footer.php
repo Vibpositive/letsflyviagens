@@ -3,7 +3,8 @@
     </div>
 <!-- End Wrapper -->
     <!-- All Jquery -->
-    <script src="<?php echo base_url(); ?>assets/admin/js/lib/jquery/jquery.min.js"></script>
+    <!-- <script src="<?php echo base_url(); ?>assets/admin/js/lib/jquery/jquery.min.js"></script> -->
+    <script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="<?php echo base_url(); ?>assets/admin/js/lib/bootstrap/js/popper.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/admin/js/lib/bootstrap/js/bootstrap.min.js"></script>
@@ -35,11 +36,22 @@
     <script src="<?php echo base_url(); ?>assets/admin/js/lib/owl-carousel/owl.carousel.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/admin/js/lib/owl-carousel/owl.carousel-init.js"></script>
     <script src="<?php echo base_url(); ?>assets/admin/js/scripts.js"></script>
+
+    <script src="<?php echo base_url(); ?>assets/js/bootstrap-datepicker.min.js"></script>
     <!-- scripit init-->
 
     <script src="<?php echo base_url(); ?>assets/admin/js/custom.min.js"></script>
     <script>
     $( document ).ready(function() {
+
+        console.log($('.datePicker').remove());
+
+        $('.datePicker').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'pt-BR',
+            autoclose: true,
+            todayHighlight: true
+        });
 
         $(".page-item").click(function(e) {
             var href = $(this).find(".page-link").find("a").attr("href");

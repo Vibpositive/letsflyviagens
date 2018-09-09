@@ -148,137 +148,215 @@ class Admin extends CI_Controller
         $post = $this->input->post(null, true);
         
         if (
-            isset($post['localizador'])            && array_key_exists('localizador',           $post) 
-            && isset($post['airline'])             && array_key_exists('airline',               $post) 
-            && isset($post['flight'])              && array_key_exists('flight',                $post) 
-            && isset($post['departure_datetime'])  && array_key_exists('departure_datetime',    $post) 
-            && isset($post['arrival_datetime'])    && array_key_exists('arrival_datetime',      $post) 
-            && isset($post['class'])               && array_key_exists('class',                 $post) 
-            && isset($post['origin'])              && array_key_exists('origin',                $post) 
-            && isset($post['destination'])         && array_key_exists('destination',           $post) 
-            && isset($post['luggage'])             && array_key_exists('luggage',               $post) 
-            && isset($post['stops'])               && array_key_exists('stops',                 $post) 
-            && isset($post['currency'])            && array_key_exists('currency',              $post) 
-            // && isset($post['exchange'])            && array_key_exists('exchange',              $post) 
-            // && isset($post['original_cost'])       && array_key_exists('original_cost',         $post) 
-            // && isset($post['tax'])                 && array_key_exists('tax',                   $post) 
-            // && isset($post['rav'])                 && array_key_exists('rav',                   $post) 
-            // && isset($post['quote_id'])            && array_key_exists('quote_id',              $post) 
+            isset($post['localizador'])            && array_key_exists('localizador',           $post)
+            && isset($post['airline'])             && array_key_exists('airline',               $post)
+            && isset($post['flight'])              && array_key_exists('flight',                $post)
+            && isset($post['departure_datetime'])  && array_key_exists('departure_datetime',    $post)
+            && isset($post['arrival_datetime'])    && array_key_exists('arrival_datetime',      $post)
+            && isset($post['class'])               && array_key_exists('class',                 $post)
+            && isset($post['origin'])              && array_key_exists('origin',                $post)
+            && isset($post['destination'])         && array_key_exists('destination',           $post)
+            && isset($post['luggage'])             && array_key_exists('luggage',               $post)
+            && isset($post['stops'])               && array_key_exists('stops',                 $post)
+            && isset($post['currency'])            && array_key_exists('currency',              $post)
         ) {
             $this->load->database();
             $this->load->model('Quotes_model', 'model');
             $this->load->model('admin/Currency_model', 'currency_model');
 
-            $currency_id = $this -> currency_model -> get_currency_id($post['currency']);
+            
             // TODO: validate $currency_id
             
-            $localizador        = $post['localizador'];
-            $exchange           = $post['exchange'];
-            $original_cost      = $post['original_cost'];
-            $tax                = $post['tax'];
-            $rav                = $post['rav'];
-            $localizador        = $post['localizador'];
-            $airline            = $post['airline'];
-            $flight             = $post['flight'];
-            $departure_datetime = $post['departure_datetime'];
-            $arrival_datetime   = $post['arrival_datetime'];
-            $class              = $post['class'];
-            $origin             = $post['origin'];
-            $destination        = $post['destination'];
-            $luggage            = $post['luggage'];
-            $stops              = $post['stops'];
+            // $localizador        = $post['localizador'];
+            // $exchange           = $post['exchange'];
+            // $original_cost      = $post['original_cost'];
+            // $tax                = $post['tax'];
+            // $rav                = $post['rav'];
+            // $localizador        = $post['localizador'];
+            // $airline            = $post['airline'];
+            // $flight             = $post['flight'];
+            // $departure_datetime = $post['departure_datetime'];
+            // $arrival_datetime   = $post['arrival_datetime'];
+            // $class              = $post['class'];
+            // $origin             = $post['origin'];
+            // $destination        = $post['destination'];
+            // $luggage            = $post['luggage'];
+            // $stops              = $post['stops'];
             $quote_id           = $post['quote_id'];
             
-            $cost_array = array(
-                'currency_id'       => $currency_id,
-                'exchange'          => $post['exchange'],
-                'original_cost'     => $post['original_cost'],
-                'cost'              => $original_cost * $exchange,
-                'tax'               => $post['tax'],
-                'rav'               => $post['rav'],
-                'total'             => ($post['original_cost'] * $post['exchange']) + ($tax + $rav)
-            );
+            // $cost_array = array(
+            //     'currency_id'       => $currency_id,
+            //     'exchange'          => $post['exchange'],
+            //     'original_cost'     => $post['original_cost'],
+            //     'cost'              => $original_cost * $exchange,
+            //     'tax'               => $post['tax'],
+            //     'rav'               => $post['rav'],
+            //     'total'             => ($post['original_cost'] * $post['exchange']) + ($tax + $rav)
+            // );
             
-            $result = $this -> model -> get_quote_response_cost($quote_id);
+            // $result = $this -> model -> get_quote_response_cost($quote_id);
 
-            // TODO compare if values have been updated;
+            // // TODO compare if values have been updated;
             
+            // if(
+                //     isset($result[0]['quote_id']) && array_key_exists('quote_id', $result[0]) &&
+                //     isset($result[0]['quote_answer_cost_id']) && array_key_exists('quote_answer_cost_id', $result[0])
+                // ){
+                    // $quote_response = $this -> model -> get_quote_response($post['quote_id']);
+            $quote_response_exists = $this -> get_quote_response($post['quote_id']);
+            $quote_response = $this -> model -> get_quote_response($quote_id);
+            
+            $update_response = false;
+            $update_response_cost = false;
+            $insert_cost_id = false;
+            $insert_response_id = false;
+
+            
+            if($quote_response_exists){
+                $update_response      = $this -> update_response($post, $quote_response[0]['quote_answer_cost_id']);
+                $update_response_cost = $this -> update_response_cost($post, $quote_response[0]['quote_answer_cost_id']);
+            }else {
+                // die("doesnt");
+                $insert_cost_id     = $this -> insert_response_cost($post);
+                $insert_response_id = $this -> insert_response($post, $insert_cost_id );
+            }
+            echo "update_response: " . $update_response;
+            echo "update_response_cost: " . $update_response_cost;
+            echo "insert_cost_id: " . $insert_cost_id;
+            echo "insert_response_id: " . $insert_response_id;
+            // die();
             if(
-                isset($result[0]['quote_id']) && array_key_exists('quote_id', $result[0]) &&
-                isset($result[0]['quote_answer_cost_id']) && array_key_exists('quote_answer_cost_id', $result[0])
+                ($update_response !== false) ||
+                ($update_response_cost !== false)    ||
+                ($insert_cost_id !== false)    ||
+                ($insert_response_id !== false)
             ){
-                $cost_id        = $this -> model -> update_response_cost($cost_array, $result[0]['quote_answer_cost_id']);
-            }else{
-                $cost_id        = $this -> model -> insert_response_cost($cost_array);
+                redirect(base_url() . "admin/quotes/view/" . $quote_id, 'refresh');
             }
-
-            $return = [];
-
-            if($cost_id > 0){
-                // $return = array('cost_success' => "updated successfully");
-                $push = array('cost_success' => "updated successfully");
-                array_push($return, $push);
-            }else{
-                // $return = array('cost_message' => "no updates have been made");
-                $push = array('cost_message' => "no updates have been made");
-                // array_push($push, $return);
-                array_push($return, $push);
-            }
-            
-            $response_result = $this -> model -> get_quote_response($quote_id);
-            
-            $response_array = array(
-                'localizador'           => $localizador,
-                'airline'               => $airline,
-                'flight'                => $flight,
-                'departure_datetime'    => $departure_datetime,
-                'arrival_datetime'      => $arrival_datetime,
-                'class'                 => $class,
-                'origin'                => $origin,
-                'destination'           => $destination,
-                'quote_answer_cost_id'  => $cost_id,
-                'quote_id'              => $quote_id,
-                'luggage'               => $luggage,
-                'stops'                 => $stops
-            );
-            
-            if (
-                    isset($response_result[0]['id']) && array_key_exists('id', $response_result[0]))
-            {
-                $response_id    = $this -> model -> update_response($response_array, $response_result[0]['id']);
-            } else {
-                $response_id    = $this -> model -> insert_response($quote_id, $response_array);
-            }
-            
-            if($response_id > 0){
-                // $return = array('response_success' => "updated successfully");
-                $push = array('response_success' => "updated successfully");
-                array_push($return, $push);
-                
-            }else{
-                // $return = array('response_message' => "no updates have been made");
-                $push = array('response_message' => "no updates have been made");
-                array_push($return, $push);
-            }
-                
         }else {
-            // foreach ($post as $key => $value) {
-            //     echo "$key || $value<br>";
-            // }
             $return = array('error' => "wrong number of parameters");
         }
-        echo "<pre>";
-        print_r($return);
-        echo "</pre>";
+    }
+
+    private function get_quote_response($quote_id){
+        $result = $this -> model -> get_quote_response_cost($quote_id);
+        $exists = (isset($result[0]['quote_id']) && array_key_exists('quote_id', $result[0]));
+        return $exists;
+    }
+
+    private function update_response_cost($post, $id){
+        $currency_id = $this -> currency_model -> get_currency_id($post['currency']);
+        if (!$currency_id) {
+            $currency_id = $this -> currency_model -> get_currency_id("USA");
+        }
+
+        $cost_array = array(
+            'currency_id'       => $currency_id,
+            'exchange'          => $post['exchange'],
+            'original_cost'     => $post['original_cost'],
+            'cost'              => $post['original_cost'] * $post['exchange'],
+            'tax'               => $post['tax'],
+            'rav'               => $post['rav'],
+            'total'             => ($post['original_cost'] * $post['exchange']) + ($post['tax'] + $post['rav'])
+        );
+        
+        return $this -> model -> update_response_cost($cost_array, $id);
+    }
+
+    private function insert_response_cost($post){
+        
+        if(!$post['currency']){
+            $currency_id = $this -> currency_model -> get_currency("USA");
+        }else{
+            $currency_id = $this -> currency_model -> get_currency_id($post['currency']);
+    
+            if (!$currency_id) {
+                $currency_id = $this -> currency_model -> get_currency("USA");
+            }
+        }
+
+
+        $cost_array = array(
+            'currency_id'       => $currency_id,
+            'exchange'          => $post['exchange'],
+            'original_cost'     => $post['original_cost'],
+            'cost'              => $post['original_cost'] * $post['exchange'],
+            'tax'               => $post['tax'],
+            'rav'               => $post['rav'],
+            'total'             => ($post['original_cost'] * $post['exchange']) + ($post['tax'] + $post['rav'])
+        );
+
+        return $this -> model -> insert_response_cost($cost_array);
+    }
+
+    private function update_response($post, $quote_id)
+    {
+        $localizador        = $post['localizador'];
+        $airline            = $post['airline'];
+        $flight             = $post['flight'];
+        $departure_datetime = $post['departure_datetime'];
+        $arrival_datetime   = $post['arrival_datetime'];
+        $class              = $post['class'];
+        $origin             = $post['origin'];
+        $destination        = $post['destination'];
+        $luggage            = $post['luggage'];
+        $stops              = $post['stops'];
+
+        $response_array = array(
+            'localizador'           => $localizador,
+            'airline'               => $airline,
+            'flight'                => $flight,
+            'departure_datetime'    => $departure_datetime,
+            'arrival_datetime'      => $arrival_datetime,
+            'class'                 => $class,
+            'origin'                => $origin,
+            'destination'           => $destination,
+            'quote_id'              => $quote_id,
+            'luggage'               => $luggage,
+            'quote_id'              => $quote_id,
+            'stops'                 => $stops
+        );
+
+        $response_id = $this -> model -> update_response($response_array, $quote_id);
+        // TODO: return something
+    }
+
+    private function insert_response($post, $cost_id){
+        $localizador        = $post['localizador'];
+        $airline            = $post['airline'];
+        $flight             = $post['flight'];
+        $departure_datetime = $post['departure_datetime'];
+        $arrival_datetime   = $post['arrival_datetime'];
+        $class              = $post['class'];
+        $origin             = $post['origin'];
+        $destination        = $post['destination'];
+        $luggage            = $post['luggage'];
+        $stops              = $post['stops'];
+        $quote_id           = $post['quote_id'];
+        
+        $response_array = array(
+            'localizador'           => $localizador,
+            'airline'               => $airline,
+            'flight'                => $flight,
+            'departure_datetime'    => $departure_datetime,
+            'arrival_datetime'      => $arrival_datetime,
+            'class'                 => $class,
+            'origin'                => $origin,
+            'destination'           => $destination,
+            'quote_id'              => $quote_id,
+            'luggage'               => $luggage,
+            'quote_answer_cost_id'  => $cost_id,
+            'stops'                 => $stops
+        );
+
+        $response_id = $this -> model -> insert_response($quote_id, $response_array);
+        // TODO: return something
     }
 
     public function getquotecost($quote_id){
         $this->load->model('Quotes_model', 'model');
 
         $result = $this -> model -> get_quote_response_cost($quote_id);
-        echo "<pre>";
-        print_r($result);
-        echo "</pre>";
     }
 
     private function load_quote($id){
@@ -290,24 +368,14 @@ class Admin extends CI_Controller
         $data['quote']          = $this-> model -> get_quote_by_id($id);
         
         $quote_id = $data['quote'][0]['id'];
-
-        // $data['quote_response']      = $this-> model -> get_quote_response($quote_id);
+        
         $data['quote_response_cost'] = $this-> model -> get_quote_response_cost($quote_id);
-
-        // echo "<pre>";
-        // print_r($data['quote_response']);
-        // echo "</pre>";
-
-        // echo "<pre>";
-        // print_r($data['quote_response_cost']);
-        // echo "</pre>";
         
         $this->load->view('templates/admin/header');
         $this->load->view('admin/menu');
         $this->load->view('admin/quotes/view', $data);
         $this->load->view('admin/quotes/response', $data);
         $this->load->view('templates/admin/footer');
-
     }
 
     private function load_quotes(){

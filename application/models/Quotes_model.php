@@ -165,14 +165,9 @@ class Quotes_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from($this -> table_response);
-        // $this->db->join('letsfly.quote_answer_cost qac', 'qa.quote_answer_cost_id = qac.id');
-        // $this->db->join('letsfly.currency', 'qac.currency_id = currency.id');
         $this->db->where("quote_id", $quote_id);
         $this->db->group_by("id");
         $query = $this->db->get();
-        // $quote_response_cost = $this -> get_quote_response_cost($quote_id);
-        // array_push($query[0], $quote_response_cost);
-
         return $query->result_array();
     }
 

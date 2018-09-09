@@ -12,6 +12,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url(); ?>assets/admin/images/favicon.png">
     <title>Ela - Bootstrap Admin Dashboard Template</title>
     <!-- Bootstrap Core CSS -->
+        <!--booststrap datepicker-->
+    <link href="<?php echo base_url(); ?>assets/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" media="all">
+    <!--//booststrap datepicker end-->
     <link href="<?php echo base_url(); ?>assets/admin/css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
 
@@ -22,6 +25,7 @@
     <link href="<?php echo base_url(); ?>assets/admin/css/helper.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/admin/css/style.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
     <!--[if lt IE 9]>
