@@ -64,6 +64,7 @@ $route['admin/home/crud/(:any)']  = "admin/home/crud/$1";
 // $route['posts/(:any)'] = 'posts/view/$1';
 $route['populardestinations/(:any)'] = 'populardestinations/destination';
 $route['populardestinations'] = 'populardestinations/index';
+$route['currency'] = 'currency/index';
 $route['about'] = 'about/index';
 $route['contact'] = 'contact/index';
 $route['newsletter/register'] = 'newsletter/register';

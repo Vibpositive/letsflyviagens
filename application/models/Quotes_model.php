@@ -98,18 +98,18 @@ class Quotes_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    public function update_response($response_array, $id)
+    public function update_response($post, $id)
     {
-        $localizador            = $response_array['localizador'];
-        $airline                = $response_array['airline'];
-        $flight                 = $response_array['flight'];
-        $departure_datetime     = $response_array['departure_datetime'];
-        $arrival_datetime       = $response_array['arrival_datetime'];
-        $class                  = $response_array['class'];
-        $origin                 = $response_array['origin'];
-        $destination            = $response_array['destination'];
-        $luggage                = $response_array['luggage'];
-        $stops                  = $response_array['stops'];
+        $localizador            = $post['localizador'];
+        $airline                = $post['airline'];
+        $flight                 = $post['flight'];
+        $departure_datetime     = $post['departure_datetime'];
+        $arrival_datetime       = $post['arrival_datetime'];
+        $class                  = $post['class'];
+        $origin                 = $post['origin'];
+        $destination            = $post['destination'];
+        $luggage                = $post['luggage'];
+        $stops                  = $post['stops'];
         
         $this->db->set('localizador', $localizador);
         $this->db->set('airline', $airline);
@@ -121,7 +121,7 @@ class Quotes_model extends CI_Model
         $this->db->set('destination', $destination);
         $this->db->set('luggage', $luggage);
         $this->db->set('stops', $stops);
-        $this->db->where('id', $id);
+        $this->db->where('quote_id', $id);
 
         $this->db->update($this -> table_response);
         $result = $this->db->affected_rows();
@@ -143,8 +143,8 @@ class Quotes_model extends CI_Model
         $rav = $cost_array['rav'];
         $total = $cost_array['total'];
         
-        // $this->db->set('currency_id', $currency_id);
         $this->db->set('exchange', $exchange);
+        $this->db->set('currency_id', $currency_id);
         $this->db->set('original_cost', $original_cost);
         $this->db->set('cost', $cost);
         $this->db->set('tax', $tax);

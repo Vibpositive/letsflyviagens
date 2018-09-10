@@ -1,11 +1,3 @@
-<?php
-    // $data = $this -> model -> get_by_id($id)[0];
-    // TODO: load data and fill in into the inputs if theyre existent in the db
-    // echo "<pre>";
-    // print_r($quote_response_cost);
-    // echo "<pre>";
-    // die();
-?>
 <div class="col-lg-12">
     <div class="card card-outline-primary">
         <div class="card-header">
@@ -18,19 +10,63 @@
                 <div class="form-group row">
                 <?php if( isset($quote_response_cost[0]) && array_key_exists(0, $quote_response_cost)) : ?>
                     <?php foreach ($quote_response_cost[0] as $key => $value) : ?>
-                        <?php if ($key !== "quote_answer_cost_id") : ?>
+                        <?php if ($key !== "quote_answer_cost_id" && $key !== "id" && $key !== "quote_id" && $key !== "total" && $key !== "cost") : ?>
                             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
                                 <label class="col-lg-12 col-form-label" for="<?php echo $key; ?>"><?php echo $key; ?></label>
                             </div>
                             <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12" style="margin-bottom:20px">
                                 <input
-                                    type="text"
-                                    class="form-control col-lg-12"
-                                    id="<?php echo $key; ?>"
+                                
+                                    <?php if($key === "luggage" || $key === "stops") :?>
+                                        type="number"
+                                        step="1"
+                                    <?php elseif($key === "exchange" || $key === "original_cost" || $key === "tax"  || $key === "rav") :?>
+                                        type="number"
+                                        step="0.01"
+                                    <?php else :?>
+                                        type="text"
+
+                                    <?php endif;?>
+                                    
+                                    <?php if($key === "departure_datetime" || $key === "arrival_datetime") : ?>
+                                        class="form-control col-lg-12 datePicker"
+                                    <?php else:?>
+                                        class="form-control col-lg-12"
+                                    <?php endif;?>
+                                    
+                                    <?php if($key === "currency") :?>
+                                        id="autocomplete_currency"
+                                    <?php else:?>
+                                        id="<?php echo $key; ?>"
+                                    <?php endif;?>
+                                    
                                     name="<?php echo $key; ?>"
                                     placeholder="Ex: <?php echo $key;?>"
                                     value="<?php echo $value;?>">
                             </div>
+                        <?php elseif ($key === "cost") :?>
+                                <input type="hidden"
+                                id="<?php echo $key; ?>"
+                                    name="<?php echo $key; ?>"
+                                    placeholder="Ex: <?php echo $key;?>"
+                                    value="<?php echo $value;?>">
+                        <?php elseif ($key === "quote_id") :?>
+                                <input type="hidden"
+                                id="<?php echo $key; ?>"
+                                    name="<?php echo $key; ?>"
+                                    value="<?php echo $value;?>">
+                        <?php elseif ($key === "total") :?>
+                                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+                                   <label class="col-lg-12 col-form-label" for="<?php echo $key; ?>"><?php echo $key; ?></label>
+                               </div>
+                               <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12" style="margin-bottom:20px">
+                                  <input
+                                        type="text"
+                                        class="form-control col-lg-12"
+                                        id="<?php echo $key; ?>"
+                                        placeholder="Ex: <?php echo $key;?>"
+                                        value="<?php echo $value;?>" disabled>
+                                </div>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 <?php else : ?>
@@ -59,14 +95,14 @@
                         <label class="col-lg-12 col-form-label" for="departure_datetime">Data de Embarque</label>
                     </div>
                     <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12" style="margin-bottom:20px">
-                        <input type="text" class="form-control col-lg-12 datepicker" id="departure_datetime" name="departure_datetime" placeholder="Ex: 00/00/00000" value="">
+                        <input type="text" class="form-control col-lg-12 datePicker" id="departure_datetime" name="departure_datetime" placeholder="Ex: 00/00/00000" value="">
                     </div>
 
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
                         <label class="col-lg-12 col-form-label" for="arrival_datetime">Data de Chegada</label>
                     </div>
                     <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12" style="margin-bottom:20px">
-                        <input type="text" class="form-control col-lg-12 datepicker" id="arrival_datetime" name="arrival_datetime" placeholder="Ex: 00/00/00000" value="">
+                        <input type="text" class="form-control col-lg-12 datePicker" id="arrival_datetime" name="arrival_datetime" placeholder="Ex: 00/00/00000" value="">
                     </div>
 
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
@@ -105,11 +141,10 @@
                     </div>
 
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
-                        <label class="col-lg-12 col-form-label" for="currency">Moeda</label>
-                        <!-- TODO: bring currency from db -->
+                        <label class="col-lg-12 col-form-label" for="currency">Moeda</label>         
                     </div>
                     <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12" style="margin-bottom:20px">
-                        <input type="text" class="form-control col-lg-12" id="currency" name="currency" placeholder="Ex: EUR" value="">
+                        <input id="autocomplete_currency" type="text" name="currency" placeholder="Moeda">
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
                         <label class="col-lg-12 col-form-label" for="exchange">Cotacao</label>
@@ -150,11 +185,6 @@
                 </div>
             </div>
             </form>
-            <!-- <form class="form-valide" action="<?php echo base_url() . "admin/news/delete/" . $quote[0]['id'] ?>/run" method="post">
-                <div class="col-lg-12 text-center">
-                    <button type="submit" class="btn btn-danger col-lg-12 col-md-12 col-xs-12 col-sm-12" id="delete_button">Deletar</button>
-                </div>
-            </form> -->
         </div>
     </div>
 </div>

@@ -21,4 +21,12 @@ class Currency_model extends CI_Model
         $query = $this->db->get();
         return $query -> result();
     }
+
+    public function get_currencies()
+    {
+        $this->db->select('*');
+        $this->db->from($this -> table);
+        $query = $this->db->get();
+        return $query -> result_array();
+    }
 }

@@ -30,7 +30,7 @@ class Admin extends CI_Controller
                     if($this->model->update($id, $post)){
                         redirect("admin/home/" . $page . "/" . $operation . "/" . $id, 'refresh');
                     }else{
-                        // TODO: better message
+                        // TODO: die("could not update");
                         die("could not update");
                     }
                     break;
@@ -38,7 +38,7 @@ class Admin extends CI_Controller
                         if($this->model->delete($id)){
                             redirect("admin/home/" . $page, 'refresh');
                         }else{
-                            // TODO: better message
+                            // TODO: die("could not delete");
                             die("could not delete");
                         }
                         break;
@@ -46,7 +46,7 @@ class Admin extends CI_Controller
                         if($this->model->create($post)){
                             redirect("admin/home/" . $page, 'refresh');
                         }else{
-                            // TODO: better message
+                            // TODO: die("could not create");
                             die("could not create");
                         }
                     break;
@@ -63,12 +63,8 @@ class Admin extends CI_Controller
         
         $this->load->model("admin/news_model", "model");
         if($run === "" && $operation !== "create"){
-            // die("if");
-
             $this -> loadview("news", "", $operation, $id);
-
         }else{
-            // die("else");
             $post = $this->input->post(NULL, TRUE);
             
             switch ($operation) {
@@ -86,7 +82,7 @@ class Admin extends CI_Controller
 
                     if (! $this->upload->do_upload('image')) {
                         $error = array('error' => $this->upload->display_errors());
-                        // $this->load->view('admin', $error);
+                        // TODO:die($error);
                         die($error);
                     } else {
                         $post           = $this->input->post(null, true);
@@ -101,7 +97,7 @@ class Admin extends CI_Controller
                             // redirect("admin/news/" . $page . "/" . $operation . "/" . $id, 'refresh');
                             redirect("admin/$callback/", 'refresh');
                         } else {
-                            // TODO: better message
+                            // TODO: die("could not update");
                             die("could not update");
                         }
                     }
@@ -111,15 +107,15 @@ class Admin extends CI_Controller
                         if($this->model->delete($id)){
                             redirect("admin/news/", 'refresh');
                         }else{
+                            // TODO: die("could not delete");
                             die("could not delete");
-                            // TODO: better message
                         }
                         break;
                         case 'create':
                         if($this->model->create($post)){
                             redirect("admin/news/" . $page, 'refresh');
                         }else{
-                            // TODO: better message
+                            // TODO: die("could not create");
                             die("could not create");
                         }
                     break;
@@ -213,18 +209,13 @@ class Admin extends CI_Controller
 
             
             if($quote_response_exists){
-                $update_response      = $this -> update_response($post, $quote_response[0]['quote_answer_cost_id']);
+                $update_response      = $this -> update_response($post, $quote_id);
                 $update_response_cost = $this -> update_response_cost($post, $quote_response[0]['quote_answer_cost_id']);
             }else {
-                // die("doesnt");
                 $insert_cost_id     = $this -> insert_response_cost($post);
                 $insert_response_id = $this -> insert_response($post, $insert_cost_id );
             }
-            echo "update_response: " . $update_response;
-            echo "update_response_cost: " . $update_response_cost;
-            echo "insert_cost_id: " . $insert_cost_id;
-            echo "insert_response_id: " . $insert_response_id;
-            // die();
+            
             if(
                 ($update_response !== false) ||
                 ($update_response_cost !== false)    ||
@@ -249,7 +240,8 @@ class Admin extends CI_Controller
         if (!$currency_id) {
             $currency_id = $this -> currency_model -> get_currency_id("USA");
         }
-
+        
+        
         $cost_array = array(
             'currency_id'       => $currency_id,
             'exchange'          => $post['exchange'],
@@ -294,14 +286,16 @@ class Admin extends CI_Controller
         $localizador        = $post['localizador'];
         $airline            = $post['airline'];
         $flight             = $post['flight'];
-        $departure_datetime = $post['departure_datetime'];
+
         $arrival_datetime   = $post['arrival_datetime'];
+        $departure_datetime = $post['departure_datetime'];
+        
         $class              = $post['class'];
         $origin             = $post['origin'];
         $destination        = $post['destination'];
         $luggage            = $post['luggage'];
         $stops              = $post['stops'];
-
+        
         $response_array = array(
             'localizador'           => $localizador,
             'airline'               => $airline,
@@ -364,8 +358,10 @@ class Admin extends CI_Controller
 
         $this->load->database();
         $this->load->model('Quotes_model', 'model');
+        $this->load->model('admin/Currency_model', 'currency_model');
         
-        $data['quote']          = $this-> model -> get_quote_by_id($id);
+        $data['quote']          = $this-> model             -> get_quote_by_id($id);
+        $data['currency']      = $this-> currency_model    -> get_currencies();
         
         $quote_id = $data['quote'][0]['id'];
         
