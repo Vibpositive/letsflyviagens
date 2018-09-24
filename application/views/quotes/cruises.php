@@ -38,7 +38,7 @@
                             <input type="number" id="cf_adults" name="cf_adults" placeholder="No. Adultos" min="1" max="20" class="form-control" required="">
 
                             <label for="cf_kids">No. Crianças</label>
-                            <input type="number" id="cf_kids" name="cf_kids" placeholder="No. Crianças" min="1" max="20" class="form-control" required="">
+                            <input type="number" id="cf_kids" name="cf_kids" placeholder="No. Crianças" min="0" max="20" class="form-control" required="">
 
                             <label for="cf_month">Mês</label>
                             <select name="cf_month">
