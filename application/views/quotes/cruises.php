@@ -38,17 +38,25 @@
                             <input type="number" id="cf_adults" name="cf_adults" placeholder="No. Adultos" min="1" max="20" class="form-control" required="">
 
                             <label for="cf_kids">No. Crianças</label>
-                            <input type="number" id="cf_kids" name="cf_kids" placeholder="No. Crianças" min="0" max="20" class="form-control" required="">
+                            <input type="number" id="cf_kids" name="cf_kids" placeholder="No. Crianças" min="0" max="20" class="form-control">
 
                             <label for="cf_month">Mês</label>
                             <select name="cf_month">
                                 <option value="" disabled selected>Mês</option>
-                                <option value="Agosto 2018">Agosto 2018</option>
-                                <option value="Setembro 2018">Setembro 2018</option>
-                                <option value="Outubro 2018">Outubro 2018</option>
-                                <option value="Novembro 2018">Novembrok 2018</option>
-                                <option value="Dezembro 2018">Dezembro 2018</option>
-                                <option value="Janeiro 2018">Janeiro 2018</option>
+<!-- -                                <option value="Agosto 2018">Agosto 2018</option> -->
+<!-- -                                <option value="Setembro 2018">Setembro 2018</option> -->
+                                 <option value="Outubro 2018">Outubro 2018</option>
+-                                <option value="Novembro 2018">Novembrok 2018</option>
++                                <option value="Novembro 2018">Novembro 2018</option>
+                                 <option value="Dezembro 2018">Dezembro 2018</option>
+-                                <option value="Janeiro 2018">Janeiro 2018</option>
++                                <option value="Janeiro 2019">Janeiro 2019</option>
++                                <option value="Fevereiro 2019">Fevereiro 2019</option>
++                                <option value="Março 2019">Março 2019</option>
++                                <option value="Abril 2019">Abril 2019</option>
++                                <option value="Maio 2019">Maio 2019</option>
++                                <option value="Junho 2019">Junho 2019</option>
++                                <option value="Julho 2019">Julho 2019</option>
                             </select>
 
                             <label for="cf_cruiseOperator">Companhia</label>
