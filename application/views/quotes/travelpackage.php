@@ -32,8 +32,8 @@
 
                         <label for="tp_phone">Telefone</label>
                         <input type="tel" id="tp_phone" name="tp_phone" placeholder="+55(XX)XXXX-XXXX" required="">
-
-                        <label for="tp_departureCity" id="tp_departureCity">Destino</label>
+                        
+                        <label for="tp_departureCity">Destino</label>
                         <input type="text" id="tp_departureCity" name="tp_departureCity" placeholder="Cidade de Saida" class="form-control" required="">
 
                         <label for="tp_destinationCity" id="tp_destinationCity">Destino</label>
