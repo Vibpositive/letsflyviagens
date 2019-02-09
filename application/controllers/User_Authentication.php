@@ -22,6 +22,7 @@ Class User_Authentication extends CI_Controller {
     public function index() {
         // $this->load->helper('form');
         // $this->load->view('login/login_form');
+        die('here');
         $this->load->view('templates/header');
         $this->load->view('login/login');
     }
