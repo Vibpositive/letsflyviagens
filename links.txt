@@ -1,0 +1,2 @@
+https://github.com/docker-library/php/issues/391
+https://github.com/docker-library/docs/tree/master/php#php-core-extensions
