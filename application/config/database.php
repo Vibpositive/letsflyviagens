@@ -78,9 +78,9 @@ switch (ENVIRONMENT)
 	case 'development':
 		$db['default'] = array(
             'dsn'	=> '',
-            'hostname' => 'letsfly_mariadb',
+            'hostname' => 'localhost',
             'username' => 'root',
-            'password' => 'rootpwd',
+            'password' => '',
             'database' => 'letsfly',
             'dbdriver' => 'mysqli',
             'dbprefix' => '',
