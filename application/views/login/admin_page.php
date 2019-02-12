@@ -26,7 +26,7 @@ echo "<br/>";
 echo "Your Email is " . $email;
 echo "<br/>";
 ?>
-<b id="logout"><a href="logout">Logout</a></b>
+<b id="logout"><a href="/logout">Logout</a></b>
 </div>
 <br/>
 </body>

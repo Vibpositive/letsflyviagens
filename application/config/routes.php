@@ -53,8 +53,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 // $route['populardestinations'] = 'popular/index';
 
 $route['login'] = 'login';
-
-
 $route['admin'] = 'admin/index';
 $route['admin/home/(:any)'] = 'admin/home/$1';
 $route['admin/news/(:any)'] = 'admin/news/$1';

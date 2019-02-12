@@ -1,7 +1,8 @@
 <html>
 <?php
+die('registration form')
 if (isset($this->session->userdata['logged_in'])) {
-    header("location: http://localhost/login/index.php/login/user_login_process");
+    header("location: http://localhost/login/index.php/login/login");
 }
 ?>
 <head>
