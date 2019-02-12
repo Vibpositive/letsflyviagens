@@ -71,3 +71,7 @@ $route['quotes'] = 'quotes/index';
 $route['default_controller'] = 'home/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = false;
+
+
+// $route['admin/sales/(:any)'] = 'admin/home/$1';
+$route['admin/sales'] = 'admin/sales';

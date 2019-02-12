@@ -230,6 +230,7 @@ if (isset($this->session->userdata['logged_in'])) {
                                 <li><a href="<?php echo base_url(); ?>admin/news">Notícias</a></li>
                                 <!-- <li><a href="email-read.html">Texto rotativo</a></li> -->
                                 <li><a href="email-inbox.html">Texto Principal </a></li>
+                                <li><a href="<?php echo base_url(); ?>admin/sales">Promocoes</a></li>
                             </ul>
                         </li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-edit"></i><span class="hide-menu">Sobre Nós</span></a>

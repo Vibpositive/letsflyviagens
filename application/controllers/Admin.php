@@ -15,8 +15,13 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-    public function home($page, $operation = "", $id = 0, $run = "")
+    public function home($page = "", $operation = "", $id = 0, $run = "")
     {
+        if(!$page){
+            show_404();
+            die();
+        }
+        
         $model_name = $page.'_model';
         $this->load->model("admin/$model_name", "model");
 
@@ -447,23 +452,43 @@ class Admin extends CI_Controller
         }
     }
     
-    public function upload(){
-        $config['upload_path']          = './assets/images/news/';
+    // TODO: add option to set upload_path
+    public function upload($path = ""){
+        if(!$path){
+            throw new Exception("Upload path must be set");
+        }
+
+        $upload_path = '';
+        
+        switch ($path) {
+            case 'sales':
+                $upload_path = './assets/images/sales/';
+                break;
+            case 'news':
+                $upload_path = './assets/images/news/';
+                break;
+            
+            default:
+                throw new Exception("Upload path must be set");
+                break;
+        }
+        
+        $config['upload_path']          = $upload_path;
         $config['allowed_types']        = 'gif|jpg|png';
         $config['encrypt_name'] = TRUE;
         
         $config['max_size']             = 9999;
-        $config['max_width']            = 9999;
-        $config['max_height']           = 9999;
+        $config['max_width']            = 1024;
+        $config['max_height']           = 1024;
 
         $this->load->library('upload', $config);
 
         if ( ! $this->upload->do_upload('image')){
             $error = array('error' => $this->upload->display_errors());
-            // $this->load->view('admin', $error);
-            // $this -> loadview("admin", "");
             $this->session->set_flashdata('error', $error);
-            redirect("admin/news/", 'refresh');
+            // redirect("admin/news/", 'refresh');
+            die(print_r($error));
+            redirect("admin/$path/", 'refresh');
         }else{
             $post = $this->input->post(NULL, TRUE);
             $title = $post['title'];
@@ -476,8 +501,51 @@ class Admin extends CI_Controller
             
             $this->session->set_flashdata('success', "Criado com sucesso");
             redirect("admin/$callback/", 'refresh');
-            // $this->load->view(, $data);  
         } 
     }
     
+    // public function sales($page, $operation = "", $id = 0, $run = "")
+    public function sales()
+    {
+        $model_name = 'Sales_model';
+        $this->load->model("admin/$model_name", "model");
+        // $this -> loadview("sales", $page, $operation, $id);
+        $this -> loadview("sales","","");
+        
+        // if($run === "" && $operation !== "create"){
+        //     $this -> loadview("home", $page, $operation, $id);
+        // }else{
+        //     $post = $this->input->post(NULL, TRUE);
+            
+        //     switch ($operation) {
+        //         case 'update':
+        //             if($this->model->update($id, $post)){
+        //                 redirect("admin/home/" . $page . "/" . $operation . "/" . $id, 'refresh');
+        //             }else{
+        //                 // TODO: die("could not update");
+        //                 die("could not update");
+        //             }
+        //             break;
+        //             case 'delete':
+        //                 if($this->model->delete($id)){
+        //                     redirect("admin/home/" . $page, 'refresh');
+        //                 }else{
+        //                     // TODO: die("could not delete");
+        //                     die("could not delete");
+        //                 }
+        //                 break;
+        //                 case 'create':
+        //                 if($this->model->create($post)){
+        //                     redirect("admin/home/" . $page, 'refresh');
+        //                 }else{
+        //                     // TODO: die("could not create");
+        //                     die("could not create");
+        //                 }
+        //             break;
+        //         default:
+        //             # code...
+        //             break;
+        //     }
+        // }
+    }
 }

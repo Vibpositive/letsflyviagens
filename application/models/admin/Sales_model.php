@@ -1,8 +1,8 @@
 <?php
 
-Class News_model extends CI_Model {
+Class Sales_model extends CI_Model {
     
-    private $table = "news";
+    private $table = "sales";
     
     public function __construct(){
         $this->load->database();
