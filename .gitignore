@@ -6,10 +6,6 @@ application/cache/*
 application/logs/*
 !application/logs/index.html
 
-!assets/images/
-!assets/images/news/*
-!assets/images/sales/*
-
 !application/*/.htaccess
 
 composer.lock
@@ -35,3 +31,5 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/results/
 .psd
 .htaccess
+!/assets/images/sales/*.*
+!assets/images/news/*.*
