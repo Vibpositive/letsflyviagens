@@ -1,8 +1,13 @@
 <?php
 
 class Admin extends CI_Controller
-{
-                                             
+{    
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('session');
+    }
+    
     public function index($page = 'index')
     {
         if (!file_exists(APPPATH.'views/admin/'.$page.'.php')) {
@@ -414,10 +419,11 @@ class Admin extends CI_Controller
         $this->load->view('admin/quotes/quotes', $params);
         $this->load->view('templates/admin/footer');
     }
-
+    // TODO: refactor
     private function loadview($mainpage, $page, $operation = "", $id = 0){
         
         if($operation !== ""){
+            
             if (!file_exists(APPPATH.'views/admin/' . $mainpage . '/' . $page . "/" . $operation . '.php')) {
                 show_404();
             }
@@ -429,7 +435,6 @@ class Admin extends CI_Controller
             $this->load->view('admin/' . $mainpage . '/' . $page . "/" . $operation, $data);
             $this->load->view('templates/admin/footer');
         }elseif ($page === "") {
-            
             if (!file_exists(APPPATH.'views/admin/' . $mainpage . "/" . $mainpage . '.php')) {
                 show_404();
             }
@@ -452,27 +457,13 @@ class Admin extends CI_Controller
         }
     }
     
-    // TODO: add option to set upload_path
     public function upload($path = ""){
         if(!$path){
             throw new Exception("Upload path must be set");
         }
 
-        $upload_path = '';
-        
-        switch ($path) {
-            case 'sales':
-                $upload_path = './assets/images/sales/';
-                break;
-            case 'news':
-                $upload_path = './assets/images/news/';
-                break;
-            
-            default:
-                throw new Exception("Upload path must be set");
-                break;
-        }
-        
+		$upload_path = './assets/images/news/';
+		
         $config['upload_path']          = $upload_path;
         $config['allowed_types']        = 'gif|jpg|png';
         $config['encrypt_name'] = TRUE;
@@ -486,8 +477,6 @@ class Admin extends CI_Controller
         if ( ! $this->upload->do_upload('image')){
             $error = array('error' => $this->upload->display_errors());
             $this->session->set_flashdata('error', $error);
-            // redirect("admin/news/", 'refresh');
-            die(print_r($error));
             redirect("admin/$path/", 'refresh');
         }else{
             $post = $this->input->post(NULL, TRUE);
@@ -504,48 +493,7 @@ class Admin extends CI_Controller
         } 
     }
     
-    // public function sales($page, $operation = "", $id = 0, $run = "")
-    public function sales()
-    {
-        $model_name = 'Sales_model';
-        $this->load->model("admin/$model_name", "model");
-        // $this -> loadview("sales", $page, $operation, $id);
-        $this -> loadview("sales","","");
-        
-        // if($run === "" && $operation !== "create"){
-        //     $this -> loadview("home", $page, $operation, $id);
-        // }else{
-        //     $post = $this->input->post(NULL, TRUE);
-            
-        //     switch ($operation) {
-        //         case 'update':
-        //             if($this->model->update($id, $post)){
-        //                 redirect("admin/home/" . $page . "/" . $operation . "/" . $id, 'refresh');
-        //             }else{
-        //                 // TODO: die("could not update");
-        //                 die("could not update");
-        //             }
-        //             break;
-        //             case 'delete':
-        //                 if($this->model->delete($id)){
-        //                     redirect("admin/home/" . $page, 'refresh');
-        //                 }else{
-        //                     // TODO: die("could not delete");
-        //                     die("could not delete");
-        //                 }
-        //                 break;
-        //                 case 'create':
-        //                 if($this->model->create($post)){
-        //                     redirect("admin/home/" . $page, 'refresh');
-        //                 }else{
-        //                     // TODO: die("could not create");
-        //                     die("could not create");
-        //                 }
-        //             break;
-        //         default:
-        //             # code...
-        //             break;
-        //     }
-        // }
-    }
+    
+
+   
 }

@@ -3,6 +3,7 @@ if (isset($this->session->userdata['logged_in'])) {
     $username = ($this->session->userdata['logged_in']['username']);
     // $email = ($this->session->userdata['logged_in']['email']);
 } else {
+	// TODO: remove auth validation and add to controllers
     header("location: " . base_url() . "login"); 
 }
 ?>

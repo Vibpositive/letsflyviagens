@@ -25,8 +25,9 @@ Class Sales_model extends CI_Model {
     }
     
     public function update($id, $data) {
+		$this->db->set('image', "'" . $data['image'] ."'", FALSE);
         $this->db->where("id", $id);
-        $this->db->update($this -> table, $data);
+		$this->db->update($this -> table);
         return $this->db->affected_rows() == 1;
     }
     

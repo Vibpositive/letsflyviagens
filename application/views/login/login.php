@@ -1,49 +1,34 @@
 <style>
-/*
- * Specific styles of signin component
- */
-/*
- * General styles
- */
-body, html {
+    body, html {
     height: 100%;
     background-repeat: no-repeat;
     background-image: linear-gradient(rgb(42, 87, 160), rgb(40, 123, 182));
-}
-
-.card-container.card {
+    }
+    .card-container.card {
     max-width: 350px;
     padding: 40px 40px;
-}
-
-.btn {
+    }
+    .btn {
     font-weight: 700;
     height: 36px;
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
     cursor: default;
-}
-
-/*
- * Card component
- */
-.card {
+    }
+    .card {
     background-color: #F7F7F7;
-    /* just in case there no content*/
     padding: 20px 25px 30px;
     margin: 0 auto 25px;
     margin-top: 50px;
-    /* shadows and rounded borders */
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
     -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-}
-
-.profile-img-card {
+    }
+    .profile-img-card {
     width: 96px;
     height: 96px;
     margin: 0 auto 10px;
@@ -51,20 +36,16 @@ body, html {
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
-}
-
-/*
- * Form styles
- */
-.profile-name-card {
+    }
+    
+    .profile-name-card {
     font-size: 16px;
     font-weight: bold;
     text-align: center;
     margin: 10px 0 0;
     min-height: 1em;
-}
-
-.reauth-email {
+    }
+    .reauth-email {
     display: block;
     color: #404040;
     line-height: 2;
@@ -77,19 +58,17 @@ body, html {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-}
-
-.form-signin #inputEmail,
-.form-signin #inputPassword {
+    }
+    .form-signin #inputEmail,
+    .form-signin #inputPassword {
     direction: ltr;
     height: 44px;
     font-size: 16px;
-}
-
-.form-signin input[type=email],
-.form-signin input[type=password],
-.form-signin input[type=text],
-.form-signin button {
+    }
+    .form-signin input[type=email],
+    .form-signin input[type=password],
+    .form-signin input[type=text],
+    .form-signin button {
     width: 100%;
     display: block;
     margin-bottom: 10px;
@@ -98,19 +77,15 @@ body, html {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-}
-
-.form-signin .form-control:focus {
+    }
+    .form-signin .form-control:focus {
     border-color: rgb(104, 145, 162);
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
-}
-
-.btn.btn-signin {
-    /*background-color: #4d90fe; */
+    }
+    .btn.btn-signin {
     background-color: rgb(104, 145, 162);
-    /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
     padding: 0px;
     font-weight: 700;
     font-size: 14px;
@@ -123,61 +98,46 @@ body, html {
     -moz-transition: all 0.218s;
     -webkit-transition: all 0.218s;
     transition: all 0.218s;
-}
-
-.btn.btn-signin:hover,
-.btn.btn-signin:active,
-.btn.btn-signin:focus {
+    }
+    .btn.btn-signin:hover,
+    .btn.btn-signin:active,
+    .btn.btn-signin:focus {
     background-color: rgb(12, 97, 33);
-}
-
-.forgot-password {
+    }
+    .forgot-password {
     color: rgb(104, 145, 162);
-}
-
-.forgot-password:hover,
-.forgot-password:active,
-.forgot-password:focus{
+    }
+    .forgot-password:hover,
+    .forgot-password:active,
+    .forgot-password:focus{
     color: rgb(12, 97, 33);
-}</style>
+    }
+</style>
 <?php
-$this->load->helper('form', 'url');
-if (isset($this->session->userdata['logged_in'])) {
-    // TODO: fix url
-    // header("location: http://localhost/login/index.php/login/login");
-    redirect('/admin');
-}
-?>
-    <div class="container">
-    
-        <div class="card card-container">
-            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
-            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-            <p id="profile-name" class="profile-name-card"></p>
-            <?php echo form_open('login/login','class="form-signin"'); ?>
-
-            <?php
-                echo "<div class='error_msg'>";
-                if (isset($error_message)) {
-                    echo $error_message;
-                }
-                echo validation_errors();
-                echo "</div>";
+    $this->load->helper('form', 'url');
+    if (isset($this->session->userdata['logged_in'])) {
+        // TODO: fix url
+        // header("location: http://localhost/login/index.php/login/login");
+        redirect('/admin');
+    }
+    ?>
+<div class="container">
+    <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <?php echo form_open('login/login','class="form-signin"'); ?>
+        <?php
+            echo "<div class='error_msg'>";
+            if (isset($error_message)) {
+                echo $error_message;
+            }
+            echo validation_errors();
+            echo "</div>";
             ?>
-                <span id="reauth-email" class="reauth-email"></span>
-                <!-- <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus> -->
-                <!-- <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus> -->
-                <input type="text" id="email" name="email" class="form-control" placeholder="email" required autofocus>
-                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-                <!-- <div id="remember" class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-                </div> -->
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
-            </form><!-- /form -->
-            <!-- <a href="#" class="forgot-password">
-                Forgot the password?
-            </a> -->
-        </div><!-- /card-container -->
-    </div><!-- /container -->
+        <span id="reauth-email" class="reauth-email"></span>
+        <input type="text" id="email" name="email" class="form-control" placeholder="email" required autofocus>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+        </form>
+    </div>
+</div>

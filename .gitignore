@@ -6,6 +6,10 @@ application/cache/*
 application/logs/*
 !application/logs/index.html
 
+!assets/images/*
+!assets/images/news/*
+!assets/images/sales/*
+
 !application/*/.htaccess
 
 composer.lock

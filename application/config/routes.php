@@ -74,4 +74,10 @@ $route['translate_uri_dashes'] = false;
 
 
 // $route['admin/sales/(:any)'] = 'admin/home/$1';
-$route['admin/sales'] = 'admin/sales';
+
+$route['admin/sales'] = 'Sales_controller';
+$route['admin/sales/upload'] = 'Sales_controller/upload';
+$route['admin/sales/delete'] = 'Sales_controller/delete';
+
+$route['admin/sales/create'] = 'Sales_controller/sales_create';
+$route['admin/sales/update/(:num)'] = 'Sales_controller/sales_update/$1';
