@@ -54,8 +54,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 $route['login'] = 'login';
 $route['admin'] = 'admin/index';
-$route['admin/home/(:any)'] = 'admin/home/$1';
-$route['admin/news/(:any)'] = 'admin/news/$1';
 
 $route['admin/home/crud/(:any)']  = "admin/home/crud/$1";
 
@@ -91,6 +89,7 @@ $route['admin/typer/delete'] 					= 'AdminTyper_Controller/delete';
 $route['admin/typer/edit/(:num)'] 				= 'AdminTyper_Controller/edit/$1';
 $route['admin/typer/update'] 					= 'AdminTyper_Controller/update';
 
+
 $route['admin/maintext'] 						= 'AdminmainText_Controller';
 $route['admin/maintext/create'] 				= 'AdminmainText_Controller/create';
 $route['admin/maintext/create_maintext']		= 'AdminmainText_Controller/create_maintext';
@@ -99,3 +98,13 @@ $route['admin/maintext/delete'] 				= 'AdminmainText_Controller/delete';
 
 $route['admin/maintext/edit/(:num)'] 			= 'AdminmainText_Controller/edit/$1';
 $route['admin/maintext/update'] 				= 'AdminmainText_Controller/update';
+
+
+$route['admin/news'] 							= 'AdminNews_Controller';
+$route['admin/news/create'] 					= 'AdminNews_Controller/create';
+$route['admin/news/create_news']				= 'AdminNews_Controller/create_news';
+
+$route['admin/news/delete'] 					= 'AdminNews_Controller/delete';
+
+$route['admin/news/edit/(:num)'] 				= 'AdminNews_Controller/edit/$1';
+$route['admin/news/update'] 					= 'AdminNews_Controller/update';

@@ -367,45 +367,8 @@ class Admin extends CI_Controller
         $this->load->view('admin/menu');
         $this->load->view('admin/quotes/quotes', $params);
         $this->load->view('templates/admin/footer');
-    }
-    // TODO: refactor
-    private function loadview($mainpage, $page, $operation = "", $id = 0){
-        
-        if($operation !== ""){
-            
-            if (!file_exists(APPPATH.'views/admin/' . $mainpage . '/' . $page . "/" . $operation . '.php')) {
-                show_404();
-            }
-            
-            $data['id'] = $id;
-            
-            $this->load->view('templates/admin/header');
-            $this->load->view('admin/menu');
-            $this->load->view('admin/' . $mainpage . '/' . $page . "/" . $operation, $data);
-            $this->load->view('templates/admin/footer');
-        }elseif ($page === "") {
-            if (!file_exists(APPPATH.'views/admin/' . $mainpage . "/" . $mainpage . '.php')) {
-                show_404();
-            }
-            
-            $this->load->view('templates/admin/header');
-            $this->load->view('admin/menu');
-            $this->load->view('admin/' . $mainpage . "/" . $mainpage);
-            $this->load->view('templates/admin/footer');
-        }
-        else{
-            
-            if (!file_exists(APPPATH.'views/admin/' . $mainpage . '/' . $page . '.php')) {
-                show_404();
-            }
-            
-            $this->load->view('templates/admin/header');
-            $this->load->view('admin/menu');
-            $this->load->view('admin/' . $mainpage . '/' . $page);
-            $this->load->view('templates/admin/footer');
-        }
-    }
-    
+	}
+	
     public function upload($path = ""){
         if(!$path){
             throw new Exception("Upload path must be set");
