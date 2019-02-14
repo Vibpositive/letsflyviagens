@@ -33,21 +33,15 @@ class AdminNews_Controller extends CI_Controller
 			show_404();
 		}
 		
-		
 		$data = $this -> model -> get_by_id($id);
 		
 		if(!$data){
 			show_404();
 		}
 		
-		$data = array(
-			'id' => $data[0]['id'],
-			'vallue' => $data[0]['value']
-		);
-		
         $this->load->view('templates/admin/header');
 		$this->load->view('admin/menu');
-        $this->load->view('admin/news/edit', $data);
+        $this->load->view('admin/news/edit', $data[0]);
         $this->load->view('templates/admin/footer');
     }
 	
@@ -110,15 +104,45 @@ class AdminNews_Controller extends CI_Controller
 	
 	public function update()
 	{
+
+		// die(print_r($_FILES['image']['name']));
+		
 		$method = $this->input->method();
 		$post = $this->input->post(NULL, TRUE);
 		$refer 	= $this->agent->referrer();
+
+		$id = isset($post['id']) ? $post['id'] : null;
 		
 		if($method != "post" || !$post['id']){
 			show_404();	
 		}
-		
-		$data = array('value' => $post['value'], "id" => $post['id']);
+
+		$title          = $post['title'];
+		$body           = $post['body'];
+
+		if (isset($_FILES['image']['name']) && !empty($_FILES['image']['name'])) {
+
+			$config['upload_path']          = './assets/images/news/';
+			$config['allowed_types']        = 'gif|jpg|png';
+			$config['encrypt_name']         = true;
+			
+			$config['max_size']             = 9999;
+			$config['max_width']            = 9999;
+			$config['max_height']           = 9999;
+
+			$this->load->library('upload', $config);
+
+			if (! $this->upload->do_upload('image')) {
+				$error = array('error' => $this->upload->display_errors());
+				// TODO:die($error);
+				die(print_r($error));
+			} else {
+				$post = $this->input->post(null, true);
+				$data = array('image' => $this->upload->data()['file_name'], "title" => $title, "body" => $body);
+			}
+		}else{
+			$data = array("title" => $title, "body" => $body);
+		}
 		
 		$query = $this->model->update($post['id'], $data);
 		
@@ -126,6 +150,8 @@ class AdminNews_Controller extends CI_Controller
 			$this->session->set_flashdata('success', "Atualizado com sucesso");
 		}else{
 			// TODO: LOG error message
+			// echo "here<br />";
+			die(print_r($query) . "<br/>after");
 			$this->session->set_flashdata('error', array("error" => "Houve um problema ao atualizar"));
 		}
 		redirect($refer);
@@ -152,12 +178,10 @@ class AdminNews_Controller extends CI_Controller
             $error = array('error' => $this->upload->display_errors());
 			$this->session->set_flashdata('error', $error);
         }else{
-			$this->load->model("admin/sales_model", "model");
-
+			
 			$post = $this->input->post(NULL, TRUE);
             $title = $post['title'];
-            $body = $post['body'];
-			$id = isset($post['id']) ? $post['id'] : null;
+			$body = $post['body'];
 			
 			$callback = $post['callback'];
 
@@ -170,20 +194,14 @@ class AdminNews_Controller extends CI_Controller
 			}
 			
 			$data = array('image' => $this->upload->data()['file_name'], "title" => $title, "body" => $body);
-
-			// die(print_r($data));
 			
-			if(isset($id)){
-				$result = $this->model->update($post['id'], $data);
-				$this->session->set_flashdata('success', "Atualizado com sucesso");
+			$query = $this->model->create($data);
+
+			if($query > 0){
+				$this->session->set_flashdata('success', "Enviado com sucesso");
 			}else{
-				$query = $this->model->create($data);
-				if($query > 0){
-					$this->session->set_flashdata('success', "Enviado com sucesso");
-				}else{
-					// TODO: LOG error message
-					$this->session->set_flashdata('error', array("error" => "Houve um problema ao enviar"));
-				}
+				// TODO: LOG error message
+				$this->session->set_flashdata('error', array("error" => "Houve um problema ao enviar"));
 			}
         }
 		redirect($refer);

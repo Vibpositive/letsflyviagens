@@ -24,10 +24,25 @@ Class News_model extends CI_Model {
         return $query -> result_array();
     }
     
-    public function update($id, $data) {
-        $this->db->where("id", $id);
-        $this->db->update($this -> table, $data);
-        return $this->db->affected_rows() == 1;
+    public function update($id = "null", $data) {
+		try {
+			if(!isset($id) || is_null($id) || $id == "" || !is_numeric($id)){
+				throw new Exception('Paramater error! ID must be informed');
+			}
+
+			$this->db->where("id", $id);
+			$this->db->update($this -> table, $data);
+			
+			$db_error = $this->db->error();
+			
+			if ($db_error['code'] != 0) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+			}
+			return $this->db->affected_rows();
+
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
     }
     
     public function delete($id) {

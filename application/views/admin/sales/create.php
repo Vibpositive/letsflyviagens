@@ -26,7 +26,7 @@
 						<label class="col-lg-2 col-form-label" for="image">Imagem
 						</label>
 						<div class="col-lg-10">
-							<input type="file" size="20" class="form-control" id="image" name="image" placeholder="Texto" value="" accept=".gif,.png, .jpg"  />
+							<input type="file" size="20" class="form-control" id="image" name="image" placeholder="Imagem" value="" accept=".gif,.png, .jpg"  />
 							<input type="hidden" name="callback" value="news" />
 						</div>
 						

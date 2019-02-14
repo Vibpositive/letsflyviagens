@@ -31,7 +31,7 @@
                         style="" alt="">
                     </div>
                     <div class="col-lg-12">
-                        <a href="<?php echo base_url() . "admin/news/update/". $key['id']; ?>" style="display: inline-block;">
+                        <a href="<?php echo base_url() . "admin/news/edit/". $key['id']; ?>" style="display: inline-block;">
                             <button type="submit" class="btn btn-info   ">Modificar</button>
                         </a>
                         <?php echo form_open(base_url() . "admin/news/delete/" . $key['id'] . "/run", array("class" => 'form-valide', 'style' => "display: inline-block;")); ?>

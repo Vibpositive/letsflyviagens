@@ -55,7 +55,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['login'] = 'login';
 $route['admin'] = 'admin/index';
 
-$route['admin/home/crud/(:any)']  = "admin/home/crud/$1";
+// $route['admin/home/crud/(:any)']  = "admin/home/crud/$1";
 
 // $route['posts/(:any)'] = 'posts/view/$1';
 $route['populardestinations/(:any)'] = 'populardestinations/destination';
@@ -110,4 +110,3 @@ $route['admin/news/edit/(:num)'] 				= 'AdminNews_Controller/edit/$1';
 $route['admin/news/update'] 					= 'AdminNews_Controller/update';
 
 $route['admin/news/upload'] 					= 'AdminNews_Controller/upload';
-
