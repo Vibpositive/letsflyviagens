@@ -1,6 +1,6 @@
 <?php
 
-class AdminSalesController extends CI_Controller
+class AdminSales_Controller extends CI_Controller
 {
 
 	public function __construct() {

@@ -10,70 +10,12 @@ class Admin extends CI_Controller
     
     public function index($page = 'index')
     {
-        if (!file_exists(APPPATH.'views/admin/'.$page.'.php')) {
-            // show_404();
-        }
-
         $this->load->view('templates/admin/header');
         $this->load->view('admin/menu');
         $this->load->view('admin/index');
         $this->load->view('templates/admin/footer');
-    }
-
-    public function home($page = "", $operation = "", $id = 0, $run = "")
-    {
-		echo $page;
-		echo $operation;
-		echo $id;
-		echo $run;
-
-		// die();
-
-        if(!$page){
-            show_404();
-            die();
-        }
-        
-        $model_name = $page.'_model';
-        $this->load->model("admin/$model_name", "model");
-
-        if($run === "" && $operation !== "create"){
-            $this -> loadview("home", $page, $operation, $id);
-        }else{
-            $post = $this->input->post(NULL, TRUE);
-            
-            switch ($operation) {
-                case 'update':
-                    if($this->model->update($id, $post)){
-                        redirect("admin/home/" . $page . "/" . $operation . "/" . $id, 'refresh');
-                    }else{
-                        // TODO: die("could not update");
-                        die("could not update");
-                    }
-                    break;
-                    case 'delete':
-                        if($this->model->delete($id)){
-                            redirect("admin/home/" . $page, 'refresh');
-                        }else{
-                            // TODO: die("could not delete");
-                            die("could not delete");
-                        }
-                        break;
-                        case 'create':
-                        if($this->model->create($post)){
-                            redirect("admin/home/" . $page, 'refresh');
-                        }else{
-                            // TODO: die("could not create");
-                            die("could not create");
-                        }
-                    break;
-                default:
-                    # code...
-                    break;
-            }
-        }
-    }
-
+	}
+	
     public function news($operation = "", $id = 0, $run = "")
     {
         $page = "news";

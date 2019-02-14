@@ -239,8 +239,14 @@
             <li>
                <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-edit"></i><span class="hide-menu">Home</span></a>
                <ul aria-expanded="false" class="collapse">
-                  <li><a href="<?php echo base_url(); ?>admin/home/maintext">Texto Principal</a></li>
                   <li><a href="<?php echo base_url(); ?>admin/news">Notícias</a></li>
+               </ul>
+            </li>
+				<li>
+               <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-edit"></i><span class="hide-menu">Texto Principal</span></a>
+               <ul aria-expanded="false" class="collapse">
+                  <li><a href="<?php echo base_url(); ?>admin/maintext">Lista</a></li>
+                  <li><a href="<?php echo base_url(); ?>admin/maintext/create">Criar</a></li>
                </ul>
             </li>
 				<li>

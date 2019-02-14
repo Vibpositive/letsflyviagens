@@ -1,6 +1,6 @@
 <?php
 
-class AdminTyper_Controller extends CI_Controller
+class AdminMainText_Controller extends CI_Controller
 {
 
 	public function __construct() {
@@ -11,7 +11,7 @@ class AdminTyper_Controller extends CI_Controller
 		$this->load->library('user_agent');
 		$this->load->library('session');
 		
-		$this->load->model("admin/Typer_model", "model");
+		$this->load->model("admin/maintext_model", "model");
 		
 		// TODO: session management to all endpoints
 		if(!isset($this->session->userdata['logged_in'])){
@@ -23,7 +23,7 @@ class AdminTyper_Controller extends CI_Controller
     {
         $this->load->view('templates/admin/header');
         $this->load->view('admin/menu');
-        $this->load->view('admin/typer/index');
+        $this->load->view('admin/maintext/index');
         $this->load->view('templates/admin/footer');
 	}
 
@@ -47,7 +47,7 @@ class AdminTyper_Controller extends CI_Controller
 		
         $this->load->view('templates/admin/header');
 		$this->load->view('admin/menu');
-        $this->load->view('admin/Typer/edit', $data);
+        $this->load->view('admin/maintext/edit', $data);
         $this->load->view('templates/admin/footer');
     }
 	
@@ -55,11 +55,11 @@ class AdminTyper_Controller extends CI_Controller
 	public function create(){
 		$this->load->view('templates/admin/header');
 		$this->load->view('admin/menu');
-		$this->load->view('admin/Typer/create');
+		$this->load->view('admin/maintext/create');
 		$this->load->view('templates/admin/footer');
 	}
 	
-	public function create_typer(){
+	public function create_maintext(){
 		$method = $this->input->method();
 
 		if($method != "post"){
@@ -105,7 +105,7 @@ class AdminTyper_Controller extends CI_Controller
 			$this->session->set_flashdata('error', array("error" => "Houve um problema ao deletar"));
 		}
 		
-		redirect(base_url() . "admin/typer");	
+		redirect(base_url() . "admin/maintext");	
 	}
 	
 	public function update()

@@ -36,7 +36,6 @@ Class Typer_model extends CI_Model {
 			return $this->db->affected_rows() == 1;
 		} catch (Exception $e) {
 			return $e->getMessage();
-			//throw $th;
 		}
     }
 
