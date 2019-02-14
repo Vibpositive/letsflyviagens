@@ -24,6 +24,13 @@ input[type=text] {
 	width: 100%;
 }
 
+textarea {
+	box-shadow: none !important;
+	border-color: #e7e7e7 !important;
+	background-color: #f1f1f1 !important;
+	width: 100% !important;
+}
+
 input[type=submit] {
 	background-color: DodgerBlue;
 	color: #fff;

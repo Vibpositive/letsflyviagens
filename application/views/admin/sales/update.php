@@ -24,7 +24,7 @@
 
             <?php echo form_open_multipart('admin/sales/upload/', "class='form-valide row'");?>
 				<div class="col-lg-12" style="padding:0px; padding-top: 10px;">
-				<input type="file" size="20" class="form-control" id="image" name="image" placeholder="Texto" value="" accept=".gif,.png, .jpg"  />
+				<input type="file" size="20" class="form-control" id="image" name="image" placeholder="Imagem" value="" accept=".gif,.png, .jpg"  />
 				<!-- TODO: add id to session instead of form -->
 				<input type="hidden" name="id" value="<?php echo $id; ?>" />
 			</div>

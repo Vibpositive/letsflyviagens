@@ -38,8 +38,17 @@ Class News_model extends CI_Model {
     }
     
     public function create($data) {
-        $this->db->insert($this -> table, $data);
-        return $this->db->affected_rows() == 1;
+		try {
+			$this->db->insert($this -> table, $data);
+			$db_error = $this->db->error();
+			
+			if ($db_error['code'] != 0) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+			}
+			return $this->db->insert_id();
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}		
     }
        
 }

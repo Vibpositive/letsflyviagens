@@ -108,3 +108,6 @@ $route['admin/news/delete'] 					= 'AdminNews_Controller/delete';
 
 $route['admin/news/edit/(:num)'] 				= 'AdminNews_Controller/edit/$1';
 $route['admin/news/update'] 					= 'AdminNews_Controller/update';
+
+$route['admin/news/upload'] 					= 'AdminNews_Controller/upload';
+

@@ -155,21 +155,38 @@ class AdminNews_Controller extends CI_Controller
 			$this->load->model("admin/sales_model", "model");
 
 			$post = $this->input->post(NULL, TRUE);
-			$data = array('image' => $this->upload->data()['file_name']);
+            $title = $post['title'];
+            $body = $post['body'];
+			$id = isset($post['id']) ? $post['id'] : null;
 			
-			$result = false;
+			$callback = $post['callback'];
 
-			// FIXME: Fix setflashdata message on result var
-			if($post['id']){
+			if($title == ""){
+				$title = null;
+			}
+			
+			if($body == ""){
+				$body = null;
+			}
+			
+			$data = array('image' => $this->upload->data()['file_name'], "title" => $title, "body" => $body);
+
+			// die(print_r($data));
+			
+			if(isset($id)){
 				$result = $this->model->update($post['id'], $data);
 				$this->session->set_flashdata('success', "Atualizado com sucesso");
-				redirect($refer);
 			}else{
-				$result = $this->model->create($data);
-				$this->session->set_flashdata('success', "Enviado com sucesso");
-				redirect(base_url() . "/admin/sales");
+				$query = $this->model->create($data);
+				if($query > 0){
+					$this->session->set_flashdata('success', "Enviado com sucesso");
+				}else{
+					// TODO: LOG error message
+					$this->session->set_flashdata('error', array("error" => "Houve um problema ao enviar"));
+				}
 			}
         }
+		redirect($refer);
 	}
 	
 }

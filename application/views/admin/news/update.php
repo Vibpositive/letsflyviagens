@@ -34,7 +34,8 @@
                         <label class="col-lg-12 col-form-label" for="image">Nova Foto</label>
                     </div>
                     <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12" style="margin-bottom:20px">
-                        <input type="file" size="20" class="form-control" id="image" name="image" placeholder="Texto" value="" />
+                        <!-- <input type="file" size="20" class="form-control" id="image" name="image" placeholder="Texto" value="" /> -->
+                        <input type="file" size="20" class="form-control" id="image" name="image" placeholder="Imagem" value="" accept=".gif,.png, .jpg"  />
                         <input type="hidden" name="callback" value="news" />
                     </div>
                     <div class="col-lg-12 text-center">
