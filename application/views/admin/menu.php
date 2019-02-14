@@ -237,9 +237,10 @@
          <ul id="sidebarnav">
             <li class="nav-label">Seções</li>
             <li>
-               <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-edit"></i><span class="hide-menu">Home</span></a>
+               <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-edit"></i><span class="hide-menu">Noticias</span></a>
                <ul aria-expanded="false" class="collapse">
-                  <li><a href="<?php echo base_url(); ?>admin/news">Notícias</a></li>
+                  <li><a href="<?php echo base_url(); ?>admin/news">Lista</a></li>
+                  <li><a href="<?php echo base_url(); ?>admin/news/create">Criar</a></li>
                </ul>
             </li>
 				<li>
