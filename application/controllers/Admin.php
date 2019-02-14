@@ -16,74 +16,6 @@ class Admin extends CI_Controller
         $this->load->view('templates/admin/footer');
 	}
 	
-    public function news($operation = "", $id = 0, $run = "")
-    {
-        $page = "news";
-        
-        $this->load->model("admin/news_model", "model");
-        if($run === "" && $operation !== "create"){
-            $this -> loadview("news", "", $operation, $id);
-        }else{
-            $post = $this->input->post(NULL, TRUE);
-            
-            switch ($operation) {
-                case 'update':
-
-                    $config['upload_path']          = './assets/images/news/';
-                    $config['allowed_types']        = 'gif|jpg|png';
-                    $config['encrypt_name']         = true;
-                    
-                    $config['max_size']             = 9999;
-                    $config['max_width']            = 9999;
-                    $config['max_height']           = 9999;
-
-                    $this->load->library('upload', $config);
-
-                    if (! $this->upload->do_upload('image')) {
-                        $error = array('error' => $this->upload->display_errors());
-                        // TODO:die($error);
-                        die($error);
-                    } else {
-                        $post           = $this->input->post(null, true);
-                        $title          = $post['title'];
-                        $body           = $post['body'];
-                        $callback       = $post['callback'];
-                        $data           = array('image' => $this->upload->data()['file_name'], "title" => $title, "body" => $body);
-
-                        $this->load->model("admin/news_model", "model");
-
-                        if ($this->model->update($id, $data)) {
-                            // redirect("admin/news/" . $page . "/" . $operation . "/" . $id, 'refresh');
-                            redirect("admin/$callback/", 'refresh');
-                        } else {
-                            // TODO: die("could not update");
-                            die("could not update");
-                        }
-                    }
-                    
-                    break;
-                    case 'delete':
-                        if($this->model->delete($id)){
-                            redirect("admin/news/", 'refresh');
-                        }else{
-                            // TODO: die("could not delete");
-                            die("could not delete");
-                        }
-                        break;
-                        case 'create':
-                        if($this->model->create($post)){
-                            redirect("admin/news/" . $page, 'refresh');
-                        }else{
-                            // TODO: die("could not create");
-                            die("could not create");
-                        }
-                    break;
-                default:
-                    # code...
-                    break;
-            }
-        }
-    }
     
     public function quotes($operation = "", $id = 0, $run = "")
     {
@@ -368,44 +300,4 @@ class Admin extends CI_Controller
         $this->load->view('admin/quotes/quotes', $params);
         $this->load->view('templates/admin/footer');
 	}
-	
-    public function upload($path = ""){
-        if(!$path){
-            throw new Exception("Upload path must be set");
-        }
-
-		$upload_path = './assets/images/news/';
-		
-        $config['upload_path']          = $upload_path;
-        $config['allowed_types']        = 'gif|jpg|png';
-        $config['encrypt_name'] = TRUE;
-        
-        $config['max_size']             = 9999;
-        $config['max_width']            = 1024;
-        $config['max_height']           = 1024;
-
-        $this->load->library('upload', $config);
-
-        if ( ! $this->upload->do_upload('image')){
-            $error = array('error' => $this->upload->display_errors());
-            $this->session->set_flashdata('error', $error);
-            redirect("admin/$path/", 'refresh');
-        }else{
-            $post = $this->input->post(NULL, TRUE);
-            $title = $post['title'];
-            $body = $post['body'];
-            $callback = $post['callback'];
-            $data = array('image' => $this->upload->data()['file_name'], "title" => $title, "body" => $body);
-            
-            $this->load->model("admin/news_model", "model");
-            $this->model->create($data);
-            
-            $this->session->set_flashdata('success', "Criado com sucesso");
-            redirect("admin/$callback/", 'refresh');
-        } 
-    }
-    
-    
-
-   
 }

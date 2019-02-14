@@ -73,6 +73,7 @@ $route['translate_uri_dashes'] = false;
 
 // $route['admin/sales/(:any)'] = 'admin/home/$1';
 
+// TODO: fix routes and controllers when Admin controller is removed
 $route['admin/sales'] 							= 'AdminSales_Controller';
 $route['admin/sales/upload'] 					= 'AdminSales_Controller/upload';
 $route['admin/sales/delete'] 					= 'AdminSales_Controller/delete';

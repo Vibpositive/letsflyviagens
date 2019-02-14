@@ -40,15 +40,15 @@
 						<!-- <input type="file" size="20" class="form-control" id="image" name="image" placeholder="Texto" value="" /> -->
 						<input type="file" size="20" class="form-control" id="image" name="image" placeholder="Imagem" value="" accept=".gif,.png, .jpg"  />
 						<input type="hidden" name="id" value="<?php echo $id; ?>" />
-						<!-- <input type="hidden" name="id" value="$id" /> -->
 					</div>
 					<div class="col-lg-12 text-center">
 						<button type="submit" class="btn btn-info col-lg-12 col-md-12 col-xs-12 col-sm-12">Atualizar</button>
 					</div>
 				</div>
 			</div>
-			</form>
-			<form class="form-valide" action="<?php echo base_url() . "admin/news/delete/" . $id ?>/run" method="post">
+		</form>
+		<form class="form-valide" action="<?php echo base_url() . 'admin/news/delete/' ?>" method="post">
+		<input type="hidden" name="id" value="<?php echo $id; ?>" />
 				<div class="col-lg-12 text-center">
 					<button type="submit" class="btn btn-danger col-lg-12 col-md-12 col-xs-12 col-sm-12" id="delete_button">Deletar</button>
 				</div>

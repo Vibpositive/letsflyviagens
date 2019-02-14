@@ -34,7 +34,8 @@
                         <a href="<?php echo base_url() . "admin/news/edit/". $key['id']; ?>" style="display: inline-block;">
                             <button type="submit" class="btn btn-info   ">Modificar</button>
                         </a>
-                        <?php echo form_open(base_url() . "admin/news/delete/" . $key['id'] . "/run", array("class" => 'form-valide', 'style' => "display: inline-block;")); ?>
+						<?php echo form_open(base_url() . "admin/news/delete/" , array("class" => 'form-valide', 'style' => "display: inline-block;")); ?>
+						<input type="hidden" name="id" value="<?php echo $key['id']; ?>" />
                         <button type="submit" class="btn btn-danger" id="delete_button">Deletar</button>
                         </form>
                     </div>
