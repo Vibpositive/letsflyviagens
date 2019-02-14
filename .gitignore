@@ -34,3 +34,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 !/assets/images/sales/*.*
 assets/images/sales/
 assets/images/news/
+ftpp.txt
