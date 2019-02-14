@@ -99,6 +99,7 @@ class AdminSalesController extends CI_Controller
 			
 			$result = false;
 
+			// FIXME: Fix setflashdata message on result var
 			if($post['id']){
 				$result = $this->model->update($post['id'], $data);
 				$this->session->set_flashdata('success', "Atualizado com sucesso");

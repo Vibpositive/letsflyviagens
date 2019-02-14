@@ -32,9 +32,9 @@
 					<button type="submit" class="btn btn-info">Atualizar</button>
 				</div>
 			</form>
-            <?php echo form_open('admin/sales/delete', "class='form-valide row'");?>
-			<input type="hidden" name="id" value="<?php echo $id; ?>" />
-			<!-- TODO: add id to session instead of form -->
+			<?php echo form_open('admin/sales/delete', "class='form-valide row'");?>
+				<input type="hidden" name="id" value="<?php echo $id; ?>" />
+				<!-- TODO: add id to session instead of form -->
 				<button type="submit" class="btn btn-danger" id="delete_button">Deletar</button>
 			</form>
          </div>

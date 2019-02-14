@@ -81,3 +81,12 @@ $route['admin/sales/delete'] = 'AdminSalesController/delete';
 
 $route['admin/sales/create'] = 'AdminSalesController/sales_create';
 $route['admin/sales/update/(:num)'] = 'AdminSalesController/sales_update/$1';
+
+$route['admin/typer'] 							= 'AdminTyper_Controller';
+$route['admin/typer/create'] 					= 'AdminTyper_Controller/create';
+$route['admin/typer/create_typer'] 				= 'AdminTyper_Controller/create_typer';
+
+$route['admin/typer/delete'] 					= 'AdminTyper_Controller/delete';
+
+$route['admin/typer/edit/(:num)'] 			= 'AdminTyper_Controller/edit/$1';
+$route['admin/typer/update'] 				= 'AdminTyper_Controller/update';

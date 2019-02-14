@@ -239,12 +239,19 @@
             <li>
                <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-edit"></i><span class="hide-menu">Home</span></a>
                <ul aria-expanded="false" class="collapse">
-                  <li><a href="<?php echo base_url(); ?>admin/home/typer">Typer</a></li>
+                  <!-- <li><a href="<?php echo base_url(); ?>admin/home/typer">Typer</a></li> -->
                   <li><a href="<?php echo base_url(); ?>admin/home/maintext">Texto Principal</a></li>
                   <li><a href="<?php echo base_url(); ?>admin/news">Notícias</a></li>
                </ul>
             </li>
-			<li>
+				<li>
+               <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-edit"></i><span class="hide-menu">Typer</span></a>
+               <ul aria-expanded="false" class="collapse">
+                  <li><a href="<?php echo base_url(); ?>admin/typer">Lista</a></li>
+                  <li><a href="<?php echo base_url(); ?>admin/typer/create">Criar</a></li>
+               </ul>
+            </li>
+				<li>
                <a class="has-arrow" href="#" aria-expanded="false"><i class="fa fa-edit"></i><span class="hide-menu">Promoções</span></a>
                <ul aria-expanded="false" class="collapse">
                   <li><a href="<?php echo base_url(); ?>admin/sales">Lista</a></li>

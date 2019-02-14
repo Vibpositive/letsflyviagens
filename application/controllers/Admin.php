@@ -22,6 +22,13 @@ class Admin extends CI_Controller
 
     public function home($page = "", $operation = "", $id = 0, $run = "")
     {
+		echo $page;
+		echo $operation;
+		echo $id;
+		echo $run;
+
+		// die();
+
         if(!$page){
             show_404();
             die();
