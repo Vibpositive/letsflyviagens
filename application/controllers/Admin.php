@@ -17,7 +17,7 @@ class Admin extends CI_Controller
 	}
 	
     
-    public function quotes($operation = "", $id = 0, $run = "")
+    public function quotess($operation = "", $id = 0, $run = "")
     {
         switch ($operation) {
             case 'view':

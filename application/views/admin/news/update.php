@@ -4,13 +4,12 @@
 ?>
 <div class="col-lg-12">
     <div class="card card-outline-primary">
-        <div class="card-header">
+        <!-- <div class="card-header">
             <h4 class="m-b-0 text-white">Atualizar Campos</h4>
-        </div>
+        </div> -->
         <div class="card-body">
             <div class="form-validation">
                 <?php echo form_open_multipart(base_url() . 'admin/news/update/' . $data['id'] . '/run', "class='form-valide'");?>
-                <hr>
                 <div class="form-group row">
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
                         <label class="col-lg-12 col-form-label" for="<?php echo "field_" . $data['id']; ?>">Titulo</label>

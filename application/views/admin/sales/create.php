@@ -3,9 +3,9 @@
     ?>
 <div class="col-lg-12">
     <div class="card card-outline-primary">
-        <div class="card-header">
+        <!-- <div class="card-header">
             <h4 class="m-b-0 text-white">Inserir Valor</h4>
-        </div>
+        </div> -->
         <div class="card-body">
 			<?php if($this->session->flashdata('success')) : ?>
 				<div class="alert alert-info" role="alert">

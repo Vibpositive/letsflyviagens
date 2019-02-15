@@ -13,7 +13,6 @@
 			<?php endif; ?>
 			<div class="form-validation">
 				<?php echo form_open_multipart(base_url() . 'admin/news/update/', "class='form-valide'");?>
-				<hr>
 				<div class="form-group row">
 					<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
 						<label class="col-lg-12 col-form-label" for="<?php echo "field_" . $id; ?>">Titulo</label>

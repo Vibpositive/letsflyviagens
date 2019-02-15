@@ -2,10 +2,10 @@
     $data = $this -> model -> get(false);
 ?>
 <div class="col-lg-12">
-    <div class="card card-outline-primary">
+    <!-- <div class="card card-outline-primary">
         <div class="card-header">
-            <h4 class="m-b-0 text-white">Atualizar Campos</h4>
-        </div>
+            <!-- <h4 class="m-b-0 text-white">Atualizar Campos</h4> -->
+        </div> -->
         <div class="card-body">
 			<?php if($this->session->flashdata('success')) : ?>
 				<div class="alert alert-info" role="alert">

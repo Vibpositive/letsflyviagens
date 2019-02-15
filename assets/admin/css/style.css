@@ -4853,8 +4853,8 @@ footer p {
 ------------------------*/
 .form-group {
   /* margin-bottom: 20px; */
-  padding: 20px;
-  border-bottom: 1px solid darkgrey;
+  /* padding: 20px; */
+  /* border-bottom: 1px solid darkgrey; */
 }
 .form-control {
   height: 42px;

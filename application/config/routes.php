@@ -111,3 +111,21 @@ $route['admin/news/edit/(:num)'] 				= 'AdminNews_Controller/edit/$1';
 $route['admin/news/update'] 					= 'AdminNews_Controller/update';
 
 $route['admin/news/upload'] 					= 'AdminNews_Controller/upload';
+
+
+
+$route['admin/quotes'] 							= 'AdminQuotes_Controller';
+$route['admin/quotes/(:num)']					= 'AdminQuotes_Controller/index';
+$route['admin/quotes/edit/(:num)']				= 'AdminQuotes_Controller/edit/$1';
+$route['admin/quotes/response']					= 'AdminQuotes_Controller/response';
+$route['admin/quotes/update']					= 'AdminQuotes_Controller/update';
+
+// $route['admin/news/create'] 					= 'AdminNews_Controller/create';
+// $route['admin/news/create_news']				= 'AdminNews_Controller/create_news';
+
+// $route['admin/news/delete'] 					= 'AdminNews_Controller/delete';
+
+// $route['admin/news/edit/(:num)'] 				= 'AdminNews_Controller/edit/$1';
+// $route['admin/news/update'] 					= 'AdminNews_Controller/update';
+
+// $route['admin/news/upload'] 					= 'AdminNews_Controller/upload';

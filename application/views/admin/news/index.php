@@ -6,7 +6,6 @@
         <div class="card-body">
             <div class="form-validation">
                 <?php foreach ($data as $key) : ?>
-                <hr>
                 <div class="form-group row justify-content-center align-items-center">
                     <div class="col-xl-2" style="margin-bottom:20px">
                         <label class="col-12 col-form-label" for="<?php echo " field_" . $key['id']; ?>">Titulo</label>
