@@ -43,7 +43,7 @@ class Quotes_model extends CI_Model
     public function get_quote_type_id($name)
     {
         $this->db->select('id');
-        $this->db->from($this ->able_quote_type);
+        $this->db->from($this ->table_quote_type);
         $this->db->where('name', $name);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -100,65 +100,41 @@ class Quotes_model extends CI_Model
 
     public function update_response($post, $id)
     {
-        $localizador            = $post['localizador'];
-        $airline                = $post['airline'];
-        $flight                 = $post['flight'];
-        $departure_datetime     = $post['departure_datetime'];
-        $arrival_datetime       = $post['arrival_datetime'];
-        $class                  = $post['class'];
-        $origin                 = $post['origin'];
-        $destination            = $post['destination'];
-        $luggage                = $post['luggage'];
-        $stops                  = $post['stops'];
-        
-        $this->db->set('localizador', $localizador);
-        $this->db->set('airline', $airline);
-        $this->db->set('flight', $flight);
-        $this->db->set('departure_datetime', $departure_datetime);
-        $this->db->set('arrival_datetime', $arrival_datetime);
-        $this->db->set('class', $class);
-        $this->db->set('origin', $origin);
-        $this->db->set('destination', $destination);
-        $this->db->set('luggage', $luggage);
-        $this->db->set('stops', $stops);
-        $this->db->where('quote_id', $id);
+		try {
+			$this->db->where('quote_id', $id);
+			$this->db->update($this -> table_response, $post);
 
-        $this->db->update($this -> table_response);
-        $result = $this->db->affected_rows();
+			$db_error = $this->db->error();
+			
+			if ($db_error['code'] != 0) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+			}
+			
+			return $this->db->affected_rows();
 
-        if($result == 1){
-            return $id;
-        }
-
-        return 0;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+		
     }
 
-    public function update_response_cost($cost_array, $id)
-    {
-        $currency_id = $cost_array['currency_id'];
-        $exchange = $cost_array['exchange'];
-        $original_cost = $cost_array['original_cost'];
-        $cost = $cost_array['cost'];
-        $tax = $cost_array['tax'];
-        $rav = $cost_array['rav'];
-        $total = $cost_array['total'];
-        
-        $this->db->set('exchange', $exchange);
-        $this->db->set('currency_id', $currency_id);
-        $this->db->set('original_cost', $original_cost);
-        $this->db->set('cost', $cost);
-        $this->db->set('tax', $tax);
-        $this->db->set('rav', $rav);
-        $this->db->set('total', $total);
-        $this->db->where('id', $id);
-        $this->db->update($this -> table_cost);
-        $result = $this->db->affected_rows();
+    public function update_response_cost($post, $id)
+    { 
+		try {
+			$this->db->where('id', $id);
+			$this->db->update($this -> table_cost, $post);
 
-        if($result == 1){
-            return $id;
-        }
+			$db_error = $this->db->error();
+			
+			if ($db_error['code'] != 0) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+			}
+			
+			return $this->db->affected_rows();
 
-        return 0;
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
     }
 
     public function get_quote_response($quote_id)

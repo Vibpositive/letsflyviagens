@@ -49,8 +49,8 @@
                                     value="<?php echo $value;?>">
                         <?php elseif ($key === "quote_id") :?>
                                 <input type="hidden"
-                                id="<?php echo $key; ?>"
-                                    name="<?php echo $key; ?>"
+                                	id="id"
+                                    name="id"
                                     value="<?php echo $value;?>">
                         <?php elseif ($key === "total") :?>
                                 <div class="col-lg-2">
@@ -267,9 +267,7 @@
                     </div>
                     
                     <div class="col-lg-10" style="margin-bottom:20px">
-					<input
-						type="hidden" name="id"
-					value="<?php echo $quote[0]['id'] ?>" />
+					<input type="hidden" name="id" value="<?php echo $quote[0]['id'] ?>" />
                     </div>
                 <?php endif; ?>
                     <div class="col-lg-12 text-center">
