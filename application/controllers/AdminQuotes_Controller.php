@@ -99,8 +99,6 @@ class AdminQuotes_Controller extends CI_Controller
 		if ($this->form_validation->run() == FALSE)
 		{
 			$this->session->set_flashdata('error', array('error' => validation_errors()));
-			
-			redirect($refer);
 		}else{
 
 			try {
@@ -127,8 +125,43 @@ class AdminQuotes_Controller extends CI_Controller
 				$this->session->set_flashdata('error', array('error' => $e->getMessage() ));
 			}
 		}
-			
+
+		$forminput = $arrayName = array(
+			'localizador' 			=> $post['localizador'],
+			'airline' 				=> $post['airline'],
+			'flight' 				=> $post['flight'],
+			'departure_datetime' 	=> $post['departure_datetime'],
+			'departure_datetime' 	=> $post['departure_datetime'],
+			'arrival_datetime' 		=> $post['arrival_datetime'],
+			'arrival_datetime' 		=> $post['arrival_datetime'],
+			'class' 				=> $post['class'],
+			'origin' 				=> $post['origin'],
+			'destination' 			=> $post['destination'],
+			'luggage' 				=> $post['luggage'],
+			'stops' 				=> $post['stops'],
+			'currency' 				=> $post['currency'],
+			'exchange' 				=> $post['exchange'],
+			'original_cost' 		=> $post['original_cost'],
+			'tax' 					=> $post['tax'],
+			'rav' 					=>$post['rav'] 
+		);
+		
+		$this->session->set_flashdata('forminput', $forminput);
+
 		redirect($refer);
+	}
+
+	public function date_check($str)
+	{
+		$day = (int) substr($date, 0, 2);
+		$month = (int) substr($date, 3, 2);
+		$year = (int) substr($date, 6, 4);
+		if(!checkdate($month, $day, $year)){
+			$this->form_validation->set_message('date_check', 'O campo {field} deve conter uma data valida');
+			return FALSE;
+		}
+		
+		return TRUE;
 	}
 
 	public function update()

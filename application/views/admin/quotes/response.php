@@ -73,108 +73,203 @@
                         <label class="col-lg-12 col-form-label" for="localizador">Localizador</label>
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input type="text" class="form-control col-lg-12" id="localizador" name="localizador" placeholder="Ex: Localizador" value="<?php echo set_value('localizador'); ?>">
+                        <input
+							type="text"
+							class="form-control col-lg-12"
+							id="localizador"
+							name="localizador"
+							placeholder="Ex: Localizador"
+							value="<?php echo $this->session->flashdata('forminput')['localizador']; ?>">
                     </div>
 
                     <div class="col-lg-2">
                         <label class="col-lg-12 col-form-label" for="airline">Cia Aerea</label>
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input type="text" class="form-control col-lg-12" id="airline" name="airline" placeholder="Ex: Cia Aerea" value="">
+                        <input
+							type="text"
+							class="form-control col-lg-12"
+							id="airline"
+							name="airline"
+							placeholder="Ex: Cia Aerea"
+							value="<?php echo $this->session->flashdata('forminput')['airline']; ?>">
                     </div>
 
                     <div class="col-lg-2">
                         <label class="col-lg-12 col-form-label" for="flight">Voo</label>
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input type="text" class="form-control col-lg-12" id="flight" name="flight" placeholder="Ex: Voo" value="">
+                        <input
+							type="text"
+							class="form-control col-lg-12"
+							id="flight"
+							name="flight"
+							placeholder="Ex: Voo"
+							value="<?php echo $this->session->flashdata('forminput')['flight']; ?>">
                     </div>
 
                     <div class="col-lg-2">
                         <label class="col-lg-12 col-form-label" for="departure_datetime">Data de Embarque</label>
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input type="text" class="form-control col-lg-12 datePicker" id="departure_datetime" name="departure_datetime" placeholder="Ex: 00/00/00000" value="">
+                        <input
+							type="date"
+							class="form-control col-lg-12 datePicker"
+							id="departure_datetime"
+							name="departure_datetime"
+							placeholder="Ex: 00/00/00000"
+							value="<?php echo $this->session->flashdata('forminput')['departure_datetime']; ?>">
                     </div>
 
                     <div class="col-lg-2">
                         <label class="col-lg-12 col-form-label" for="arrival_datetime">Data de Chegada</label>
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input type="text" class="form-control col-lg-12 datePicker" id="arrival_datetime" name="arrival_datetime" placeholder="Ex: 00/00/00000" value="">
+                        <input
+							type="date"
+							class="form-control col-lg-12 datePicker"
+							id="arrival_datetime"
+							name="arrival_datetime"
+							placeholder="Ex: 00/00/00000"
+							value="<?php echo $this->session->flashdata('forminput')['arrival_datetime']; ?>">
                     </div>
 
                     <div class="col-lg-2">
                         <label class="col-lg-12 col-form-label" for="class">Classe</label>
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input type="text" class="form-control col-lg-12" id="class" name="class" placeholder="Ex: Economica" value="">
+                        <input
+							type="text"
+							class="form-control col-lg-12"
+							id="class"
+							name="class"
+							placeholder="Ex: Economica"
+							value="<?php echo $this->session->flashdata('forminput')['class']; ?>">
                     </div>
 
                     <div class="col-lg-2">
                         <label class="col-lg-12 col-form-label" for="origin">Origem</label>
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input type="text" class="form-control col-lg-12" id="origin" name="origin" placeholder="Ex: Sao Paulo" value="<?php echo set_value('origin'); ?>">
+                        <input
+							type="text"
+							class="form-control col-lg-12"
+							id="origin"
+							name="origin"
+							placeholder="Ex: Sao Paulo"
+							value="<?php echo $this->session->flashdata('forminput')['origin']; ?>">
                     </div>
 
                     <div class="col-lg-2">
                         <label class="col-lg-12 col-form-label" for="destination">Destino</label>
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input type="text" class="form-control col-lg-12" id="destination" name="destination" placeholder="Ex: Destino" value="">
+                        <input
+							type="text"
+							class="form-control col-lg-12"
+							id="destination"
+							name="destination"
+							placeholder="Ex: Destino"
+							value="<?php echo $this->session->flashdata('forminput')['destination']; ?>">
                     </div>
 
                     <div class="col-lg-2">
                         <label class="col-lg-12 col-form-label" for="luggage">Bagagem</label>
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input type="text" class="form-control col-lg-12" id="luggage" name="luggage" placeholder="Ex: Bagagem" value="">
+                        <input
+							type="text"
+							class="form-control col-lg-12"
+							id="luggage"
+							name="luggage"
+							placeholder="Ex: Bagagem"
+							value="<?php echo $this->session->flashdata('forminput')['luggage']; ?>">
                     </div>
 
                     <div class="col-lg-2">
                         <label class="col-lg-12 col-form-label" for="stops">Paradas</label>
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input type="text" class="form-control col-lg-12" id="stops" name="stops" placeholder="Ex: 0" value="">
+                        <input
+							type="text"
+							class="form-control col-lg-12"
+							id="stops"
+							name="stops"
+							placeholder="Ex: 0"
+							value="<?php echo $this->session->flashdata('forminput')['stops']; ?>">
                     </div>
 
                     <div class="col-lg-2">
                         <label class="col-lg-12 col-form-label" for="currency">Moeda</label>         
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input id="autocomplete_currency" type="text" name="currency" placeholder="Moeda">
+                        <input
+							type="text"
+							class="form-control col-lg-12"
+							id="autocomplete_currency"
+							name="currency"
+							placeholder="Moeda"
+							value="<?php echo $this->session->flashdata('forminput')['currency']; ?>">
                     </div>
                     <div class="col-lg-2">
                         <label class="col-lg-12 col-form-label" for="exchange">Cotacao</label>
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input type="number" step="0.01" class="form-control col-lg-12" id="exchange" name="exchange" placeholder="Ex: Cotacao" value="">
+                        <input
+							type="number"
+							class="form-control col-lg-12"
+							id="exchange" name="exchange"
+							name="exchange"
+							placeholder="Ex: Cotacao"
+							value="<?php echo $this->session->flashdata('forminput')['exchange']; ?>"
+							step="0.01">
                     </div>
 
                     <div class="col-lg-2">
                         <label class="col-lg-12 col-form-label" for="original_cost">Custo Original</label>
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input type="number" step="0.01" class="form-control col-lg-12" id="original_cost" name="original_cost" placeholder="Ex: Custo Original" value="">
+                        <input
+							type="number" 
+							class="form-control col-lg-12"
+							id="original_cost"
+							name="original_cost"
+							placeholder="Ex: Custo Original"
+							value="<?php echo $this->session->flashdata('forminput')['original_cost']; ?>"
+							step="0.01">
                     </div>
 
                     <div class="col-lg-2">
                         <label class="col-lg-12 col-form-label" for="tax">Taxa de Embarque</label>
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input type="number" step="0.01" class="form-control col-lg-12" id="tax" name="tax" placeholder="Ex: Taxa de Embarque" value="">
+                        <input
+							type="number"
+							class="form-control col-lg-12"
+							id="tax"
+							name="tax"
+							placeholder="Ex: Taxa de Embarque"
+							value="<?php echo $this->session->flashdata('forminput')['tax']; ?>"
+							step="0.01">
                     </div>
 
                     <div class="col-lg-2">
                         <label class="col-lg-12 col-form-label" for="rav">RAV</label>
                     </div>
                     <div class="col-lg-10" style="margin-bottom:20px">
-                        <input type="number" step="0.01"class="form-control col-lg-12" id="rav" name="rav" placeholder="Ex: 100" value="">
+                        <input
+							type="number"
+							step="0.01"class="form-control col-lg-12"
+							id="rav"
+							name="rav"
+							placeholder="Ex: 100"
+							value="<?php echo $this->session->flashdata('forminput')['rav']; ?>">
                     </div>
                     
                     <div class="col-lg-10" style="margin-bottom:20px">
-					<input type="hidden" name="id" value="<?php echo $quote[0]['id'] ?>" />
+					<input
+						type="hidden" name="id"
+					value="<?php echo $quote[0]['id'] ?>" />
                     </div>
                 <?php endif; ?>
                     <div class="col-lg-12 text-center">
