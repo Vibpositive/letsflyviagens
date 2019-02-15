@@ -166,7 +166,7 @@ class Quotes extends CI_Controller
         $this -> quote("travelpackage");
     }
     
-    public function flights()
+    public function flights($page = 'flights')
     {
         if (!file_exists(APPPATH.'views/quotes/'.$page.'.php')) {
             show_404();
