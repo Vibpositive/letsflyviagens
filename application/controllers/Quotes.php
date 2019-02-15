@@ -33,7 +33,8 @@ class Quotes extends CI_Controller
         $this->load->model('quotes_model', 'quotes');
         $this->load->model('user_model', 'user_model');
         
-        $post = $this->input->post(NULL, TRUE);
+		$post = $this->input->post(NULL, TRUE);
+		
         $email = get_quote_email($post);
         $quote_type_id = $this -> quotes -> get_quote_type_id($quote_name);
         
@@ -45,8 +46,8 @@ class Quotes extends CI_Controller
                 $user = $this -> user_model -> get_user($email);
             }
             $userid = $user -> id;
-        }//TODO: else if no email and quote type id
-        
+		}
+		//TODO: else if no email and quote type id
         
         if(isset($userid)){
             $data = array();
@@ -95,28 +96,30 @@ class Quotes extends CI_Controller
             $headers .= "From: " . strip_tags($email) . "\r\n"; // remetente
             $headers .= "Return-Path: " . strip_tags($email) . "\r\n"; // return-path
 
-            
-            if(!mail($emaildestinatario, $assunto, $mensagemHTML, $headers ,"-r".$emailsender)){ // Se for Postfix
-                $headers .= "Return-Path: " . $emailsender . $quebra_linha; // Se "não for Postfix"
-                if(mail($emaildestinatario, $assunto, $mensagemHTML, $headers )){
-                    // enviou no windows
-                    $this->output->set_output("success1");
-                    return;
-                }else{
-                    // Nao enviou nenhum dos dois
-                    $this->output->set_output("failure1");
-                    return;
-                }
-                // nao enviou no linux
-                $this->output->set_output("failure2");
-                return;
-            }else{
-                // enviou no linux
-                $this->output->set_output("success");
-                return;
-            }
+            if(ENVIRONMENT == 'production'){
+				
+				if(!mail($emaildestinatario, $assunto, $mensagemHTML, $headers ,"-r".$emailsender)){ // Se for Postfix
+					$headers .= "Return-Path: " . $emailsender . $quebra_linha; // Se "não for Postfix"
+					if(mail($emaildestinatario, $assunto, $mensagemHTML, $headers )){
+						// enviou no windows
+						$this->output->set_output("success1");
+						return;
+					}else{
+						// Nao enviou nenhum dos dois
+						$this->output->set_output("failure1");
+						return;
+					}
+					// nao enviou no linux
+					$this->output->set_output("failure2");
+					return;
+				}else{
+					// enviou no linux
+					$this->output->set_output("success");
+					return;
+				}
+			}
         }
-        $this->output->set_output("dbonly");
+        $this->output->set_output("success");
         // $this->output->set_output("success");
         
     }

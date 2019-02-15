@@ -4,6 +4,10 @@ Class Login_Model extends CI_Model {
     
     private $table = "user";
 
+    public function __construct(){
+        $this->load->database();
+    }
+
     // Insert registration data in database
     public function registration_insert($data) {
         
@@ -42,9 +46,10 @@ Class Login_Model extends CI_Model {
     public function login($data) {
         
         // $condition = "username =" . "'" . $data['username'] . "' AND " . "password =" . "'" . $data['password'] . "'";
-        $condition = "email =" . "'" . $data['email'] . "' AND " . "password =" . "'" . $data['password'] . "'";
+        $condition = "username =" . "'" . $data['email'] . "' AND " . "password =" . "'" . $data['password'] . "'";
         $this->db->select('*');
-        $this->db->from($this -> table);
+        // $this->db->from($this -> table);
+        $this->db->from("admin");
         $this->db->where($condition);
         $this->db->limit(1);
         $query = $this->db->get();
@@ -61,7 +66,8 @@ Class Login_Model extends CI_Model {
         
         $condition = "username =" . "'" . $username . "'";
         $this->db->select('*');
-        $this->db->from($this -> table);
+        // $this->db->from($this -> table);
+        $this->db->from("admin");
         $this->db->where($condition);
         $this->db->limit(1);
         $query = $this->db->get();

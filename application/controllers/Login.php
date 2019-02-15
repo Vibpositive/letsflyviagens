@@ -20,14 +20,15 @@ Class Login extends CI_Controller {
     
     // Show login page
     public function index() {
+		// die("here");
         $this->load->view('templates/header');
         $this->load->view('login/login');
     }
     
     // Show registration page
-    public function user_registration_show() {
-        $this->load->view('login/registration_form');
-    }
+    // public function user_registration_show() {
+    //     $this->load->view('login/registration_form');
+    // }
     
     // Validate and store registration data in database
     // public function new_user_registration() {
@@ -67,7 +68,8 @@ Class Login extends CI_Controller {
         
         if ($this->form_validation->run() == FALSE) {
             if(isset($this->session->userdata['logged_in'])){
-                $this->load->view('login/admin_page');
+                // $this->load->view('login/admin');
+                redirect('/admin', 'refresh');
             }else{
                 $this->load->view('login/login_form');
                 // header("location: http://localhost/login/");
@@ -84,26 +86,24 @@ Class Login extends CI_Controller {
             // die($result);   
             if ($result == 'true') {
                 
-                // $username = $this->input->post('username');  
+                // $username = $this->input->post('username');
                 $email = $this->input->post('email');
                 $result = $this->login_model->read_user_information($email);
                 if ($result != false) {
                     $session_data = array(
-                        'username' => $result[0]->username,
-                        'email' => $result[0]->email,
+                        'username' => $result[0]->username
                    );
-              // Add user data in session
+                    // Add user data in session
                     $this->session->set_userdata('logged_in', $session_data);
-                    // $this->load->view('login/admin_page');
-                    redirect('/admin');
+                    // $this->load->view('login/admin');
+                    redirect('/admin', 'refresh');
                 }
             } else {
                 $data = array(
                     'error_message' => 'Invalid Username or Password'
                 );
-                // $this->load->view('login/login_form', $data);
-                // header("location: http://localhost/login/");
-                redirect('/login');
+                $this->session->set_flashdata('error', $data);
+                redirect(base_url() . '/admin', 'refresh');
             }
         }
     }

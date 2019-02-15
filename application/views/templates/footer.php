@@ -171,11 +171,11 @@
     <script>
         $('.counter-agileits-w3layouts').countUp();
     </script>
-    <!-- //stats -->
-    <!-- typer js-->
-    <!-- For banner text -->
-    <script src='<?php echo base_url(); ?>assets/js/jquery.typer.js'></script>
-    <!-- //typer js-->
+	
+	<?php if (base_url(uri_string()) == base_url()) : ?>
+    	<script src='<?php echo base_url(); ?>assets/js/jquery.typer.js'></script>
+	<?php endif;?>
+	
     <!-- //For banner text -->
     <script src="<?php echo base_url(); ?>assets/js/main.js"></script>
     <!--bootstrap working-->
@@ -187,12 +187,10 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jcarousel.basic.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.jcarousel-autoscroll.min.js"></script>
     <!-- //JCaroussel -->
-
-
-
+	
+	<!-- TODO: implement counters only if in quotes pages -->
     <script>
         var win = $(window),
-            foo = $('#typer'),
             tf_counter = 1,
             cr_counter = 1,
             cf_counter = 1,
@@ -203,14 +201,25 @@
         var title = "undefined"
         var body = "undefined"
 
-        foo.typer(['Viajar é preciso', 'Preços acessíveis', 'Sempre ao seu lado', 'A melhor experiência', 'Férias de verão com a Let\'s Fly']);
-        // unneeded...
-        win.resize(function() {
-            var fontSize = Math.max(Math.min(win.width() / (1 * 11), parseFloat(Number.POSITIVE_INFINITY)), parseFloat(Number.NEGATIVE_INFINITY));
-            foo.css({
-                fontSize: fontSize * .8 + 'px'
-            });
-        }).resize();
+        <?php if(isset($section_1)) : ?>
+            var foo = $('#typer');
+			var type = [];
+			
+			<?php foreach ($section_1 as $key) : ?>
+				<?php 
+					echo "type.push('" . addslashes ($key['value']) . "');\n";
+				?>
+			<?php endforeach; ?>
+        	foo.typer(type);
+			win.resize(function() {
+				var fontSize = Math.max(Math.min(win.width() / (1 * 11), parseFloat(Number.POSITIVE_INFINITY)), parseFloat(Number.NEGATIVE_INFINITY));
+				foo.css({
+					fontSize: fontSize * .8 + 'px'
+				});
+			}).resize();
+		<?php endif; ?>
+
+
         $(document).ready(function() {
 
             $(".more-info").click(function(e) {
@@ -359,9 +368,6 @@
                     data: form.serialize(), // serializes the form's elements.
                     success: function(data)
                         {
-
-                            console.log(data);
-
                             data = data.split('\n').join('');
 
                             if(data == "success"){
@@ -383,7 +389,6 @@
             });
 
             $('#emailFeedbackModal').on('show.bs.modal', function (event) {
-                console.log("Opened");
                 var modal = $(this)
                 modal.find('.modal-title').text(title)
                 modal.find('.modal-main-text').text(body)
@@ -392,9 +397,8 @@
             $("#success-alert").hide();
 
             $(".more-info").click(function (){
-                var target = $(this).attr("target");
-                console.log($(".py-4").offset());
-
+				var target = $(this).attr("target");
+				
                 var $el = $("#different_way_to"); 
                 var bottom = $el.position().top + $el.outerHeight(true);
 

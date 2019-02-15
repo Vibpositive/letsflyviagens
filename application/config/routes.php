@@ -54,8 +54,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 $route['login'] = 'login';
 $route['admin'] = 'admin/index';
+
+// $route['admin/home/crud/(:any)']  = "admin/home/crud/$1";
+
+// $route['posts/(:any)'] = 'posts/view/$1';
 $route['populardestinations/(:any)'] = 'populardestinations/destination';
 $route['populardestinations'] = 'populardestinations/index';
+$route['currency'] = 'currency/index';
 $route['about'] = 'about/index';
 $route['contact'] = 'contact/index';
 $route['newsletter/register'] = 'newsletter/register';
@@ -64,3 +69,63 @@ $route['quotes'] = 'quotes/index';
 $route['default_controller'] = 'home/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = false;
+
+
+// $route['admin/sales/(:any)'] = 'admin/home/$1';
+
+// TODO: fix routes and controllers when Admin controller is removed
+$route['admin/sales'] 							= 'AdminSales_Controller';
+$route['admin/sales/upload'] 					= 'AdminSales_Controller/upload';
+$route['admin/sales/delete'] 					= 'AdminSales_Controller/delete';
+
+$route['admin/sales/create'] 					= 'AdminSales_Controller/sales_create';
+$route['admin/sales/update/(:num)'] 			= 'AdminSales_Controller/sales_update/$1';
+
+$route['admin/typer'] 							= 'AdminTyper_Controller';
+$route['admin/typer/create'] 					= 'AdminTyper_Controller/create';
+$route['admin/typer/create_typer'] 				= 'AdminTyper_Controller/create_typer';
+
+$route['admin/typer/delete'] 					= 'AdminTyper_Controller/delete';
+
+$route['admin/typer/edit/(:num)'] 				= 'AdminTyper_Controller/edit/$1';
+$route['admin/typer/update'] 					= 'AdminTyper_Controller/update';
+
+
+$route['admin/maintext'] 						= 'AdminmainText_Controller';
+$route['admin/maintext/create'] 				= 'AdminmainText_Controller/create';
+$route['admin/maintext/create_maintext']		= 'AdminmainText_Controller/create_maintext';
+
+$route['admin/maintext/delete'] 				= 'AdminmainText_Controller/delete';
+
+$route['admin/maintext/edit/(:num)'] 			= 'AdminmainText_Controller/edit/$1';
+$route['admin/maintext/update'] 				= 'AdminmainText_Controller/update';
+
+
+$route['admin/news'] 							= 'AdminNews_Controller';
+$route['admin/news/create'] 					= 'AdminNews_Controller/create';
+$route['admin/news/create_news']				= 'AdminNews_Controller/create_news';
+
+$route['admin/news/delete'] 					= 'AdminNews_Controller/delete';
+
+$route['admin/news/edit/(:num)'] 				= 'AdminNews_Controller/edit/$1';
+$route['admin/news/update'] 					= 'AdminNews_Controller/update';
+
+$route['admin/news/upload'] 					= 'AdminNews_Controller/upload';
+
+
+
+$route['admin/quotes'] 							= 'AdminQuotes_Controller';
+$route['admin/quotes/(:num)']					= 'AdminQuotes_Controller/index';
+$route['admin/quotes/edit/(:num)']				= 'AdminQuotes_Controller/edit/$1';
+$route['admin/quotes/response']					= 'AdminQuotes_Controller/response';
+$route['admin/quotes/update']					= 'AdminQuotes_Controller/update';
+
+// $route['admin/news/create'] 					= 'AdminNews_Controller/create';
+// $route['admin/news/create_news']				= 'AdminNews_Controller/create_news';
+
+// $route['admin/news/delete'] 					= 'AdminNews_Controller/delete';
+
+// $route['admin/news/edit/(:num)'] 				= 'AdminNews_Controller/edit/$1';
+// $route['admin/news/update'] 					= 'AdminNews_Controller/update';
+
+// $route['admin/news/upload'] 					= 'AdminNews_Controller/upload';

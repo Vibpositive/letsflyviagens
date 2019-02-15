@@ -4852,7 +4852,9 @@ footer p {
 /*    Input Style
 ------------------------*/
 .form-group {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  /* padding: 20px; */
+  /* border-bottom: 1px solid darkgrey; */
 }
 .form-control {
   height: 42px;
@@ -6920,4 +6922,10 @@ tbody tr td:last-child {
   .retina-logo {
     display: inline-block !important;
   }
+}
+.dropdown-menu-width{
+  width: auto !important;
+}
+.date-picker{
+  text-align: center !important;
 }

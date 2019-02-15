@@ -43,6 +43,18 @@
                             <label for="cf_month">Mês</label>
                             <select name="cf_month">
                                 <option value="" disabled selected>Mês</option>
+<<<<<<< HEAD
+                                <option value="Outubro 2018">Outubro 2018</option>
+                                <option value="Novembro 2018">Novembro 2018</option>
+                                <option value="Dezembro 2018">Dezembro 2018</option>
+                                <option value="Janeiro 2019">Janeiro 2019</option>
+                                <option value="Fevereiro 2019">Fevereiro 2019</option>
+                                <option value="Março 2019">Março 2019</option>
+                                <option value="Abril 2019">Abril 2019</option>
+                                <option value="Maio 2019">Maio 2019</option>
+                                <option value="Junho 2019">Junho 2019</option>
+                                <option value="Julho 2019">Julho 2019</option>
+=======
 <!-- -                                <option value="Agosto 2018">Agosto 2018</option> -->
 <!-- -                                <option value="Setembro 2018">Setembro 2018</option> -->
                                  <option value="Outubro 2018">Outubro 2018</option>
@@ -57,6 +69,7 @@
 +                                <option value="Maio 2019">Maio 2019</option>
 +                                <option value="Junho 2019">Junho 2019</option>
 +                                <option value="Julho 2019">Julho 2019</option>
+>>>>>>> develop
                             </select>
 
                             <label for="cf_cruiseOperator">Companhia</label>
