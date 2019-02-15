@@ -23,7 +23,7 @@
                 <?php foreach ($data as $key) : ?>
                 <div class="form-group row">
                     <div>
-                        <img src="<?php echo base_url(); ?>assets/images/sales/<?php echo $key['image']; ?>" class="" width="300" alt="">
+                        <img src="<?php echo base_url(); ?>assets/images/caroussel/<?php echo $key['image']; ?>" class="" width="300" alt="">
 						<div style="margin: auto;display: table; padding: 10px;">
 							<a href="<?php echo base_url(); ?>admin/sales/update/<?php echo $key['id']; ?>">
 								<button type="submit" class="btn btn-info">Modificar</button>

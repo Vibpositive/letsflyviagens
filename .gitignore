@@ -31,6 +31,8 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/results/
 .psd
 .htaccess
+!/assets/images/caroussel/*.*
+assets/images/caroussel/
 !/assets/images/sales/*.*
 assets/images/sales/
 assets/images/news/

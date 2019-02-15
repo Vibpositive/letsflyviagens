@@ -4,7 +4,7 @@
          <div class="form-validation">
             <div class="row">
                <div style="margin: auto;">
-                  <img src="<?php echo base_url(); ?>assets/images/sales/<?php echo $image; ?>" class="" width="580" alt="">
+                  <img src="<?php echo base_url(); ?>assets/images/caroussel/<?php echo $image; ?>" class="" width="580" alt="">
                </div>
 			</div>
 			

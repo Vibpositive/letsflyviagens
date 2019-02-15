@@ -48,6 +48,7 @@ class Home extends CI_Controller
         $this->load->model('populardestinations_model', 'populardestinations');
         $this->load->model('admin/home_model', 'home');
         $this->load->model('admin/maintext_model', 'maintext_model');
+        $this->load->model('admin/sales_model', 'sales_model');
         $data['section_1'] = $this -> home -> get_section_1();
 
         $this->load->helper('text');
@@ -56,7 +57,8 @@ class Home extends CI_Controller
         $data['title'] = ucfirst($page);
         $data['home'] = $this->uri->segment(1) == '';
         $data['news'] = $this -> news -> getnews();
-        $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
+		$data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
+		$caroussel['data'] = $this -> sales_model -> get();
 
         // echo  ? "Silvio" : "Santos"; 
         // empty($this->uri->segment(1));
@@ -66,7 +68,7 @@ class Home extends CI_Controller
         $this->load->view('quotes/index', $data);
         // $this->load->view('quotes/index', $data);
         // $this->load->view('home/services');
-        $this->load->view('about/caroussel');
+        $this->load->view('about/caroussel', $caroussel);
         // $this->load->view('home/testimonials');
         $this->load->view('home/contact_home');
         $this->load->view('home/news_home', $data);

@@ -186,8 +186,8 @@
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.jcarousel.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jcarousel.basic.js"></script>
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.jcarousel-autoscroll.min.js"></script>
-
     <!-- //JCaroussel -->
+	
 	<!-- TODO: implement counters only if in quotes pages -->
     <script>
         var win = $(window),

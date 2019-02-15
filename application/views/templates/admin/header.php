@@ -16,8 +16,6 @@
 
     <link href="<?php echo base_url(); ?>assets/admin/css/lib/calendar2/semantic.ui.min.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/admin/css/lib/calendar2/pignose.calendar.min.css" rel="stylesheet">
-    <link href="<?php echo base_url(); ?>assets/admin/css/lib/owl.carousel.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url(); ?>assets/admin/css/lib/owl.theme.default.min.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>assets/admin/css/helper.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/admin/css/style.css" rel="stylesheet">
     <link href="<?php echo base_url(); ?>assets/admin/css/autocomplete.css" rel="stylesheet">

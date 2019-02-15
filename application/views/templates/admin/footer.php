@@ -19,8 +19,6 @@
     <script src="<?php echo base_url(); ?>assets/admin/js/lib/calendar-2/pignose.calendar.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/admin/js/lib/calendar-2/pignose.init.js"></script>
 
-    <script src="<?php echo base_url(); ?>assets/admin/js/lib/owl-carousel/owl.carousel.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/admin/js/lib/owl-carousel/owl.carousel-init.js"></script>
     <script src="<?php echo base_url(); ?>assets/admin/js/scripts.js"></script>
     
     <script src="<?php echo base_url(); ?>assets/admin/js/lib/moment/moment-with-locales.min.js"></script>

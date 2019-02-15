@@ -20,6 +20,7 @@ Class Login extends CI_Controller {
     
     // Show login page
     public function index() {
+		// die("here");
         $this->load->view('templates/header');
         $this->load->view('login/login');
     }

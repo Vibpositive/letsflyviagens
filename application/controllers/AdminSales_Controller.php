@@ -73,7 +73,7 @@ class AdminSales_Controller extends CI_Controller
 	
     public function upload(){
 		
-		$upload_path = './assets/images/sales/';
+		$upload_path = './assets/images/caroussel/';
         
         $config['upload_path']          = $upload_path;
         $config['allowed_types']        = 'gif|jpg|png';
