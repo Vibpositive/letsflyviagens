@@ -14,8 +14,6 @@
                     <form class="quote-form" action="quotes/<?php echo basename(__FILE__, '.php') . "quote"; ?>" method="post">
                 <?php endif; ?>
                     <div class="contact_left_grid contact-tickets">
-                    <!-- TODO: implement https://tempusdominus.github.io/bootstrap-4/Usage/ -->
-
                         <label for="cr_name_1">Nome do Condutor</label>
                         <input type="text" id="cr_name_1" name="cr_name_1" placeholder="Nome do Condutor" required="">
 

@@ -94,8 +94,22 @@ class Quotes_model extends CI_Model
 
     public function insert_response_cost($cost_array)
     {
-        $this->db->insert($this -> table_cost, $cost_array);
-        return $this->db->insert_id();
+		try {
+			$this->db->insert($this -> table_cost, $cost_array);
+			
+			$db_error = $this->db->error();
+			
+			if ($db_error['code'] != 0) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+			}
+
+			// die('$this->db->insert_id(): ' . $this->db->insert_id() . ';');
+			return $this->db->insert_id();
+		} catch (Exception $e) {
+
+			die($e->getMessage());
+			return $e->getMessage();
+		}
     }
 
     public function update_response($post, $id)

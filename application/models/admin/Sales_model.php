@@ -32,7 +32,7 @@ Class Sales_model extends CI_Model {
     }
     
     public function delete($id) {
-        // TODO: remove image from dir
+        // TODO: remove image from dir - reported
         $this->db->where("id", $id);
         $this->db->delete($this -> table);
         return $this->db->affected_rows() == 1;

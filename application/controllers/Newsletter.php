@@ -26,7 +26,7 @@ class Newsletter extends CI_Controller
             }
             $userid = $user -> id;
             $this -> user_model -> newsletter($userid);
-        }//TODO: else if no email and quote type id
+        }//TODO: else if no email and quote type id - reported
         
         $mensagemHTML = '<html><body>';
 

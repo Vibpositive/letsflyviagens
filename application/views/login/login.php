@@ -116,9 +116,6 @@
 <?php
     $this->load->helper('form', 'url');
     if (isset($this->session->userdata['logged_in'])) {
-        // TODO: fix url
-		// header("location: http://localhost/login/index.php/login/login");
-		// die("ai para aqui");
         redirect(base_url() . 'admin');
     }
     ?>
