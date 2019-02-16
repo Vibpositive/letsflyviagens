@@ -4,28 +4,22 @@ Class Home_model extends CI_Model {
     
     private $table = "typer";
 
-    public function get_section_1() {
-        $this->db->select('*');
-        $this->db->from($this -> table);
-        $query = $this->db->get();
-        return $query -> result_array();
-    }
-
-    public function get_by_id($id = 0) {
-        $this->db->select('*');
-        $this->db->where("id", $id);
-        $this->db->from($this -> table);
-        $query = $this->db->get();
-        return $query -> result_array();
-    }
-
-    public function insert_into_typer($data) {
-        
-        $this->db->insert($this -> table, $data);
-        return $this->db->affected_rows() > 0;
-
-    }
-    
+    public function get_typer_items() {
+		try {
+			$this->db->select('*');
+			$this->db->from($this -> table);
+			$query = $this->db->get();
+			
+            $db_error = $this->db->error();
+            if ($db_error['code'] != 0) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+            }
+            
+			return $query -> result_array();
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+	}
 }
 
 ?>

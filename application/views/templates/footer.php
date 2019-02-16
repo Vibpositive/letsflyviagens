@@ -201,11 +201,11 @@
         var title = "undefined"
         var body = "undefined"
 
-        <?php if(isset($section_1)) : ?>
+        <?php if(isset($type_items)) : ?>
             var foo = $('#typer');
 			var type = [];
 			
-			<?php foreach ($section_1 as $key) : ?>
+			<?php foreach ($type_items as $key) : ?>
 				<?php 
 					echo "type.push('" . addslashes ($key['value']) . "');\n";
 				?>

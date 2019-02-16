@@ -40,9 +40,6 @@ class Home extends CI_Controller
      */
     public function index($page = 'index')
     {
-		// echo (getenv('DB_USER'));
-		// echo (APPPATH . "../");
-		// die();
         if (!file_exists(APPPATH.'views/home/'.$page.'.php')) {
             show_404();
         }
@@ -52,7 +49,7 @@ class Home extends CI_Controller
         $this->load->model('admin/home_model', 'home');
         $this->load->model('admin/maintext_model', 'maintext_model');
         $this->load->model('admin/sales_model', 'sales_model');
-        $data['section_1'] = $this -> home -> get_section_1();
+        $data['type_items'] = $this -> home -> get_typer_items();
 
         $this->load->helper('text');
         $this->load->helper('date');
@@ -63,16 +60,10 @@ class Home extends CI_Controller
 		$data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
 		$caroussel['data'] = $this -> sales_model -> get();
 
-        // echo  ? "Silvio" : "Santos"; 
-        // empty($this->uri->segment(1));
         $this->load->view('templates/header');
         $this->load->view('home/header', $data);
-        // $this->load->view('home/quotation', $data);
         $this->load->view('quotes/index', $data);
-        // $this->load->view('quotes/index', $data);
-        // $this->load->view('home/services');
         $this->load->view('about/caroussel', $caroussel);
-        // $this->load->view('home/testimonials');
         $this->load->view('home/contact_home');
         $this->load->view('home/news_home', $data);
         $this->load->view('templates/footer', $data);
