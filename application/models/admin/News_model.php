@@ -9,63 +9,96 @@ Class News_model extends CI_Model {
     }
     
     public function get() {
-        $this->db->select('*');
-        $this->db->from($this -> table);
-        $this->db->order_by("id", "desc");
-        $query = $this->db->get();
-        return $query -> result_array();
+		try {
+			$this->db->select('*');
+			$this->db->from($this -> table);
+			$this->db->order_by("id", "desc");
+			$query = $this->db->get();
+			$result = $query -> result_array();
+			
+            $db_error = $this->db->error();
+            if ($db_error['code'] != 0) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+            }
+            
+			return $result;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
     
     public function get_by_id($id = 0) {
-        $this->db->select('*');
-        $this->db->where("id", $id);
-        $this->db->from($this -> table);
-        $query = $this->db->get();
-        return $query -> result_array();
+		try {
+			$this->db->select('*');
+			$this->db->where("id", $id);
+			$this->db->from($this -> table);
+			$query = $this->db->get();
+			$result = $query -> result_array();
+			
+            $db_error = $this->db->error();
+            if ($db_error['code'] != 0) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+            }
+            
+			return $result;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
     
-    public function update($id = "null", $data) {
+    public function update($id, $data) {
 		try {
-			if(!isset($id) || is_null($id) || $id == "" || !is_numeric($id)){
-				throw new Exception('Paramater error! ID must be informed');
-			}
-
 			$this->db->where("id", $id);
 			$this->db->update($this -> table, $data);
 			
-			$db_error = $this->db->error();
-			
-			if ($db_error['code'] != 0) {
-				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
-			}
-			return $this->db->affected_rows();
+			$result = $this->db->affected_rows() == 1;
 
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}
+            $db_error = $this->db->error();
+            if ($db_error['code'] != 0) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+            }
+            
+			return $result;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+		
     }
     
     public function delete($id) {
-        // TODO: remove image from dir - reported
-        $this->db->where("id", $id);
-        $this->db->delete($this -> table);
-        return $this->db->affected_rows() == 1;
+		// TODO: remove image from dir - reported
+		try {
+			$this->db->where("id", $id);
+        	$this->db->delete($this -> table);
+			
+			$result = $this->db->affected_rows() == 1;
+
+            $db_error = $this->db->error();
+            if ($db_error['code'] != 0) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+            }
+			return $result;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
     
     public function create($data) {
 		try {
 			$this->db->insert($this -> table, $data);
-			$db_error = $this->db->error();
 			
-			if ($db_error['code'] != 0) {
+			$result = $this->db->insert_id();
+
+            $db_error = $this->db->error();
+            if ($db_error['code'] != 0) {
 				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
-			}
-			return $this->db->insert_id();
-		} catch (Exception $e) {
-			return $e->getMessage();
-		}		
-    }
-       
+            }
+			return $result;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+	}
+
 }
 
 ?>

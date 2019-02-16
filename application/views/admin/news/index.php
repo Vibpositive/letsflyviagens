@@ -5,6 +5,7 @@
     <div class="card card-outline-primary">
         <div class="card-body">
             <div class="form-validation">
+			<!-- TODO: add success and error messages -->
                 <?php foreach ($data as $key) : ?>
                 <div class="form-group row justify-content-center align-items-center">
                     <div class="col-xl-2" style="margin-bottom:20px">
