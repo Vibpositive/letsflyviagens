@@ -6,43 +6,33 @@ class AdminSales_Controller extends CI_Controller
 	public function __construct() {
 		parent::__construct();
 		
-        $this->load->helper('form', 'url');
-		$this->load->library('form_validation');
-		$this->load->library('user_agent');
-		$this->load->library('session');
-		
 		// TODO: session management to all endpoints
 		if(!isset($this->session->userdata['logged_in'])){
 			show_404();
 		}
+
+        $this->load->helper('form', 'url');
+		$this->load->library('form_validation');
+		$this->load->library('user_agent');
+		$this->load->library('session');
+		$this->load->model("admin/Sales_model", "model");
+
     }
 
     public function index($page = 'index')
     {
-        $model_name = 'Sales_model';
-        $page_name = 'index';
-        $section_name = "sales";
-        
-        $this->load->model("admin/$model_name", "model");
-
         $this->load->view('templates/admin/header');
         $this->load->view('admin/menu');
-        $this->load->view('admin/' . $section_name . '/' . $page_name);
+        $this->load->view('admin/sales/index');
         $this->load->view('templates/admin/footer');
 	}
 	
-    public function sales_update($id){
+    public function update($id){
 		
 		if(!$id){
 			show_404();
 		}
-
-        $model_name = 'Sales_model';
-        $page_name = 'index';
-        $section_name = "sales";
-        
-		$this->load->model("admin/$model_name", "model");
-
+		
 		$data = $this -> model -> get_by_id($id);
 		
 		if(!$data){
@@ -60,11 +50,8 @@ class AdminSales_Controller extends CI_Controller
         $this->load->view('templates/admin/footer');
     }
 
-    public function sales_create()
+    public function create()
     {
-        $model_name = 'Sales_model';
-        $this->load->model("admin/$model_name", "model");
-
         $this->load->view('templates/admin/header');
         $this->load->view('admin/menu');
         $this->load->view('admin/sales/create');
@@ -92,7 +79,6 @@ class AdminSales_Controller extends CI_Controller
             $error = array('error' => $this->upload->display_errors());
 			$this->session->set_flashdata('error', $error);
         }else{
-			$this->load->model("admin/sales_model", "model");
 
 			$post = $this->input->post(NULL, TRUE);
 			$data = array('image' => $this->upload->data()['file_name']);
@@ -120,8 +106,7 @@ class AdminSales_Controller extends CI_Controller
 		}
 
 		$refer =  $this->agent->referrer();
-		$this->load->model("admin/sales_model", "model");
-
+		
 		$post = $this->input->post(NULL, TRUE);
 		
 		$result = false;

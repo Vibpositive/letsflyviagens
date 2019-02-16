@@ -70,8 +70,8 @@ $route['admin/sales'] 							= 'AdminSales_Controller';
 $route['admin/sales/upload'] 					= 'AdminSales_Controller/upload';
 $route['admin/sales/delete'] 					= 'AdminSales_Controller/delete';
 
-$route['admin/sales/create'] 					= 'AdminSales_Controller/sales_create';
-$route['admin/sales/update/(:num)'] 			= 'AdminSales_Controller/sales_update/$1';
+$route['admin/sales/create'] 					= 'AdminSales_Controller/create';
+$route['admin/sales/update/(:num)'] 			= 'AdminSales_Controller/update/$1';
 
 $route['admin/typer'] 							= 'AdminTyper_Controller';
 $route['admin/typer/create'] 					= 'AdminTyper_Controller/create';
