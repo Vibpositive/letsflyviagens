@@ -112,19 +112,8 @@ class AdminQuotes_Controller extends CI_Controller
 					throw new Exception('Uma moeda valida deve ser informada');
 				}else{
 					$insert_cost_id     = $this -> insert_response_cost($post);
-					// die("cost: " . print_r($insert_cost_id) . " end cost");
-
-					// $post['cost_id'] = $insert_cost_id;
-					// echo('$post<pre>');
-					// print_r($post);
-					// echo('</pre>end $post');
-					// die();
-					
 					$insert_response_id = $this -> insert_response($post, $insert_cost_id );
 					
-					
-					// die("response id: " . print_r($insert_response_id) . " end insert_response_id");
-
 					$db_error = $this->db->error();
 					
 					if ($db_error['code'] != 0) {
