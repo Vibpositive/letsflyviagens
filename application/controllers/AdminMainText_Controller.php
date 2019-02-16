@@ -13,7 +13,7 @@ class AdminMainText_Controller extends CI_Controller
 		
 		$this->load->model("admin/maintext_model", "model");
 		
-		// TODO: session management to all endpoints
+		// TODO: session management to all endpoints - Reported
 		if(!isset($this->session->userdata['logged_in'])){
 			show_404();
 		}

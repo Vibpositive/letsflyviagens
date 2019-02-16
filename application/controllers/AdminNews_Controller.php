@@ -13,7 +13,7 @@ class AdminNews_Controller extends CI_Controller
 		
 		$this->load->model("admin/news_model", "model");
 		
-		// TODO: session management to all endpoints
+		// TODO: session management to all endpoints - Reported
 		if(!isset($this->session->userdata['logged_in'])){
 			show_404();
 		}
@@ -104,9 +104,6 @@ class AdminNews_Controller extends CI_Controller
 	
 	public function update()
 	{
-
-		// die(print_r($_FILES['image']['name']));
-		
 		$method = $this->input->method();
 		$post = $this->input->post(NULL, TRUE);
 		$refer 	= $this->agent->referrer();
@@ -134,7 +131,7 @@ class AdminNews_Controller extends CI_Controller
 
 			if (! $this->upload->do_upload('image')) {
 				$error = array('error' => $this->upload->display_errors());
-				// TODO:die($error);
+				// TODO: set flashdata and redirect - Reported
 				die(print_r($error));
 			} else {
 				$post = $this->input->post(null, true);

@@ -40,6 +40,9 @@ class Home extends CI_Controller
      */
     public function index($page = 'index')
     {
+		// echo (getenv('DB_USER'));
+		// echo (APPPATH . "../");
+		// die();
         if (!file_exists(APPPATH.'views/home/'.$page.'.php')) {
             show_404();
         }

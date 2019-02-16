@@ -208,7 +208,7 @@ class AdminQuotes_Controller extends CI_Controller
 
 					if($quote_response){
 						
-						// TODO transaction to make sure both oprations
+						// TODO transaction to make sure both oprations - Reported
 						$update_response      = $this -> update_response($post, $id);
 						$update_response_cost = $this -> update_response_cost($post, $quote_response[0]['quote_answer_cost_id']);
 
@@ -275,7 +275,7 @@ class AdminQuotes_Controller extends CI_Controller
 	}
 	
 	private function insert_response_cost($post){
-        // TODO: update method so it does not get an automatic value from db as it is being under validation already
+        // TODO: update method so it does not get an automatic value from db as it is being under validation already - reported
         if(!$post['currency']){
             $currency_id = $this -> currency_model -> get_currency("USA");
         }else{
@@ -338,6 +338,6 @@ class AdminQuotes_Controller extends CI_Controller
         );
 
         $response_id = $this -> model -> insert_response($id, $response_array);
-        // TODO: return something
+        // TODO: return something - Reported
     }
 }

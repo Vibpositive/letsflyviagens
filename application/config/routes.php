@@ -50,14 +50,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 // $route['default_controller'] = 'welcome';
-// $route['populardestinations'] = 'popular/index';
 
 $route['login'] = 'login';
 $route['admin'] = 'admin/index';
 
-// $route['admin/home/crud/(:any)']  = "admin/home/crud/$1";
-
-// $route['posts/(:any)'] = 'posts/view/$1';
 $route['populardestinations/(:any)'] = 'populardestinations/destination';
 $route['populardestinations'] = 'populardestinations/index';
 $route['currency'] = 'currency/index';
@@ -70,10 +66,6 @@ $route['default_controller'] = 'home/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = false;
 
-
-// $route['admin/sales/(:any)'] = 'admin/home/$1';
-
-// TODO: fix routes and controllers when Admin controller is removed
 $route['admin/sales'] 							= 'AdminSales_Controller';
 $route['admin/sales/upload'] 					= 'AdminSales_Controller/upload';
 $route['admin/sales/delete'] 					= 'AdminSales_Controller/delete';
@@ -119,13 +111,3 @@ $route['admin/quotes/(:num)']					= 'AdminQuotes_Controller/index';
 $route['admin/quotes/edit/(:num)']				= 'AdminQuotes_Controller/edit/$1';
 $route['admin/quotes/response']					= 'AdminQuotes_Controller/response';
 $route['admin/quotes/update']					= 'AdminQuotes_Controller/update';
-
-// $route['admin/news/create'] 					= 'AdminNews_Controller/create';
-// $route['admin/news/create_news']				= 'AdminNews_Controller/create_news';
-
-// $route['admin/news/delete'] 					= 'AdminNews_Controller/delete';
-
-// $route['admin/news/edit/(:num)'] 				= 'AdminNews_Controller/edit/$1';
-// $route['admin/news/update'] 					= 'AdminNews_Controller/update';
-
-// $route['admin/news/upload'] 					= 'AdminNews_Controller/upload';

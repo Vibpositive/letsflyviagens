@@ -26,7 +26,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 switch (ENVIRONMENT)
 {
 	case 'development':
-		$config['base_url'] = 'http://localhost/letsfly';
+		$config['base_url'] = "http://".$_SERVER['HTTP_HOST']. "/letsfly";
 	break;
 
 	case 'testing':
@@ -117,7 +117,7 @@ $config['charset'] = 'UTF-8';
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
-$config['enable_hooks'] = false;
+$config['enable_hooks'] = true;
 
 /*
 |--------------------------------------------------------------------------
@@ -153,7 +153,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = false;
+$config['composer_autoload'] = true;
 
 /*
 |--------------------------------------------------------------------------
