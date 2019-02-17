@@ -11,23 +11,40 @@ class News_model extends CI_Model
         $this->load->database();
     }
 
-    public function getnews($ammount = 3)
+    public function get($ammount = 3)
     {
-        $this->db->order_by("id", "desc");
-        $query = $this->db->get('news', $ammount);
-        $result = $query->result();
-        return $query->result();
+		try {
+			$this->db->order_by("id", "desc");
+			$query = $this->db->get('news', $ammount);
+			$result = $query->result();
+			
+            $db_error = $this->db->error();
+            if ($db_error['code'] != 0) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+            }
+			return $result;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 
-    public function getpost($id = "")
+    public function get_by_id($id = "")
     {
-        $this->db->order_by("id", "desc");
-        $this->db->where("id", $id);
-        $query = $this->db->get('news', 1);
-        
-        // return $query->result();
-        // print_r($query->row());
-        return $query->row();
+		try {
+			$this->db->order_by("id", "desc");
+			$this->db->where("id", $id);
+			$query = $this->db->get('news', 1);
+
+			$result = $query->row();
+			
+            $db_error = $this->db->error();
+            if ($db_error['code'] != 0) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+            }
+			return $result;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
     
 }

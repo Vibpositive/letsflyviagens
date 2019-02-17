@@ -56,7 +56,7 @@ class Home extends CI_Controller
         
         $data['title'] = ucfirst($page);
         $data['home'] = $this->uri->segment(1) == '';
-        $data['news'] = $this -> news -> getnews();
+        $data['news'] = $this -> news -> get();
 		$data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
 		$caroussel['data'] = $this -> sales_model -> get();
 
@@ -68,6 +68,6 @@ class Home extends CI_Controller
         $this->load->view('home/news_home', $data);
         $this->load->view('templates/footer', $data);
         $this->load->model('news_model', 'news');
-        $this->news->getnews();
+        // $this->news->getnews();
     }
 }
