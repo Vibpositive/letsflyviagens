@@ -12,7 +12,7 @@ class Quotes extends CI_Controller
 
         $data['title'] = ucfirst($page);
         $data['home'] = $this->uri->segment(1) == '';
-        $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
+        $data['populardestinations'] = $this -> populardestinations -> get();
         
         $this->load->view('templates/header');
         $this->load->view('home/header', $data);
@@ -39,11 +39,11 @@ class Quotes extends CI_Controller
         $quote_type_id = $this -> quotes -> get_quote_type_id($quote_name);
         
         if($email && $quote_type_id){
-            $user = $this -> user_model -> get_user($email);
+            $user = $this -> user_model -> get($email);
             
             if(!$user){
                 $this -> user_model -> create_user($email);
-                $user = $this -> user_model -> get_user($email);
+                $user = $this -> user_model -> get($email);
             }
             $userid = $user -> id;
 		}
@@ -177,7 +177,7 @@ class Quotes extends CI_Controller
         $data['title'] = ucfirst($page);
         $data['home'] = $this->uri->segment(1) == '';
         $data['base_url'] = $this->uri->segment(1);
-        $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
+        $data['populardestinations'] = $this -> populardestinations -> get();
 
         $this->load->view('templates/header');
         $this->load->view('home/header', $data);
@@ -197,7 +197,7 @@ class Quotes extends CI_Controller
         $data['title'] = ucfirst($page);
         $data['home'] = $this->uri->segment(1) == '';
         $data['base_url'] = $this->uri->segment(1);
-        $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
+        $data['populardestinations'] = $this -> populardestinations -> get();
 
         $this->load->view('templates/header');
         $this->load->view('home/header', $data);
@@ -217,7 +217,7 @@ class Quotes extends CI_Controller
         $data['title'] = ucfirst($page);
         $data['home'] = $this->uri->segment(1) == '';
         $data['base_url'] = $this->uri->segment(1);
-        $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
+        $data['populardestinations'] = $this -> populardestinations -> get();
 
         $this->load->view('templates/header');
         $this->load->view('home/header', $data);
@@ -237,7 +237,7 @@ class Quotes extends CI_Controller
         $data['title'] = ucfirst($page);
         $data['home'] = $this->uri->segment(1) == '';
         $data['base_url'] = $this->uri->segment(1);
-        $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
+        $data['populardestinations'] = $this -> populardestinations -> get();
 
         $this->load->view('templates/header');
         $this->load->view('home/header', $data);
@@ -257,7 +257,7 @@ class Quotes extends CI_Controller
         $data['title'] = ucfirst($page);
         $data['home'] = $this->uri->segment(1) == '';
         $data['base_url'] = $this->uri->segment(1);
-        $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
+        $data['populardestinations'] = $this -> populardestinations -> get();
 
         $this->load->view('templates/header');
         $this->load->view('home/header', $data);
@@ -277,7 +277,7 @@ class Quotes extends CI_Controller
         $data['title'] = ucfirst($page);
         $data['home'] = $this->uri->segment(1) == '';
         $data['base_url'] = $this->uri->segment(1);
-        $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
+        $data['populardestinations'] = $this -> populardestinations -> get();
 
         $this->load->view('templates/header');
         $this->load->view('home/header', $data);

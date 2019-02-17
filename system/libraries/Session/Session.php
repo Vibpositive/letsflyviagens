@@ -727,7 +727,7 @@ class CI_Session {
 	 *
 	 * @returns	array
 	 */
-	public function &get_userdata()
+	public function &getdata()
 	{
 		return $_SESSION;
 	}

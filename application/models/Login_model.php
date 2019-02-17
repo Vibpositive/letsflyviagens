@@ -20,9 +20,9 @@ Class Login_Model extends CI_Model {
         $query = $this->db->get();
 
         $this -> load -> model('user_model');
-        // $user = $this -> user_model -> get_user_by_username($data['username']);
-        $user_name = $this -> user_model -> get_user_by_username($data['username']);
-        $user_email = $this -> user_model -> get_user_by_username($data['email']);
+        // $user = $this -> user_model -> get_by_username($data['username']);
+        $user_name = $this -> user_model -> get_by_username($data['username']);
+        $user_email = $this -> user_model -> get_by_username($data['email']);
         
         if (is_null($user_email) && is_null($user_name)) {
             

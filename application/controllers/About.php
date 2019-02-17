@@ -48,7 +48,7 @@ class About extends CI_Controller
 
         $data['title'] = ucfirst($page);
         $data['home'] = $this->uri->segment(1) == '';
-        $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
+        $data['populardestinations'] = $this -> populardestinations -> get();
 
         $this->load->view('templates/header');
         $this->load->view('home/header', $data);

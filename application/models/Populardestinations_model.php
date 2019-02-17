@@ -2,25 +2,27 @@
 
 class Populardestinations_model extends CI_Model
 {
-    public $id;
-    public $title;
-    public $body;
-    public $date;
-    private $table = 'popular_destinations';
-
+	
     public function __construct(){
         $this->load->database();
-
     }
 
-    public function getpopulardestinations($amount = 9)
+    public function get($amount = 9)
     {
-        $this->load->helper('text');
-        $this->load->helper('date');
+		try {
+			$this->db->order_by("created_at", "desc");
 
-        $this->db->order_by("created_at", "desc");
+        	$query = $this->db->get('popular_destinations', $amount);			
 
-        $query = $this->db->get('popular_destinations', $amount);
-        return $query->result();
+			$result = $query->result();
+			
+            $db_error = $this->db->error();
+            if ($db_error['code'] != 0) {
+				throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+            }
+			return $result;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
     }
 }

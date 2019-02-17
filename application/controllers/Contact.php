@@ -10,7 +10,7 @@ class Contact extends CI_Controller
 
         $this->load->model('populardestinations_model', 'populardestinations');
 
-        $data['populardestinations'] = $this -> populardestinations -> getpopulardestinations();
+        $data['populardestinations'] = $this -> populardestinations -> get();
         $data['title'] = ucfirst($page);
         $data['home'] = $this->uri->segment(1) == '';
 
@@ -42,11 +42,11 @@ class Contact extends CI_Controller
         $email = $post['Email'];
 
         if($email){
-            $user = $this -> user_model -> get_user($email);
+            $user = $this -> user_model -> get($email);
             
             if(!$user){
                 $this -> user_model -> create_user($email);
-                $user = $this -> user_model -> get_user($email);
+                $user = $this -> user_model -> get($email);
             }
             $userid = $user -> id;
         }//TODO: else if no email and quote type id

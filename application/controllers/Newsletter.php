@@ -18,11 +18,11 @@ class Newsletter extends CI_Controller
         $email = $post['Email'];
 
         if($email){
-            $user = $this -> user_model -> get_user($email);
+            $user = $this -> user_model -> get($email);
             
             if(!$user){
                 $this -> user_model -> create_user($email);
-                $user = $this -> user_model -> get_user($email);
+                $user = $this -> user_model -> get($email);
             }
             $userid = $user -> id;
             $this -> user_model -> newsletter($userid);
