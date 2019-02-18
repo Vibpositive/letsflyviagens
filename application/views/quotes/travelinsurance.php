@@ -8,21 +8,13 @@
         <div class="container py-4 mt-2">
             <h2 class="tittle text-center mb-3 title-quote">Seguro Viagem</h2>
             <div class="contact_grid_right mt-5">
-                <!-- <h6>Please fill this form to contact with us.</h6> -->
                 <a class="blog-btn add-passenger" role="button" formType="ti">Adicionar segurado</a>
-                    <?php if ($this->uri->segment(1) == "quotes") : ?>
-                        <form class="quote-form" action="<?php echo $this->uri->segment(2) . "quote"; ?>" method="post">
-                    <?php else : ?>
-                        <form class="quote-form" action="quotes/<?php echo basename(__FILE__, '.php') . "quote"; ?>" method="post">
-                    <?php endif; ?>
+					<form class="quote-form" action="<?php echo base_url();?>quotes/travelinsurancequote" method="post">
                     <div class="contact_left_grid contact-tickets">
 
                         <label for="ti_name_1">Nome completo</label>
                         <input type="text" id="ti_name_1" name="ti_name_1" placeholder="Nome Completo" required="">
-
-                        <!-- <label for="ti_surname_1" class="label-surname">Sobrenome</label> -->
-                        <!-- <input type="text" id="ti_surname_1" name="ti_surname_1" placeholder="Sobrenome" required=""> -->
-
+						
                         <label for="ti_dob_1">Data de Nascimento</label>
                         <input type="text" id="ti_dob_1" name="ti_dob_1" placeholder="Data de Nascimento" class="form-control datePicker" required="">
 

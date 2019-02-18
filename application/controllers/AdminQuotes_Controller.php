@@ -153,7 +153,7 @@ class AdminQuotes_Controller extends CI_Controller
 	
 	public function update()
 	{
-		// TODO fix all endpoints that are meant to be access by post to remove direct access to it
+		// TODO fix all endpoints that are meant to be accessed by post to remove direct access to it
 		$method = $this->input->method();
 		$refer 	=  $this->agent->referrer();
 		$post 	= $this->input->post(null, true);
@@ -256,12 +256,11 @@ class AdminQuotes_Controller extends CI_Controller
 	}
 	
 	private function update_response_cost($post, $id){
-        $currency_id = $this -> currency_model -> get_currency_id($post['currency']);
-        if (!$currency_id) {
-            $currency_id = $this -> currency_model -> get_currency_id("USA");
-        }
-        
-        
+		
+		// TODO: test for currency len and if prop exists
+		$currency_id = $this -> currency_model -> get_currency_id($post['currency']);
+		// TODO: treat error if currency is not found
+		
         $cost_array = array(
             'currency_id'       => $currency_id,
             'exchange'          => $post['exchange'],

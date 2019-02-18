@@ -8,14 +8,8 @@
         <div class="container py-4 mt-2">
             <h2 class="tittle text-center mb-3 title-quote">Pacote de Viagem</h2>
             <div class="contact_grid_right mt-5">
-                <!-- <h6>Please fill this form to contact with us.</h6> -->
                 <a class="blog-btn add-passenger" role="button" formType="tp">Adicionar Passageiro</a>
-
-                    <?php if ($this->uri->segment(1) == "quotes") : ?>
-                        <form class="quote-form" action="<?php echo $this->uri->segment(2) . "quote"; ?>" method="post">
-                    <?php else : ?>
-                        <form class="quote-form" action="quotes/<?php echo basename(__FILE__, '.php') . "quote"; ?>" method="post">
-                    <?php endif; ?>
+					<form class="quote-form" action="<?php echo base_url();?>quotes/travelpackagequote" method="post">
                     <div class="contact_left_grid contact-tickets">
 
                         <label for="tp_name_1">Nome</label>

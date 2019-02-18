@@ -377,6 +377,7 @@
                             }else{
                                 title = "Mensagem nao enviada"
                                 body = "Por favor tente mais tarde"
+                                // body = data
                             }
                             
                             $('#emailFeedbackModal').modal('show');

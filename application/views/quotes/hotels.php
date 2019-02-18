@@ -9,11 +9,8 @@
                 <h2 class="tittle text-center mb-3 title-quote">Hotéis</h2>
                 <div class="contact_grid_right mt-5">
                     <a class="blog-btn add-passenger" role="button" formType="hf">Adicionar hóspede</a>
-                    <?php if ($this->uri->segment(1) == "quotes") : ?>
-                        <form class="quote-form" action="<?php echo $this->uri->segment(2) . "quote"; ?>" method="post">
-                    <?php else : ?>
-                        <form class="quote-form" action="quotes/<?php echo basename(__FILE__, '.php') . "quote"; ?>" method="post">
-                    <?php endif; ?>
+					
+					<form class="quote-form" action="<?php echo base_url();?>quotes/hotelsquote" method="post">
                         <div class="contact_left_grid contact-tickets">
                         
                             <label for="hf_name_1">Nome</label>

@@ -11,11 +11,7 @@
             
                 <a class="blog-btn add-passenger" role="button" formType="tf">Adicionar passageiro</a>
                 
-                <?php if ($this->uri->segment(1) == "quotes") : ?>
-                    <form class="quote-form" action="<?php echo $this->uri->segment(2) . "quote"; ?>" method="post">
-                <?php else : ?>
-                    <form class="quote-form" action="quotes/<?php echo basename(__FILE__, '.php') . "quote"; ?>" method="post">
-                <?php endif; ?>
+                    <form class="quote-form" action="<?php echo base_url();?>quotes/flightsquote" method="post">
                     <div class="contact_left_grid contact-tickets">
                         <label for="tf_name_1">Nome</label>
                         <input type="text" id="tf_name_1" name="tf_name_1" placeholder="Nome" required="">

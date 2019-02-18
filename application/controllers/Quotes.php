@@ -6,8 +6,8 @@ class Quotes extends CI_Controller
     {
         // if (!file_exists(APPPATH.'views/quotes/'.$page.'.php')) {
         //     show_404();
-        // }
-
+		// }
+		die("here");
         $this->load->model('populardestinations_model', 'populardestinations');
 
         $data['title'] = ucfirst($page);
@@ -36,8 +36,8 @@ class Quotes extends CI_Controller
 		$post = $this->input->post(NULL, TRUE);
 		
         $email = get_quote_email($post);
-        $quote_type_id = $this -> quotes -> get_quote_type_id($quote_name);
-        
+		$quote_type_id = $this -> quotes -> get_quote_type_id($quote_name);
+		
         if($email && $quote_type_id){
             $user = $this -> user_model -> get($email);
             
@@ -45,7 +45,8 @@ class Quotes extends CI_Controller
                 $this -> user_model -> create_user($email);
                 $user = $this -> user_model -> get($email);
             }
-            $userid = $user -> id;
+			$userid = $user -> id;
+			
 		}
 		//TODO: else if no email and quote type id - reported
         
@@ -57,73 +58,81 @@ class Quotes extends CI_Controller
                 array_push($data, $register);
             }
 
-            $this -> quotes -> quote($data, $userid, $quote_type_id);
+			$result = $this -> quotes -> quote($data, $userid, $quote_type_id);
+			
+			// TODO sendmail
+			$this -> __sendmail($email, $data,$quote_name);
+           	$this->output->set_output("success");
+        }
+        
+	}
+	
+	private function __sendmail($email, $data, $quote_name){
+		setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+		date_default_timezone_set('America/Sao_Paulo');
+		$today = strftime('%d de %B de %Y', strtotime('today'));
+		$now = date("h:i:sa");
+		
+		$emaildestinatario = "letsfly@letsflyviagens.com.br";
+		$emailsender = "william@letsflyviagens.com.br";
+		$assunto = "Pedido de cotação - $quote_name";
 
-            setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
-            date_default_timezone_set('America/Sao_Paulo');
-            $today = strftime('%d de %B de %Y', strtotime('today'));
-            $now = date("h:i:sa");
-            
-            $emaildestinatario = "letsfly@letsflyviagens.com.br";
-            $emailsender = "william@letsflyviagens.com.br";
-            $assunto = "Pedido de cotação - $quote_name";
+		$mensagemHTML = '<html><body>';
+		$mensagemHTML .= '</body></html>';
+		
+		$mensagemHTML .= '<h1>Pedido de cotação</h1>';
+		$mensagemHTML .= "<h2>Em: $today $now</h2>";
+		
+		$mensagemHTML .= '<table rules="all" style="border-color: #666; font-family: arial, sans-serif; border-collapse: collapse; width: 100%;" cellpadding="100">';                      
 
-            $mensagemHTML = '<html><body>';
-            $mensagemHTML .= '</body></html>';
-            
-            $mensagemHTML .= '<h1>Pedido de cotação</h1>';
-            $mensagemHTML .= "<h2>Em: $today $now</h2>";
-            
-            $mensagemHTML .= '<table rules="all" style="border-color: #666; font-family: arial, sans-serif; border-collapse: collapse; width: 100%;" cellpadding="100">';                      
+		$quebra_linha = "<br>";
+		
+		foreach ($data as $campo) {
+			
+			$mensagemHTML .= "<tr style='background: #eee; border: 1px solid #dddddd; text-align: left; padding: 8px;'>";
+			$mensagemHTML .= "<td style='border: 1px solid #dddddd; text-align: left; padding: 8px; width:30%;'><strong>Campo: " . $campo['field_name'] . " :</strong></td>";
+			$mensagemHTML .= "<td style='border: 1px solid #dddddd; text-align: left; padding: 8px; width:70%;'>" . $campo['field_value'] . "</td>";
+			$mensagemHTML .= "</tr>";
 
-            $quebra_linha = "<br>";
-            
-            foreach ($data as $campo) {
-                
-                $mensagemHTML .= "<tr style='background: #eee; border: 1px solid #dddddd; text-align: left; padding: 8px;'>";
-                $mensagemHTML .= "<td style='border: 1px solid #dddddd; text-align: left; padding: 8px; width:30%;'><strong>Campo: " . $campo['field_name'] . " :</strong></td>";
-                $mensagemHTML .= "<td style='border: 1px solid #dddddd; text-align: left; padding: 8px; width:70%;'>" . $campo['field_value'] . "</td>";
-                $mensagemHTML .= "</tr>";
+		}
 
-            }
+		$mensagemHTML .= "</table>";
+		$mensagemHTML .= "</body></html>";
+		
+		$headers = "MIME-Version: 1.1\r\n";
+		$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+		
+		$headers .= "From: " . strip_tags($email) . "\r\n"; // remetente
+		$headers .= "Return-Path: " . strip_tags($email) . "\r\n"; // return-path
 
-            $mensagemHTML .= "</table>";
-            $mensagemHTML .= "</body></html>";
-            
-            $headers = "MIME-Version: 1.1\r\n";
-            $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-            
-            $headers .= "From: " . strip_tags($email) . "\r\n"; // remetente
-            $headers .= "Return-Path: " . strip_tags($email) . "\r\n"; // return-path
-
-            if(ENVIRONMENT == 'production'){
-				
-				if(!mail($emaildestinatario, $assunto, $mensagemHTML, $headers ,"-r".$emailsender)){ // Se for Postfix
-					$headers .= "Return-Path: " . $emailsender . $quebra_linha; // Se "não for Postfix"
-					if(mail($emaildestinatario, $assunto, $mensagemHTML, $headers )){
-						// enviou no windows
-						$this->output->set_output("success1");
-						return;
-					}else{
-						// Nao enviou nenhum dos dois
-						$this->output->set_output("failure1");
-						return;
-					}
-					// nao enviou no linux
-					$this->output->set_output("failure2");
+		if(ENVIRONMENT == 'production'){
+			
+			if(!mail($emaildestinatario, $assunto, $mensagemHTML, $headers ,"-r".$emailsender)){ // Se for Postfix
+				$headers .= "Return-Path: " . $emailsender . $quebra_linha; // Se "não for Postfix"
+				if(mail($emaildestinatario, $assunto, $mensagemHTML, $headers )){
+					// enviou no windows
+					$this->output->set_output("success1");
 					return;
 				}else{
-					// enviou no linux
-					$this->output->set_output("success");
+					// Nao enviou nenhum dos dois
+					$this->output->set_output("failure1");
 					return;
 				}
+				// nao enviou no linux
+				$this->output->set_output("failure2");
+				return;
+			}else{
+				// enviou no linux
+				$this->output->set_output("success");
+				return;
 			}
-        }
-        $this->output->set_output("success");
-        // $this->output->set_output("success");
-        
-    }
+		}else{
+			$this->output->set_output("success");
+		}
+	}
 
+	/*
+	*/
     public function flightsquote(){
         if ($this->input->method() != "post") {
             redirect('/quotes/flights', 'refresh');
@@ -164,7 +173,9 @@ class Quotes extends CI_Controller
             redirect('/quotes/travelpackage', 'refresh');
         }
         $this -> quote("travelpackage");
-    }
+	}
+
+	/**/
     
     public function flights($page = 'flights')
     {

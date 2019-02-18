@@ -9,18 +9,33 @@ class Currency_model extends CI_Model
         try {
             $this->db->select('*');
             $this->db->where("name", $name);
-            $this->db->from($this -> table);
+            // $this->db->where("name", "USD");
+			$this->db->from($this -> table);
+			
             $query = $this->db->get();
             
-            $db_error = $this->db->error();
+			$db_error = $this->db->error();
+			
+			$row = $query -> row();
+
+			echo '<pre>';
+			print_r($row);
+			echo '</pre>';
+			// die();
             
             if ($db_error['code'] != 0) {
                 throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
-            }
-            
-            return $query -> row() -> id;
+			}
+			
+			if (isset($row))
+			{
+				return $query -> row() -> id;
+			}else{
+				return $this -> get_currency_id("USD");
+			}
+			
         } catch (Exception $e) {
-            return $e->getMessage();
+			return null;
         }
     }
     
