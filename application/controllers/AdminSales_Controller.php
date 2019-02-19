@@ -6,9 +6,8 @@ class AdminSales_Controller extends CI_Controller
 	public function __construct() {
 		parent::__construct();
 		
-		// TODO: session management to all endpoints
 		if(!isset($this->session->userdata['logged_in'])){
-			show_404();
+			redirect(base_urL() . '/login');
 		}
 
         $this->load->helper('form', 'url');

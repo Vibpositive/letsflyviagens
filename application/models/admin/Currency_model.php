@@ -17,12 +17,7 @@ class Currency_model extends CI_Model
 			$db_error = $this->db->error();
 			
 			$row = $query -> row();
-
-			echo '<pre>';
-			print_r($row);
-			echo '</pre>';
-			// die();
-            
+			
             if ($db_error['code'] != 0) {
                 throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
 			}
@@ -31,7 +26,8 @@ class Currency_model extends CI_Model
 			{
 				return $query -> row() -> id;
 			}else{
-				return $this -> get_currency_id("USD");
+				// return $this -> get_currency_id("USD");
+				return null;
 			}
 			
         } catch (Exception $e) {

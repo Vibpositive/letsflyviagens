@@ -4,7 +4,12 @@ class AdminQuotes_Controller extends CI_Controller
 {    
     public function __construct()
     {
-        parent::__construct();
+		parent::__construct();
+		
+		if(!isset($this->session->userdata['logged_in'])){
+			redirect(base_urL() . '/login');
+		}
+
 		$this->load->library('session');
 		$this->load->helper('form', 'url');
 		$this->load->library('form_validation');
@@ -65,6 +70,27 @@ class AdminQuotes_Controller extends CI_Controller
         $this->load->view('templates/admin/footer');
 	}
 
+
+	public function currency_check($name)
+	{
+		if(strlen($name) != 3){
+			$this->form_validation->set_message('currency_check', 'O campo {field} deve conter 3 caracteres.');
+			return FALSE;
+		}
+
+		$this->load->model('admin/Currency_model', 'currency_model');
+		$currency = $this -> currency_model -> get_currency_id($name);
+		if (!isset($currency))
+		{
+			$this->form_validation->set_message('currency_check', 'Um {field} valido deve ser informado');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
+	}
+
 	public function response()
 	{
 		$post = $this->input->post(null, true);
@@ -75,7 +101,6 @@ class AdminQuotes_Controller extends CI_Controller
 		$id           = $post['id'];
 
 		$this->load->helper(array('form', 'url'));
-		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('localizador', 'Localizador', 'required');
 		$this->form_validation->set_rules('airline', 'airline', 'required');
@@ -89,7 +114,7 @@ class AdminQuotes_Controller extends CI_Controller
 		$this->form_validation->set_rules('destination', 'destination', 'required');
 		$this->form_validation->set_rules('luggage', 'luggage', 'required');
 		$this->form_validation->set_rules('stops', 'stops', 'required');
-		$this->form_validation->set_rules('currency', 'currency', 'required');
+		$this->form_validation->set_rules('currency', 'currency', 'callback_currency_check');
 		$this->form_validation->set_rules('exchange', 'exchange', 'required|numeric');
 		$this->form_validation->set_rules('original_cost', 'original_cost', 'required|numeric');
 		$this->form_validation->set_rules('tax', 'tax', 'required|numeric');
@@ -105,21 +130,10 @@ class AdminQuotes_Controller extends CI_Controller
 				if(!isset($id) || is_null($id) || $id == "" || !is_numeric($id)){
 					throw new Exception('Paramater error! ID must be informed');
 				}
-
-				$currency_id = $this -> currency_model -> get_currency($post['currency']);
-
-				if(!$currency_id){
-					throw new Exception('Uma moeda valida deve ser informada');
-				}else{
-					$insert_cost_id     = $this -> insert_response_cost($post);
-					$insert_response_id = $this -> insert_response($post, $insert_cost_id );
+				
+				$insert_cost_id     = $this -> insert_response_cost($post);
+				$insert_response_id = $this -> insert_response($post, $insert_cost_id );
 					
-					$db_error = $this->db->error();
-					
-					if ($db_error['code'] != 0) {
-						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
-					}
-				}
 				$this->session->set_flashdata('success', "Inserido com sucesso");
 			} catch (Exception $e) {
 				$this->session->set_flashdata('error', array('error' => $e->getMessage() ));
@@ -166,8 +180,7 @@ class AdminQuotes_Controller extends CI_Controller
 		$this->load->model('admin/Currency_model', 'currency_model');
 
 		$this->load->helper(array('form', 'url'));
-		$this->load->library('form_validation');
-
+		
 		$this->form_validation->set_rules('localizador', 'Localizador', 'required');
 		$this->form_validation->set_rules('airline', 'airline', 'required');
 		$this->form_validation->set_rules('flight', 'flight', 'required');
@@ -180,7 +193,7 @@ class AdminQuotes_Controller extends CI_Controller
 		$this->form_validation->set_rules('destination', 'destination', 'required');
 		$this->form_validation->set_rules('luggage', 'luggage', 'required');
 		$this->form_validation->set_rules('stops', 'stops', 'required');
-		$this->form_validation->set_rules('currency', 'currency', 'required');
+		$this->form_validation->set_rules('currency', 'currency', 'callback_currency_check');
 		$this->form_validation->set_rules('exchange', 'exchange', 'required|numeric');
 		$this->form_validation->set_rules('original_cost', 'original_cost', 'required|numeric');
 		$this->form_validation->set_rules('tax', 'tax', 'required|numeric');
@@ -198,32 +211,25 @@ class AdminQuotes_Controller extends CI_Controller
 				if(!isset($id) || is_null($id) || $id == "" || !is_numeric($id)){
 					throw new Exception('Paramater error! ID must be informed');
 				}
+				
+				$quote_response = $this -> model -> get_quote_response($id);
 
-				$currency_id = $this -> currency_model -> get_currency($post['currency']);
+				if($quote_response){
+					
+					// TODO transaction to make sure both oprations - Reported
+					$update_response      = $this -> update_response($post, $id);
+					$update_response_cost = $this -> update_response_cost($post, $quote_response[0]['quote_answer_cost_id']);
 
-				if(!$currency_id){
-					throw new Exception('Uma moeda valida deve ser informada');
 				}else{
-					
-					$quote_response = $this -> model -> get_quote_response($id);
-
-					if($quote_response){
-						
-						// TODO transaction to make sure both oprations - Reported
-						$update_response      = $this -> update_response($post, $id);
-						$update_response_cost = $this -> update_response_cost($post, $quote_response[0]['quote_answer_cost_id']);
-
-					}else{
-						redirect($refer);
-					}
-					
-					$db_error = $this->db->error();
-					
-					if ($db_error['code'] != 0) {
-						throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
-					}
+					redirect($refer);
 				}
-
+				
+				$db_error = $this->db->error();
+				
+				if ($db_error['code'] != 0) {
+					throw new Exception('Database error! Error Code [' . $db_error['code'] . '] Error: ' . $db_error['message']);
+				}
+					
 				$this->session->set_flashdata('success', "Atualizado com sucesso");
 			} catch (Exception $e) {
 				$this->session->set_flashdata('error', array('error' => $e->getMessage() ));
@@ -256,11 +262,8 @@ class AdminQuotes_Controller extends CI_Controller
 	}
 	
 	private function update_response_cost($post, $id){
-		
-		// TODO: test for currency len and if prop exists
 		$currency_id = $this -> currency_model -> get_currency_id($post['currency']);
-		// TODO: treat error if currency is not found
-		
+
         $cost_array = array(
             'currency_id'       => $currency_id,
             'exchange'          => $post['exchange'],
@@ -275,18 +278,8 @@ class AdminQuotes_Controller extends CI_Controller
 	}
 	
 	private function insert_response_cost($post){
-        // TODO: update method so it does not get an automatic value from db as it is being under validation already - reported
-        if(!$post['currency']){
-            $currency_id = $this -> currency_model -> get_currency("USA");
-        }else{
-            $currency_id = $this -> currency_model -> get_currency_id($post['currency']);
-    
-            if (!$currency_id) {
-                $currency_id = $this -> currency_model -> get_currency("USA");
-            }
-        }
-
-
+		$currency_id = $this -> currency_model -> get_currency_id($post['currency']);
+		
         $cost_array = array(
             'currency_id'       => $currency_id,
             'exchange'          => $post['exchange'],

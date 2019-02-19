@@ -5,6 +5,10 @@ class AdminTyper_Controller extends CI_Controller
 
 	public function __construct() {
 		parent::__construct();
+
+		if(!isset($this->session->userdata['logged_in'])){
+			redirect(base_urL() . '/login');
+		}
 		
         $this->load->helper('form', 'url');
 		$this->load->library('form_validation');
@@ -12,11 +16,6 @@ class AdminTyper_Controller extends CI_Controller
 		$this->load->library('session');
 		
 		$this->load->model("admin/Typer_model", "model");
-		
-		// TODO: session management to all endpoints
-		if(!isset($this->session->userdata['logged_in'])){
-			show_404();
-		}
     }
 
     public function index()

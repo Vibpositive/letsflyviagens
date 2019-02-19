@@ -5,6 +5,10 @@ class AdminNews_Controller extends CI_Controller
 
 	public function __construct() {
 		parent::__construct();
+
+		if(!isset($this->session->userdata['logged_in'])){
+			redirect(base_urL() . '/login');
+		}
 		
         $this->load->helper('form', 'url');
 		$this->load->library('form_validation');
@@ -12,11 +16,6 @@ class AdminNews_Controller extends CI_Controller
 		$this->load->library('session');
 		
 		$this->load->model("admin/news_model", "model");
-		
-		// TODO: session management to all endpoints - Reported
-		if(!isset($this->session->userdata['logged_in'])){
-			show_404();
-		}
     }
 
     public function index()
@@ -124,15 +123,15 @@ class AdminNews_Controller extends CI_Controller
 			$config['encrypt_name']         = true;
 			
 			$config['max_size']             = 9999;
-			$config['max_width']            = 9999;
-			$config['max_height']           = 9999;
+			$config['max_width']            = 1024;
+			$config['max_height']           = 768;
 
 			$this->load->library('upload', $config);
 
 			if (! $this->upload->do_upload('image')) {
 				$error = array('error' => $this->upload->display_errors());
-				// TODO: set flashdata and redirect - Reported
-				die(print_r($error));
+				$this->session->set_flashdata('error', $error);
+				redirect($refer);
 			} else {
 				$post = $this->input->post(null, true);
 				$data = array('image' => $this->upload->data()['file_name'], "title" => $title, "body" => $body);
@@ -147,7 +146,6 @@ class AdminNews_Controller extends CI_Controller
 			$this->session->set_flashdata('success', "Atualizado com sucesso");
 		}else{
 			// TODO: LOG error message
-			// echo "here<br />";
 			die(print_r($query) . "<br/>after");
 			$this->session->set_flashdata('error', array("error" => "Houve um problema ao atualizar"));
 		}
@@ -174,6 +172,7 @@ class AdminNews_Controller extends CI_Controller
         if ( ! $this->upload->do_upload('image')){
             $error = array('error' => $this->upload->display_errors());
 			$this->session->set_flashdata('error', $error);
+			redirect($refer);
         }else{
 			
 			$post = $this->input->post(NULL, TRUE);
