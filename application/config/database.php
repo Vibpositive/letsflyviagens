@@ -101,6 +101,28 @@ switch (ENVIRONMENT)
 	break;
 
 	case 'testing':
+		$db['default'] = array(
+			'dsn'	=> '',
+			'hostname' => getenv('LETSFLYDB_ADDRESS_TESTING',  	true) ? : getenv('LETSFLYDB_ADDRESS_TESTING'),
+			'username' => getenv('LETSFLYDB_USER_TESTING', 		true) ? : getenv('LETSFLYDB_USER_TESTING'),
+			'password' => getenv('LETSFLYDB_PASSWORD_TESTING', 	true) ? : getenv('LETSFLYDB_PASSWORD_TESTING'),
+			'database' => 'letsflytesting',
+			'dbdriver' => 'mysqli',
+			'dbprefix' => '',
+			'pconnect' => false,
+			'db_debug' => (ENVIRONMENT !== 'production'),
+			'cache_on' => false,
+			'cachedir' => '',
+			'char_set' => 'utf8',
+			'dbcollat' => 'utf8_general_ci',
+			'swap_pre' => '',
+			'encrypt' => false,
+			'compress' => false,
+			'stricton' => false,
+			'failover' => array(),
+			'save_queries' => true
+		);
+	break;
 	case 'production':
 		$db['default'] = array(
 			'dsn'	=> '',

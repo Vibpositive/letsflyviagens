@@ -16,10 +16,13 @@
                     <div class="footer-office-hour">
                         <ul>
                             <li class="hd">Endereço :</li>
-                            <li>Rua Afonso Sardinha, 95 - Conj. 94 - Lapa - São Paulo - SP</li>
+                            <li>Av vida nova, 28 Sala 904 - B</li>
+                            <li>Centro empresarial</li>
+                            <li>Taboão da Serra</li>
                         </ul>
                         <ul>
-                            <li class="hd">Telefone:+ 55 (11) 3280-3860 </li>
+                            <li class="hd">Telefone:+ 55 (11) 4303-8984 </li>
+                            <li class="hd">Plantão:+ 55 (11) 3280-3860 </li>
                             <li class="hd" style="float: left">Email:
                                 <a style="float: right; margin-top: -4px" href="mailto:letsfly@letsflyviagens.com.br">&nbsp;&nbsp;letsfly@letsflyviagens.com.br</a>
                             </li>
@@ -107,7 +110,7 @@
                 </ul>
             </div>
             <div class="copyrightbottom">
-                <p>© 2018 Let's Fly Viagens. Todos os direitos reservados
+                <p>© 2019 Let's Fly Viagens. Todos os direitos reservados
                 </p>
             </div>
             <div class="clearfix"></div>
